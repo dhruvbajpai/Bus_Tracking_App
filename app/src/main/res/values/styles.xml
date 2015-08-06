@@ -1,0 +1,31 @@
+<resources>
+
+
+
+    <style name="PauseDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowAnimationStyle">@style/PauseDialogAnimation</item>
+    </style>
+    <style name="menu_labels_style">
+        <!--<item name="android:background">@drawable/ic_launcher</item>-->
+        <item name="android:textColor">@color/new_dod</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="PauseDialogAnimation">
+       <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
+        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
+    </style>
+
+
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="AppTheme.Base">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryColorDark</item>
+        <item name="colorAccent">@color/accentColor </item>
+    </style>
+</resources>

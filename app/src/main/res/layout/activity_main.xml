@@ -1,0 +1,98 @@
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#000000">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:background="@color/abc_search_url_text_normal"
+       >
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="80dp"
+            android:src="@drawable/bus1"
+            android:layout_height="50dp" />
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fffcfdff"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:text="SCHOOL BUS TRACKER"
+            android:typeface="sans"
+            android:textSize="20dp" />
+
+        </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/busstart2">
+
+        <LinearLayout
+            android:layout_marginTop="75dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                style="@style/Button"
+                android:id="@+id/admin_mode"
+                android:background="@drawable/round2"
+                android:text="Admin Mode"
+                android:textColor="#ffffff"
+                android:textSize="25sp"
+                android:layout_width="270dp"
+                android:layout_height="50dp"
+
+                />
+            <Button
+                android:layout_margin="50dp"
+                android:layout_gravity="center"
+                style="@style/Button"
+
+                android:id="@+id/teacher_mode"
+                android:background="@drawable/round2"
+                android:text="Teacher Mode"
+                android:textSize="25sp"
+                android:layout_width="270dp"
+                android:layout_height="50dp"
+                />
+
+            <Button
+                android:layout_marginTop="40dp"
+                android:layout_gravity="center"
+                style="@style/Button"
+                android:id="@+id/parent_mode"
+                android:background="@drawable/round2"
+                android:text="Parent Mode"
+                android:textSize="25sp"
+                android:layout_width="270dp"
+                android:layout_height="50dp"
+                />
+            <Button
+                android:layout_margin="50dp"
+                android:layout_gravity="center"
+                style="@style/Button"
+                android:background="@drawable/round2"
+                android:id="@+id/driver_mode"
+                android:text="Driver Mode"
+                android:textSize="25sp"
+                android:layout_width="270dp"
+                android:layout_height="50dp"
+                />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+</LinearLayout>

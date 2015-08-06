@@ -1,0 +1,58 @@
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white_pressed"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+   <include
+        android:id="@+id/app_bar_rt_info"
+        layout="@layout/app_bar"
+
+        ></include>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+
+        android:orientation="vertical"
+
+        android:layout_margin="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textSize="30dp"
+            android:text="ROUTE INFORMATION"
+            android:textColorHighlight="#000000"
+            android:gravity="center"
+            android:textStyle="bold"/>
+
+        <it.gmariotti.cardslib.library.view.CardViewNative
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/list_cardId"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            style="@style/native_list_card.base"
+            card:card_layout_resourceID="@layout/rt_info_sub"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="View Teacher"
+            android:id="@+id/btteach"/>
+        <Button
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+            android:id="@+id/students"
+            android:text="View Students"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="View Live Location"/>
+
+    </LinearLayout>
+
+    </LinearLayout>
+

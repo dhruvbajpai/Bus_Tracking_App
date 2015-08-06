@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ *******************************************************************************
+  ~   Copyright (c) 2013-2014 Gabriele Mariotti.
+  ~
+  ~   Licensed under the Apache License, Version 2.0 (the "License");
+  ~   you may not use this file except in compliance with the License.
+  ~   You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~   Unless required by applicable law or agreed to in writing, software
+  ~   distributed under the License is distributed on an "AS IS" BASIS,
+  ~   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~   See the License for the specific language governing permissions and
+  ~   limitations under the License.
+  ~  *****************************************************************************
+  -->
+
+<resources>
+
+    <color name="demo_title_section_textcolor">#2a84a5</color>
+
+    <!-- customize header standard title
+    <color name="card_text_color_header">#990066</color>
+    -->
+
+    <color name="carddemo_googlenowbirth_title">@android:color/holo_blue_dark</color>
+
+    <!-- Purchase -->
+    <color name="demo_purchase_normal">#ececec</color>
+    <color name="demo_purchase_pressed">#CC2A84A5</color>
+
+    <!-- color card -->
+    <color name="demo_card_background_color1">#FFBB33</color>
+    <color name="demo_card_background_color2">#98CC00</color>
+    <color name="demo_card_background_color3">#A966CC</color>
+    <color name="demo_card_background_color4">#33B4E4</color>
+    <color name="demo_card_background_color5">#FF4343</color>
+
+    <!-- Birth new-->
+    <color name="demo_card_header_birth_color">#707070</color>
+    <color name="demo_card_line_birth_color">#E5E5E5</color>
+
+    <!-- Weather -->
+    <color name="demo_card_line_weather_color">#E5E5E5</color>
+    <color name="demo_card_weather_city_color">#A4A4A4</color>
+    <color name="demo_card_weather_temperature_color">#868686</color>
+
+    <!-- Stock -->
+    <color name="demo_card_stock_negative">#FF4646</color>
+    <color name="demo_card_stock_positive">#29A426</color>
+
+
+    <!-- Material -->
+    <color name="body_text_1">#de000000</color>
+    <color name="body_text_2">#8a000000</color>
+    <color name="body_text_3">#60000000</color>
+    <color name="body_text_disabled">#44000000</color>
+
+    <color name="body_text_1_inverse">#deffffff</color>
+    <color name="body_text_2_inverse">#8affffff</color>
+
+    <color name="theme_accent_1">@color/md_light_blue_900</color>
+    <color name="theme_accent_1_light">#8ad4fa</color>
+    <color name="theme_accent_2">#e91e63</color>
+
+    <color name="demo_primary_color">#2196F3</color>
+    <color name="demo_colorPrimaryDark">#0288D1</color>
+
+    <color name="navdrawer_background">#ffffffff</color>
+    <color name="navdrawer_text_color">@color/body_text_1</color>
+    <color name="navdrawer_text_color_selected">@color/theme_accent_1</color>
+    <color name="navdrawer_icon_tint">#808080</color>
+    <color name="navdrawer_icon_tint_selected">@color/theme_accent_1</color>
+
+    <color name="gray_background">#ececec</color>
+    <color name="native_background">#ececec</color>
+    <color name="navdrawer_scrim">#6000</color>
+
+    <color name="carddemo_halfcolored_color">#109D58</color>
+    <color name="carddemo_blackcolored_color">#272727</color>
+</resources>

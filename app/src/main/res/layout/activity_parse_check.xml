@@ -1,0 +1,48 @@
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto">
+    <include
+        android:id="@+id/app_bar_me_p"
+        layout="@layout/app_bar"
+
+        ></include>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+
+    android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginLeft="50dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:text="Student List for "/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/route_num"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="#575DE0"
+        android:text="1"/>
+
+
+
+</LinearLayout>
+
+
+    <it.gmariotti.cardslib.library.view.CardListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:id="@+id/myList"
+         />
+
+
+
+    </LinearLayout>

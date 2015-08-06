@@ -1,0 +1,173 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.dhruv.bus_tracking_app.studentinfoedit">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="250dp"
+            android:orientation="vertical"
+            android:background="@drawable/imagback">
+
+
+            <ImageView
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:layout_width="120dp"
+                android:src="@drawable/person"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:id="@+id/iv"/>
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:text="Name"
+                android:id="@+id/tvname"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:text="Phone"
+                android:id="@+id/tvphn"
+                android:textColor="#ffffff"
+                android:textSize="15dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/bkgrnd">
+
+                <LinearLayout
+                    android:layout_width="290dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="40dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/round2"
+                    android:layout_height="wrap_content"
+                    >
+
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:text="Username:"
+                    android:textColor="#ffffff"
+                    android:layout_marginLeft="35dp"
+                    android:textSize="20dp"
+                    android:gravity="left"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:text="Phone"
+                    android:id="@+id/tvuser"
+                    android:layout_marginLeft="60dp"
+                    android:textColor="#ffffff"
+                    android:textSize="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="290dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:background="@drawable/round2"
+                    android:layout_height="wrap_content"
+                    >
+
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:text="Password:"
+                        android:textColor="#ffffff"
+                        android:layout_marginLeft="35dp"
+                        android:textSize="20dp"
+                        android:gravity="left"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:text="Phone"
+                        android:id="@+id/tvpass"
+                        android:layout_marginLeft="60dp"
+                        android:textColor="#ffffff"
+                        android:textSize="20dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="290dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/round2"
+                    android:layout_height="wrap_content"
+                    >
+
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:text="Route:"
+                        android:textColor="#ffffff"
+                        android:layout_marginLeft="35dp"
+                        android:textSize="20dp"
+                        android:gravity="left"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:text="Phone"
+                        android:id="@+id/tvroute"
+                        android:layout_marginLeft="97dp"
+                        android:textColor="#ffffff"
+                        android:textSize="20dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+            <Button
+                android:text="EDIT"
+                android:background="#ffffff"
+                android:textColor="#000000"
+                android:id="@+id/save"
+                android:layout_marginTop="50dp"
+                android:layout_gravity="center"
+                android:layout_width="300dp"
+                android:layout_height="50dp" />
+
+        </LinearLayout>
+        </LinearLayout>
+
+</RelativeLayout>

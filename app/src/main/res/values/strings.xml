@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Bus_Tracking_App</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_admin__first">Admin_First</string>
+    <string name="title_activity_admin_page">AdminPage</string>
+    <string name="title_activity_route_info">Route_info</string>
+    <string name="title_activity_parse_check">parse_check</string>
+    <string name="title_activity_mediator">mediator</string>
+    <string name="title_activity_live_view">live_view</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_studentinfoedit">studentinfoedit</string>
+    <string name="title_activity_startpage">startpage</string>
+    <string name="title_activity_teacherinfoedit">teacherinfoedit</string>
+    <string name="title_activity_editteacher">editteacher</string>
+    <string name="title_activity_diag">Diag</string>
+    <string name="title_activity_addstudent">addstudent</string>
+    <string name="title_activity_dialogstudent">dialogstudent</string>
+    <string name="app_home">app_home</string>
+
+</resources>

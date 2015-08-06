@@ -1,0 +1,122 @@
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="#caf5f6"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="23dp"
+        android:background="#58a4f0"
+        android:textStyle="bold"
+        android:id="@+id/info"
+        android:gravity="center"
+        android:text="Pointer showing location to save"/>
+
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp">
+
+            <com.example.dhruv.bus_tracking_app.CustomAutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:textSize="10dp"
+                android:inputType="textNoSuggestions"
+                android:textStyle="bold"
+
+                android:id="@+id/location"
+                android:text="LOCATION"/>
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="2dp"
+            android:layout_height="wrap_content"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+
+                android:id="@+id/map"
+                tools:context=".MapsActivity"
+                android:name="com.google.android.gms.maps.SupportMapFragment" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentTop="true"
+                android:orientation="horizontal"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="5dp"
+                >
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="Set here"
+                    android:textSize="10sp"
+                    android:id="@+id/set_pointer"
+                    android:background="#e5d67c"
+
+                    />
+                <Button
+                    android:layout_width="0dp"
+                    android:text="Show Route markers"
+                    android:textSize="10sp"
+
+                    android:layout_weight="0.7"
+                    android:id="@+id/show_markers"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+
+                    android:background="#e5d67c"
+
+                    android:layout_height="40dp"
+
+
+                    />
+                <CheckBox
+                   android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="Auto Generate Route"
+                    android:background="#e5d67c"
+
+                     />
+
+                </LinearLayout>
+
+            <ImageView
+                android:id="@+id/img_pointer"
+                android:layout_width="35dp"
+                android:layout_height="70dp"
+                android:src="@drawable/map23"
+                android:layout_centerInParent="true"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Save Changes"
+                android:background="#f0b162"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/btn_save"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

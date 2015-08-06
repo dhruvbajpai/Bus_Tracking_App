@@ -1,0 +1,100 @@
+<!--
+  ~ *******************************************************************************
+  ~   Copyright (c) 2013-2014 Gabriele Mariotti.
+  ~
+  ~   Licensed under the Apache License, Version 2.0 (the "License");
+  ~   you may not use this file except in compliance with the License.
+  ~   You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~   Unless required by applicable law or agreed to in writing, software
+  ~   distributed under the License is distributed on an "AS IS" BASIS,
+  ~   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~   See the License for the specific language governing permissions and
+  ~   limitations under the License.
+  ~  *****************************************************************************
+  -->
+
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="drawer_width">320dp</dimen>
+    <dimen name="text_size_medium">14sp</dimen>
+    <dimen name="text_size_large">18sp</dimen>
+
+    <dimen name="demo_title_section_margin">10dp</dimen>
+    <dimen name="demo_title_section_margin_bottom">1dp</dimen>
+    <dimen name="demo_title_section_margin_top">3dp</dimen>
+    <dimen name="demo_title_section_textsize">18sp</dimen>
+
+    <!--  Card customization ***************************************************  -->
+
+    <!-- Card -->
+    <dimen name="card_base_empty_height">72dp</dimen>
+
+    <dimen name="card_birth_width">350dp</dimen>
+    <dimen name="card_mayknow_margin_top">3dp</dimen>
+
+    <!-- elevation -->
+    <dimen name="carddemo_shadow_elevation">6dp</dimen>
+    <dimen name="carddemo_shadow_start_elevation">2dp</dimen>
+    <dimen name="carddemo_shadow_end_elevation">4dp</dimen>
+
+    <!-- Grid -->
+    <dimen name="carddemo_base_grid_columnwidth">140dp</dimen>
+    <dimen name="carddemo_base_grid_columnwidth_card">125dp</dimen>
+    <dimen name="carddemo_gplay_grid_columnwidth">140dp</dimen>
+    <dimen name="carddemo_gplay_grid_columnwidth_card">125dp</dimen>
+
+    <dimen name="carddemo_gricursor_width">125dp</dimen>
+    <dimen name="card_rose">250dp</dimen>
+
+    <!-- GPlay sectioned list-->
+    <dimen name="carddemo_section_textmore_text">13sp</dimen>
+    <dimen name="carddemo_section_textmore_padding_left">8dp</dimen>
+    <dimen name="carddemo_section_textmore_padding_right">8dp</dimen>
+    <dimen name="carddemo_section_textmore_padding_top">5dp</dimen>
+    <dimen name="carddemo_section_textmore_padding_bottom">5dp</dimen>
+    <dimen name="carddemo_section_textmore_margin_left">10dp</dimen>
+
+
+    <!--Material design-->
+    <dimen name="navdrawer_width">304dp</dimen>
+    <dimen name="navdrawer_image_height">145dp</dimen>
+
+    <dimen name="headerbar_elevation">2dp</dimen>
+
+    <dimen name="carddemo_keyline_1">16dp</dimen>
+    <dimen name="carddemo_keyline_1_minus_8dp">8dp</dimen>
+    <dimen name="carddemo_keyline_margin">16dp</dimen>
+
+    <dimen name="carddemo_keyline_content_new">56dp</dimen>
+    <dimen name="carddemo_keyline_content_start">72dp</dimen>
+    <dimen name="carddemo_barheader_elevation">2dp</dimen>
+    <dimen name="carddemo_barheader_height">72dp</dimen>
+    <dimen name="carddemo_keyline_2">72dp</dimen>
+
+    <dimen name="keyline_1">16dp</dimen>
+    <dimen name="keyline_1_minus_8dp">8dp</dimen>
+    <dimen name="keyline_2">72dp</dimen>
+    <dimen name="keyline_2_minus_16dp">56dp</dimen>
+
+    <dimen name="menu_hz_margin">0dp</dimen>
+    <dimen name="hashtag_line_height">1dp</dimen>
+    <dimen name="hashtag_height">120dp</dimen>
+    <dimen name="hashtag_desc_size">40dp</dimen>
+    <dimen name="hashtag_text_size">14sp</dimen>
+    <dimen name="hashtag_hero_text_size">16sp</dimen>
+
+    <dimen name="hd_fab_size">52dp</dimen>
+    <dimen name="hd_button_elevation">2dp</dimen>
+    <dimen name="hd_button_press_elevation">4dp</dimen>
+    <dimen name="toolbar_x2">112dp</dimen>
+    <dimen name="circle_elevation">4dp</dimen>
+    <dimen name="circle_size">70dp</dimen>
+    <dimen name="carddemo_list_padding">8dp</dimen>
+
+</resources>

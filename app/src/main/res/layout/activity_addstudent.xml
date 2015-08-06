@@ -1,0 +1,307 @@
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include
+        android:id="@+id/app_bar_me_add"
+        layout="@layout/app_bar"
+
+        ></include>
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/my_scroll"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:float="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginBottom="6dp">
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="390dp"
+                android:background="@drawable/bkgrnd1"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="6dp">
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:scaleType="centerCrop"
+                    android:layout_height="fill_parent"
+                    android:src="@drawable/ic_launcher"
+                    android:id="@+id/showimage"/>
+            </LinearLayout>
+            <ImageButton
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="1dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/upload2"
+                android:id="@+id/upload"/>
+        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="25dp"
+            android:text="STUDENT INFORMATION"
+            android:textColor="#899ca4"
+            android:textSize="17dp"
+            android:textStyle="bold">
+        </TextView>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/username1"/>
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                android:layout_width="fill_parent"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_height="wrap_content"
+                float:fletPadding="5dp">
+
+                <EditText
+                    android:textSize="12dp"
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="NAME" />
+            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/cls"/>
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                android:layout_width="fill_parent"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_height="wrap_content"
+                float:fletPadding="5dp">
+
+                <EditText
+                    android:textSize="12dp"
+                    android:id="@+id/cls"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="CLASS" />
+            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:src="@drawable/password2"/>
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                android:layout_width="fill_parent"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_height="wrap_content"
+                float:fletPadding="5dp">
+
+                <EditText
+                    android:textSize="12dp"
+                    android:id="@+id/rollno"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="ROLL NO." />
+            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/phn"/>
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                android:layout_width="fill_parent"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_height="wrap_content"
+                float:fletPadding="5dp">
+
+                <EditText
+                    android:textSize="12dp"
+                    android:id="@+id/phn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="PHONE" />
+            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/bus"/>
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                android:layout_width="fill_parent"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_height="wrap_content"
+                float:fletPadding="5dp">
+
+                <EditText
+                    android:textSize="12dp"
+                    android:id="@+id/route"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="ROUTE" />
+            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_marginTop="15dp"
+
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="95dp"
+                android:text="MAP LOCATION"
+                android:textColor="#899ca4"
+                android:textSize="15dp"
+                android:textStyle="bold">
+            </TextView>
+
+
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+
+                android:layout_weight="1"
+                android:textSize="10dp"
+                android:id="@+id/editloc"
+                android:background="#58FAF4"
+                style="@style/Button"
+                android:textColor="#000000"
+                android:text="ADD LOCATION"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+
+                />
+        </LinearLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@android:color/darker_gray"/>
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+            android:layout_height="150dp" android:id="@+id/student_map"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            tools:context="com.example.dhruv.bus_tracking_app.Google_Map_Upload"
+            android:name="com.google.android.gms.maps.SupportMapFragment" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="23dp"
+            android:background="#58a4f0"
+            android:textStyle="bold"
+            android:id="@+id/st_address_info"
+            android:gravity="center"
+            android:text="Maurya Enclave, Pitampura"/>
+
+
+        <Button
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="15dp"
+            android:id="@+id/btsave"
+            style="@style/Button"
+            android:text="SAVE"
+            android:textStyle="bold"
+
+            />
+
+
+
+
+
+    </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ *******************************************************************************
+  ~   Copyright (c) 2013-2014 Gabriele Mariotti.
+  ~
+  ~   Licensed under the Apache License, Version 2.0 (the "License");
+  ~   you may not use this file except in compliance with the License.
+  ~   You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~   Unless required by applicable law or agreed to in writing, software
+  ~   distributed under the License is distributed on an "AS IS" BASIS,
+  ~   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~   See the License for the specific language governing permissions and
+  ~   limitations under the License.
+  ~  *****************************************************************************
+  -->
+
+<resources>
+    <dimen name="navdrawer_width">400dp</dimen>
+    <dimen name="drawer_width">320dp</dimen>
+    <dimen name="text_size_medium">14sp</dimen>
+    <dimen name="text_size_large">18sp</dimen>
+    <dimen name="purchase_text_size_large">18sp</dimen>
+
+    <dimen name="card_birth_width">400dp</dimen>
+    <dimen name="card_mayknow_margin_top">10dp</dimen>
+
+    <dimen name="carddemo_base_grid_columnwidth">185dp</dimen>
+    <dimen name="carddemo_base_grid_columnwidth_card">185dp</dimen>
+    <dimen name="carddemo_gplay_grid_columnwidth">190dp</dimen>
+    <dimen name="carddemo_gplay_grid_columnwidth_card">190dp</dimen>
+
+    <dimen name="card_rose">350dp</dimen>
+
+    <!--Material design-->
+    <dimen name="keyline_1">24dp</dimen>
+    <dimen name="keyline_1_minus_8dp">16dp</dimen>
+    <dimen name="keyline_2">80dp</dimen>
+    <dimen name="keyline_2_minus_16dp">64dp</dimen>
+    <dimen name="keyline_2_session_detail">104dp</dimen>
+
+    <dimen name="carddemo_keyline_margin">24dp</dimen>
+    <dimen name="carddemo_keyline_content_start">80dp</dimen>
+    <dimen name="carddemo_barheader_elevation">2dp</dimen>
+    <dimen name="carddemo_barheader_height">72dp</dimen>
+
+    <dimen name="hashtag_text_size">16sp</dimen>
+    <dimen name="hashtag_hero_text_size">18sp</dimen>
+
+    <dimen name="navdrawer_image_height">170dp</dimen>
+    <dimen name="toolbar_x2">128dp</dimen>
+    <dimen name="carddemo_list_padding">16dp</dimen>
+
+</resources>

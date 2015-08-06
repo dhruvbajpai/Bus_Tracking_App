@@ -1,0 +1,167 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.dhruv.bus_tracking_app.editteacher">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="250dp"
+            android:layout_margin="5dp"
+            >
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="390dp"
+                android:background="@drawable/bkgrnd1"
+                android:layout_margin="10dp">
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:scaleType="centerCrop"
+                    android:layout_height="fill_parent"
+                    android:src="@drawable/ic_launcher"
+                    android:id="@+id/showimage"/>
+            </LinearLayout>
+            <ImageButton
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/new111"
+                android:id="@+id/change"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round2">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Name:"
+                android:textSize="20dp"
+                android:textColor="#ffffff"/>
+        <EditText
+            android:layout_width="fill_parent"
+            android:textColor="#ffffff"
+            android:text="name"
+            android:layout_marginLeft="37dp"
+            android:id="@+id/etname"
+            android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round2">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Username:"
+                android:textSize="20dp"
+                android:textColor="#ffffff"/>
+            <EditText
+                android:layout_width="fill_parent"
+                android:textColor="#ffffff"
+                android:text="uname"
+                android:id="@+id/etuser"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round2">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Password:"
+                android:textSize="20dp"
+                android:textColor="#ffffff"/>
+            <EditText
+                android:layout_width="fill_parent"
+                android:textColor="#ffffff"
+                android:text="password"
+                android:id="@+id/etpass"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round2">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Phone:"
+                android:textSize="20dp"
+                android:textColor="#ffffff"/>
+            <EditText
+                android:layout_width="fill_parent"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="33dp"
+                android:text="phone"
+                android:id="@+id/etphn"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round2">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Route:"
+                android:textSize="20dp"
+                android:textColor="#ffffff"/>
+            <EditText
+                android:layout_width="fill_parent"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="37dp"
+                android:text="route"
+                android:id="@+id/etroute"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <Button
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="15dp"
+            android:text="SAVE"
+            android:id="@+id/btsave"
+            android:layout_gravity="center"
+            android:background="@drawable/roundwhite"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ *******************************************************************************
+  ~   Copyright (c) 2013-2014 Gabriele Mariotti.
+  ~
+  ~   Licensed under the Apache License, Version 2.0 (the "License");
+  ~   you may not use this file except in compliance with the License.
+  ~   You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~   Unless required by applicable law or agreed to in writing, software
+  ~   distributed under the License is distributed on an "AS IS" BASIS,
+  ~   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~   See the License for the specific language governing permissions and
+  ~   limitations under the License.
+  ~  *****************************************************************************
+  -->
+
+<resources>
+
+    <!--App name -->
+    <string name="app_name">CardsLib Demo</string>
+
+    <!--Authority -->
+    <string name="config_authority">it.gmariotti.cardslib.demo.provider</string>
+
+    <!-- About -->
+    <string name="title_about"><![CDATA[
+        <b>CardLib</b>&nbsp;<font color="#888888">v%1$s</font>
+    ]]></string>
+    <string name="about_ok">OK</string>
+    <string name="about_body"><![CDATA[
+        <b>Library & Demo</b><br>
+        Author: <b><a href="https://plus.google.com/114432517923423045208">Gabriele Mariotti</a></b><br>
+        <br>
+        Get: <a href="https://github.com/gabrielemariotti/cardslib">Source and doc</a><br>
+        Get on Google Play: <a href="https://play.google.com/store/apps/details?id=it.gmariotti.cardslib.demo.extras">Cardslib Demo Extras</a><br>
+        <br><br>
+        <b>Many thanks for code and ideas to:</b><br>
+        <b><a href="https://github.com/romannurik/Android-SwipeToDismiss">SwipeToDismiss</a></b><br>
+        <i>by Roman Nurik</i><br><br>
+        <b><a href="https://gist.github.com/chrisbanes/9091754">ForegroundLinearLayout</a></b><br>
+        <i>by Chris Banes</i><br><br>
+        <b><a href="https://github.com/nhaarman/ListViewAnimations">ListViewAnimations</a></b><br>
+        <i>by Niek Haarman</i><br><br>
+        <b><a href="https://github.com/frankiesardo/LinearListView">LinearListView</a></b><br>
+        <i>by Frankie Sardo</i><br><br>
+        <b><a href="https://github.com/google/iosched">Google IO14</a></b><br>
+        <i>by Google</i><br><br>
+        <br>
+        Google, Google Play and the Google Maps logo are registered trademarks of Google Inc.
+
+    ]]></string>
+
+    <string name="demo_trademark">Google, Google Play and the Google Maps logo are registered trademarks of Google Inc.</string>
+    <string name="trademark">&#8482;</string>
+
+    <!--Menu -->
+    <string name="action_menu_about">About</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_menu_refresh">Refresh</string>
+    <string name="action_share">Share</string>
+    <string name="action_menu_beer">Donate</string>
+
+    <string name="menu_select_all">Select all</string>
+    <string name="menu_reset_list">Reset list</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_discard">Discard</string>
+
+    <!-- Misc -->
+    <string name="hello_world">Hello world!</string>
+
+    <!-- Title -->
+    <string name="carddemo_title_header">Card Header</string>
+    <string name="carddemo_title_shadow">Card Shadow</string>
+    <string name="carddemo_title_thumbnail">Card Thumbnail</string>
+    <string name="carddemo_title_card">Card</string>
+    <string name="carddemo_title_card_expand">Card Expand</string>
+    <string name="carddemo_title_gplay">Google Play &#8482;</string>
+    <string name="carddemo_title_gnow">Google Now</string>
+    <string name="carddemo_title_gplus">Misc</string>
+    <string name="carddemo_title_birthday_card">BirthDay Card</string>
+    <string name="carddemo_title_stock_card">Google Now Stock</string>
+    <string name="carddemo_title_play_card">Google Play &#8482;</string>
+    <string name="carddemo_title_misc_card">Misc</string>
+    <string name="carddemo_title_card_changevalue">Refresh card</string>
+    <string name="carddemo_title_list_base">List Base</string>
+    <string name="carddemo_title_list_base_different_inner">List base with different Inner Layouts</string>
+    <string name="carddemo_title_list_expand">List with expandable card</string>
+    <string name="carddemo_title_list_gplaycard">List Google Play &#8482;</string>
+    <string name="carddemo_title_grid_base">Grid Base</string>
+    <string name="carddemo_title_grid_gplay">Grid Google Play &#8482;</string>
+    <string name="carddemo_title_list_gplaycard_undo">List with undo</string>
+    <string name="carddemo_title_list_color">Colored cards</string>
+    <string name="carddemo_title_list_cursor">List with Cursor</string>
+    <string name="carddemo_title_grid_cursor">Grid with Cursor</string>
+    <string name="carddemo_title_cab_list">List with MultiChoice</string>
+    <string name="carddemo_title_grid_gplay_cab">Grid with MultiChoice</string>
+    <string name="carddemo_title_cab_list_cursor">List with Cursor and MultiChoice</string>
+    <string name="carddemo_title_dismiss_animation">Dismiss Animation (experimental)</string>
+    <string name="carddemo_title_expandablelistcard">ExpandableListCard</string>
+    <string name="carddemo_title_carwithlist_card">Card with List</string>
+    <string name="carddemo_title_overflow_animation">Overflow animation (experimental)</string>
+    <string name="carddemo_title_sectioned_list">Sectioned List</string>
+
+    <string name="carddemo_title_native_card">Native Card</string>
+
+    <string name="carddemo_title_tag_base_header">Header</string>
+    <string name="carddemo_title_tag_base_shadow">Shadow</string>
+    <string name="carddemo_title_tag_base_thumbnail">Thumbnail</string>
+    <string name="carddemo_title_tag_base_card">Card</string>
+    <string name="carddemo_title_tag_base_card_expand">Expand</string>
+
+    <string name="carddemo_title_tag_ex_gplay">Google Play &#8482;</string>
+    <string name="carddemo_title_tag_ex_gnow">Google Now &#8482;</string>
+    <string name="carddemo_title_tag_ex_material">Material Card</string>
+    <string name="carddemo_title_tag_ex_birthday_card">BirthDay Card</string>
+    <string name="carddemo_title_tag_ex_stock_card">Google Now Stock &#8482;</string>
+    <string name="carddemo_title_tag_ex_play_card">Google Play &#8482;</string>
+    <string name="carddemo_title_tag_ex_misc_card">Misc</string>
+    <string name="carddemo_title_tag_ex_card_changevalue">Refresh card</string>
+    <string name="carddemo_title_tag_ex_topcolored">Top Colored Card</string>
+
+
+    <string name="carddemo_title_tag_list_base">List base</string>
+    <string name="carddemo_title_tag_list_base_different_layout">Different layouts</string>
+    <string name="carddemo_title_tag_list_expandable_card">Expandable cards</string>
+    <string name="carddemo_title_tag_list_google_play">Google Play &#8482;</string>
+    <string name="carddemo_title_tag_list_swipe_undo">Swipe and undo</string>
+    <string name="carddemo_title_tag_list_grid_base">Grid base</string>
+    <string name="carddemo_title_tag_list_grid_google_play">Grid Google Play &#8482;</string>
+    <string name="carddemo_title_tag_list_colored">Colored cards</string>
+    <string name="carddemo_title_tag_list_cursor">List and Cursor</string>
+    <string name="carddemo_title_tag_list_grid_cursor">Grid with Cursor</string>
+    <string name="carddemo_title_tag_list_recyclerView">Recycler View</string>
+
+
+    <string name="carddemo_title_tag_cab_multichoice">Multichoice</string>
+    <string name="carddemo_title_tag_cab_grid_multichoice">Grid with CAB</string>
+    <string name="carddemo_title_tag_cab_cursor_multichoice">CAB and Cursor</string>
+
+    <string name="carddemo_title_tag_misc_cardwithlist">Card with List</string>
+    <string name="carddemo_title_tag_misc_sectioned">Sectioned List</string>
+    <string name="carddemo_title_tag_misc_dismiss">Dimiss Animation</string>
+    <string name="carddemo_title_tag_misc_overflow_animation">Overflow Animation</string>
+
+
+    <string name="carddemo_title_tag_todo">Todo</string>
+
+
+    <!-- Section -->
+    <string name="demo_section_header_standard">Standard Header without buttons</string>
+    <string name="demo_section_header_overflow">Standard Header with overflow button</string>
+    <string name="demo_section_header_overflow_dynamic">Overflow button with dynamic menu</string>
+    <string name="demo_section_header_overflow_dynamic2">Overflow button with dynamic menu without xml file</string>
+    <string name="demo_section_header_expand">Standard Header with expand/collapse button</string>
+    <string name="demo_section_header_expand_custom_area">Standard Header with expand/collapse button and custom expand Area</string>
+    <string name="demo_section_header_otherButton">Standard Header with custom button</string>
+    <string name="demo_section_header_otherButton_programmatically">Standard Header with custom button programmatically</string>
+    <string name="demo_section_header_inner">Customize the innerContent Header Layout</string>
+    <string name="demo_section_header_layout">Customizing the HeaderLayout</string>
+    <string name="demo_section_header_buttonleft_layout">Header with button on the left</string>
+
+    <string name="demo_section_shadow_no">Card without shadow</string>
+    <string name="demo_section_shadow_customizing">Customizing shadow</string>
+    <string name="demo_section_shadow_layout">Customizing the ShadowLayout</string>
+    <string name="demo_section_shadow_elevation">Change the elevation</string>
+    <string name="demo_section_shadow_animation">Animation</string>
+
+    <string name="demo_section_thumb_id">Thumbnail from resource ID</string>
+    <string name="demo_section_thumb_url">Thumbnail from resource URL</string>
+    <string name="demo_section_thumb_style">Styling your Thumbnail card</string>
+    <string name="demo_section_thumb_customsource">Thumbnail from custom source</string>
+
+    <string name="demo_section_card_title">Card with simple title</string>
+    <string name="demo_section_card_inner">Card with custom inner layout</string>
+    <string name="demo_section_card_example">Extending card</string>
+    <string name="demo_section_card_example_swipe">Custom card with swipe</string>
+    <string name="demo_section_card_example_clickable">Custom card clickable</string>
+    <string name="demo_section_card_example_expand">Card with expand/collapse action</string>
+    <string name="demo_section_card_example_partial_listeners">Custom card with partial areas clickable</string>
+    <string name="demo_section_card_example_cab">Contextual action mode</string>
+
+    <string name="demo_section_card_expand_example1">Expand clicking on the button</string>
+    <string name="demo_section_card_expand_example2">Expand clicking on the card</string>
+    <string name="demo_section_card_expand_example3">Expand clicking on the text</string>
+    <string name="demo_section_card_expand_example4">Expand clicking on the image</string>
+    <string name="demo_section_card_expand_example5">Expand section inside the card</string>
+    <string name="demo_section_card_expand_example6">Expand the card in programmatic way</string>
+    <string name="demo_section_card_expand_example6_text">Click here to expand/collapse the card</string>
+
+    <string name="demo_section_card_changevalue_title">Click Refresh Icon to refresh card</string>
+
+    <string name="demo_section_material_large_image_text">Material Card with Large Image and Text</string>
+    <string name="demo_section_material_large_image">Material Card with Large Image and supplemental actions</string>
+    <string name="demo_section_material_progress_card">Progress Card</string>
+    <string name="demo_section_material_halfcolored">Top Colored Card</string>
+
+    <!-- Header Examples -->
+    <string name="demo_header_basetitle">Card Header Title</string>
+    <string name="demo_expand_basetitle">Card Expand Title</string>
+    <string name="demo_header_exampletitle1">This is my inner layout title</string>
+    <string name="demo_header_exampletitle2">Short subtitle example</string>
+    <string name="demo_header_example1_text">Suggested communities</string>
+
+    <!-- Shadow Examples -->
+
+
+    <!-- Expand Example -->
+    <string name="demo_expand_customtitle1">Lorem ipsum dolor sit amet, consectetur adipisici elit...</string>
+    <string name="demo_expand_customtitle2">Quis aute iure reprehenderit in voluptate velit esse cillum ..</string>
+    <string name="demo_expand_customtitle3">Lorem ipsum dolor sit amet, consectetur adipisici elit...Lorem ipsum dolor sit amet, consectetur adipisici elit...Lorem ipsum dolor sit amet, consectetur adipisici elit...Lorem ipsum dolor sit amet, consectetur adipisici elit...</string>
+    <string name="demo_header_expand_area_inside">Card with expand area inside</string>
+
+    <!-- Card Examples -->
+    <string name="demo_card_basetitle">My Inner Text</string>
+    <string name="demo_custom_card_google_maps">Google Maps &#8482;</string>
+    <string name="demo_custom_card_googleinc">Google Inc.</string>
+    <string name="demo_custom_shorttitle">Header</string>
+    <string name="demo_card_shorttitle">Content</string>
+
+    <!-- You may know card -->
+    <string name="may_know_card_title">You may know</string>
+    <string name="may_know_card_subtitle">To see posts from friends and family, add them.</string>
+    <string name="may_know_card_add">Add</string>
+    <string name="may_know_card_inner_title">Gabriele Mariotti</string>
+    <string name="may_know_card_inner_subtitle">178 in common</string>
+
+    <!-- Suggested communities -->
+    <string name="demo_suggested_header">Suggested communities</string>
+    <string name="demo_suggested_title">Android &#8482;</string>
+    <string name="demo_suggested_member">199990 members</string>
+    <string name="demo_suggested_subtitle">Brought to you by Android Central......</string>
+    <string name="demo_suggested_community">View community</string>
+
+    <!-- Purchase -->
+    <string name="demo_purchase"><![CDATA[
+        <b>Donate</b>
+    ]]></string>
+    <string name="purchase_cancel">Cancel</string>
+    <string name="demo_item_small_beer">Buy me a coffee</string>
+    <string name="demo_item_medium_beer">Buy me a toast</string>
+    <string name="demo_item_large_beer">Buy me a pizza</string>
+    <string name="demo_item_xlarge_beer">Buy me a dinner</string>
+
+
+    <string name="demo_title_cab1">Long Click to enable CAB</string>
+    <string name="demo_title_cab2">Text Changed!</string>
+    <string name="demo_section_overflow_single_title">Example with simple animation</string>
+    <string name="demo_source_code">Source</string>
+    <string name="demo_doc">Doc</string>
+
+    <!-- Material -->
+    <string name="placeholder_session_title">Native Cards Examples</string>
+    <string name="placeholder_session_subtitle">Big Cards</string>
+
+    <string name="header_title_examples">Native Cards Examples</string>
+    <string name="header_title_bigcard">Big Cards</string>
+    <string name="header_title_cardheader">Card Base Features</string>
+    <string name="header_title_cardthumbnail">Card Base Features</string>
+
+    <string name="header_title_cardsubtitle">How to use the Card</string>
+    <string name="header_title_cardshadowsubtitle">How to use the CardShadow</string>
+    <string name="header_title_cardthumbnailsubtitle">How to use the CardThumbnail</string>
+    <string name="header_title_cardheadersubtitle">How to use the CardHeader</string>
+    <string name="header_title_cardexpandsubtitle">How to use the CardExpand</string>
+
+    <string name="header_title_subtitle_ex_gbirth">Google Birthday</string>
+    <string name="header_title_subtitle_ex_gplay">Google Play &#8482;</string>
+    <string name="header_title_subtitle_ex_gstock">Google Stock &#8482;</string>
+    <string name="header_title_subtitle_ex_misc">Misc Cards</string>
+    <string name="header_title_subtitle_ex_refresh">How to refresh the card content</string>
+    <string name="header_title_subtitle_ex_material">Built-in card:Material Card</string>
+    <string name="header_title_subtitle_ex_topcolored">Built-in card:Top Colored</string>
+
+    <string name="header_title_subtitle_lbase">How to build a simple list</string>
+    <string name="header_title_subtitle_ldiff">List with card with different layouts</string>
+    <string name="header_title_subtitle_lexpand">List and expandable cards</string>
+    <string name="header_title_subtitle_lgplay">A list like the Google Play &#8482;</string>
+    <string name="header_title_subtitle_swipe">A list with the swipe and undo actions</string>
+    <string name="header_title_subtitle_gbase">A basic grid</string>
+    <string name="header_title_subtitle_ggplay">A Grid like the Google Play &#8482;</string>
+    <string name="header_title_subtitle_lcolored">A list with colored cards</string>
+    <string name="header_title_subtitle_lcursor">A list with Cursor</string>
+    <string name="header_title_subtitle_gcursor">A grid with Cursor</string>
+
+
+    <string name="header_title_subtitle_cab_multi">A List with Multichoice</string>
+    <string name="header_title_subtitle_cab_gmulti">A Grid with Multichoice</string>
+    <string name="header_title_subtitle_cab_lcursor">A List with Cursor and Multichoice</string>
+
+    <string name="header_title_subtitle_recyclerview">How to use a RecyclerView</string>
+
+    <string name="header_title_subtitle_cardwithlist">Card wih List</string>
+    <string name="header_title_subtitle_sectioned">Sectioned List</string>
+    <string name="header_title_subtitle_dismiss">Dismiss Animation</string>
+
+    <string name="header_title_card">Card Base Features</string>
+
+    <string name="header_title_group1">Card Base Features</string>
+    <string name="header_title_group2">Card Examples</string>
+    <string name="header_title_group3">List,Grid and RecyclerView</string>
+    <string name="header_title_group4">Multichoice</string>
+    <string name="header_title_group5">Misc</string>
+
+    <!--Nav drawer -->
+    <string name="navdrawer_item_native_cardslib">CardViewNative</string>
+    <string name="navdrawer_item_cardslib_v1">CardView v1</string>
+    <string name="navdrawer_item_guidelines">Guidelines</string>
+    <string name="navdrawer_item_donate">Donate</string>
+    <string name="navdrawer_item_info">About</string>
+    <string name="navdrawer_item_github">Github code</string>
+    <string name="navdrawer_item_googleplus">G+ community</string>
+    <string name="carddemo_match">Team A - Team B</string>
+    <string name="guidelines_title">Warning !!</string>
+    <string name="guidelines_text"><![CDATA[ Before using this library I recommend that you check out the new Google Material Guidelines.</br> <b>Don\'t over cardify your UI</b>.
+    <br><br>
+    You can find all the Material Design Guidelines on the usage of cards <a href="http://www.google.com/design/spec/components/cards.html">here</a>]]></string>
+
+
+</resources>

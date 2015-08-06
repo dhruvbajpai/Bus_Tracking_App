@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:float="http://schemas.android.com/tools"
+    android:layout_width="260dp"
+    android:layout_height="260dp"
+    android:orientation="vertical">
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_gravity="center_horizontal">
+
+    <ImageView
+        android:layout_width="20dp"
+        style="@style/elevate"
+        android:layout_gravity="center_vertical"
+        android:layout_height="20dp"
+        android:src="@drawable/rotate1"/>
+    <TextView
+        android:layout_gravity="center_vertical"
+        android:id="@+id/txt_dia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="2dp"
+        android:text="Sign in"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        android:textStyle="bold" >
+    </TextView>
+</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
+        android:text="ACCOUNT"
+        android:textColor="#899ca4"
+        android:textSize="15dp"
+        android:textStyle="bold">
+    </TextView>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@android:color/darker_gray"/>
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/username1"/>
+    <com.wrapp.floatlabelededittext.FloatLabeledEditText
+        android:layout_width="165dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content"
+        float:fletPadding="10dp">
+
+        <EditText
+            android:textSize="12dp"
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Username" />
+    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/password2"/>
+
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+        android:layout_width="165dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content"
+        float:fletPadding="10dp">
+
+        <EditText
+            android:textSize="12dp"
+            android:id="@+id/password"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password" />
+    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+</LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnok"
+        style="@style/Button"
+        android:layout_marginTop="5dp"
+        android:layout_width="205dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:clickable="true"
+        android:layout_gravity="center"
+        android:text="LOGIN"
+        android:textStyle="bold" />
+
+
+></LinearLayout>
