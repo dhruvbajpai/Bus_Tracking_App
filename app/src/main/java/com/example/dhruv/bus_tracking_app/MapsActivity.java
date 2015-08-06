@@ -1,7 +1,6 @@
 package com.example.dhruv.bus_tracking_app;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.Point;
 import android.location.Address;
 import android.location.Geocoder;
@@ -51,7 +50,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-
 //Change the markers to visible non visible type after downloading them ONCE....Download ONCE ONLY...
 // ADD aync to getfromlocation method so that it works in a new thread....   UI SMOOTHER
 //ADD dialogbox to activity.
@@ -60,12 +58,12 @@ public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     AutoCompleteTextView locationview;
-    Button set, save, show_markers;
+    Button set,save,show_markers;
     TextView info;
     ImageView iv;
-    int x, y;
-    boolean geoflag, are_markers_marked = false;
-    boolean flag, show_flag = true;
+    int x,y;
+    boolean geoflag,are_markers_marked = false;
+    boolean flag,show_flag =true;
     ProgressDialog dialog;
     LatLng centre_location, p_position;
     DownloadTask placesDownloadTask;
@@ -77,18 +75,19 @@ public class MapsActivity extends FragmentActivity {
     GoogleMap googleMap;
     ArrayList<LatLng> markersarray;
     ArrayList<Marker> markers;
-    Marker pos_marker, prev_marker;
+    Marker pos_marker,prev_marker;
 
-    final int PLACES = 0;
-    final int PLACES_DETAILS = 1;
+    final int PLACES=0;
+    final int PLACES_DETAILS=1;
     MarkerOptions o;
     Integer size;// (The size of the array list of markers)
 
-    Double p_lat, p_lon;
+    Double p_lat,p_lon;
 
 
-    ///CREATE A SAVE BUTTON AND SAVE THE COORDINATES OF THE LOCATION ON PARSE TABLE IN STRING FIELDS.
-    Integer position, prevact;
+///CREATE A SAVE BUTTON AND SAVE THE COORDINATES OF THE LOCATION ON PARSE TABLE IN STRING FIELDS.
+    Integer position,prevact;
+
 
 
     @Override
@@ -96,7 +95,7 @@ public class MapsActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
-        info = (TextView) findViewById(R.id.info);
+        info = (TextView)findViewById(R.id.info);
         /*if(savedInstanceState==null)
         {*/
            /* Bundle extras = getIntent().getExtras();
@@ -106,36 +105,41 @@ public class MapsActivity extends FragmentActivity {
             mMap.addMarker(new MarkerOptions().position(new LatLng(p_lat,p_lon)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)).title("Current Saved Stop")).showInfoWindow();*/
 
 
-        if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if (extras == null) {
-                position = 0;
-                prevact = -1;
-            } else
-                position = extras.getInt("position");
-            prevact = extras.getInt("activityname");
 
-        } else {
+
+
+        if(savedInstanceState==null)
+        {
+            Bundle extras = getIntent().getExtras();
+            if(extras==null)
+            {
+                position=0;
+                prevact=-1;
+            }
+            else
+                position = extras.getInt("position");
+                prevact=extras.getInt("activityname");
+
+        }else {
             position = (Integer) savedInstanceState.getSerializable("position");
             prevact = (Integer) savedInstanceState.getSerializable("activityname");
 
         }
 
-// 0 for addstudent-add location
-// 1 for studentinfoedit-editlocation
-// 2 for addstudent-edit location
-        if (prevact == 1) {
+
+        if(prevact==1) {
             info.setText("Previous Bus Stop Marked on Map");
             p_lat = Double.parseDouble(mediator.latti.get(position));
 
             p_lon = Double.parseDouble(mediator.longi.get(position));
-            prev_marker = mMap.addMarker(new MarkerOptions().position(new LatLng(p_lat, p_lon)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)).title("Current Saved Stop"));
+            prev_marker= mMap.addMarker(new MarkerOptions().position(new LatLng(p_lat, p_lon)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)).title("Current Saved Stop"));
             prev_marker.showInfoWindow();
 
-        } else if (prevact == 0) {
-            info.setText("Set your desired location by moving the map");
-
         }
+
+
+
+
 
 
          /*   if(extras==null)
@@ -161,49 +165,39 @@ public class MapsActivity extends FragmentActivity {
 
 
         flag = true;
-        geoflag = true;
-        iv = (ImageView) findViewById(R.id.img_pointer);
+        geoflag =true;
+        iv = (ImageView)findViewById(R.id.img_pointer);
 
-        x = (iv.getLeft() + iv.getRight()) / 2;
+        x = (iv.getLeft() + iv.getRight())/2;
         y = iv.getBottom();
 
 
-        save = (Button) findViewById(R.id.btn_save);
+        save = (Button)findViewById(R.id.btn_save);
         markersarray = new ArrayList<LatLng>();
         markers = new ArrayList<Marker>();
-        locationview = (AutoCompleteTextView) findViewById(R.id.location);
-        set = (Button) findViewById(R.id.set_pointer);
-        show_markers = (Button) findViewById(R.id.show_markers);
+        locationview  = (AutoCompleteTextView)findViewById(R.id.location);
+        set = (Button)findViewById(R.id.set_pointer);
+        show_markers = (Button)findViewById(R.id.show_markers);
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (pos_marker != null) {
-
+                if (pos_marker!=null) {
                     LatLng ab = pos_marker.getPosition();
                     Double lat = ab.latitude;
                     Double lon = ab.longitude;
-                    if (prevact == 0)//coming from addstudent-add map location
-                    {
 
-                        Intent returnIntent = new Intent();
-                        returnIntent.putExtra("lat", lat);
-                        returnIntent.putExtra("lon", lon);
-                        returnIntent.putExtra("address", locationview.getText().toString());
-                        setResult(RESULT_OK, returnIntent);
-                        finish();
-
-                    } else if (prevact == 1) {//from studentinfoedit
-                        mediator.address.set(position, locationview.getText().toString());
-                        mediator.latti.set(position, lat.toString());
-                        mediator.longi.set(position, lon.toString());
-                        finish();
-                    }
-                } else {
+                    mediator.latti.set(position, lat.toString());
+                    mediator.longi.set(position, lon.toString());
+                    finish();
+                }
+                else
+                {
                     finish();
                 }
             }
         });
+
 
 
         show_markers.setOnClickListener(new View.OnClickListener() {
@@ -225,8 +219,8 @@ public class MapsActivity extends FragmentActivity {
                             if (e == null) {
 
                                 size = scoreList.size();
-                                Log.d("after", size.toString());
-                                Toast.makeText(getApplicationContext(), "Showing Route Stops On Map", Toast.LENGTH_SHORT).show();
+                                Log.d("after",size.toString());
+                                Toast.makeText(getApplicationContext(),"Showing Route Stops On Map",Toast.LENGTH_SHORT).show();
 
                                 for (int j = 0; j < size; j++) {
                                     Float lt = Float.parseFloat(scoreList.get(j).get("latitude").toString());
@@ -244,10 +238,10 @@ public class MapsActivity extends FragmentActivity {
                                 school.showInfoWindow();
                                 markers.add(school);
                                 //markers.add(mMap.addMarker(new MarkerOptions().position(new LatLng(lt,lg))));
-                                // dialog.dismiss();
-                                // drawmarkers();
+                               // dialog.dismiss();
+                               // drawmarkers();
                                 ///ADD PREVIOUS LOCATION MARKER RECEIVED FROM PREVIOUS ACTIVITY
-                                prev_marker = mMap.addMarker(new MarkerOptions().position(new LatLng(p_lat, p_lon)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Current Saved Stop"));
+                                prev_marker= mMap.addMarker(new MarkerOptions().position(new LatLng(p_lat, p_lon)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Current Saved Stop"));
                                 //prev_marker.showInfoWindow();
                                 markers.add(prev_marker);
                                 info.setText("Bus Stops Marked in Orange");
@@ -271,7 +265,7 @@ public class MapsActivity extends FragmentActivity {
                 } else if (!show_flag) {//
                     mMap.clear();
                     // REMOVE MARKERS EXECUTION IF SET POINTER WAS CLICEKD PREVIOUSLY
-                    if (!flag) {
+                    if(!flag) {
                         double lat = pos_marker.getPosition().latitude;
                         double lon = pos_marker.getPosition().longitude;
                         LatLng l = new LatLng(lat, lon);
@@ -284,7 +278,7 @@ public class MapsActivity extends FragmentActivity {
 
                 }
                 ///ADD PREVIOUS LOCATION MARKER RECEIVED FROM PREVIOUS ACTIVITY
-                prev_marker = mMap.addMarker(new MarkerOptions().position(new LatLng(p_lat, p_lon)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)).title("Current Saved Stop"));
+                prev_marker= mMap.addMarker(new MarkerOptions().position(new LatLng(p_lat, p_lon)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)).title("Current Saved Stop"));
                 prev_marker.showInfoWindow();
 
 
@@ -298,9 +292,9 @@ public class MapsActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 //*Projection projection = mMap.getProjection();
-                Point point = new Point(x, y);
+                Point point = new Point(x,y);
                 //LatLng ll = projection.fromScreenLocation(point);*//*
-                if (geoflag == true)
+                if(geoflag==true)
                     geoflag = false;
                 else if (geoflag == false)
                     geoflag = true;
@@ -308,18 +302,19 @@ public class MapsActivity extends FragmentActivity {
 
                     info.setText("Click \"Save\" to save this location");
 
-                    pos_marker = mMap.addMarker(new MarkerOptions().position(centre_location).title("Student Bus Stop").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                    pos_marker =  mMap.addMarker(new MarkerOptions().position(centre_location).title("Student Bus Stop").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
                     iv.setVisibility(View.GONE);
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(centre_location.latitude + 0.0002f, centre_location.longitude + 0.0002f), 17.0f));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(centre_location.latitude + 0.0002f , centre_location.longitude + 0.0002f ), 17.0f));
                     Toast.makeText(getApplicationContext(), "Location marked", Toast.LENGTH_SHORT).show();
                     set.setText("Remove pointer");
                     flag = false;
 
-                } else// set already clciked.... EXECUTION ON CLICK ON REMOVE POINTER BELOW
+                }
+                else// set already clciked.... EXECUTION ON CLICK ON REMOVE POINTER BELOW
                 {
-                    if (show_flag) {// show route markers not clickd... text = "show route markers"
-                        Log.d("after", "show_flag true");
+                    if(show_flag) {// show route markers not clickd... text = "show route markers"
+                        Log.d("after","show_flag true" );
 
                         mMap.clear();//  ONLY ONE POINTER....Pos_marker exists on map here...which will be cleared.
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(centre_location.latitude, centre_location.longitude), 16.0f));
@@ -327,8 +322,9 @@ public class MapsActivity extends FragmentActivity {
 
                     // REMOVE POINTER EXECUTION WHEN ROUTE MARKERS ALREADY PRESENT
                     // HIDE THE POSITION MARKER AND ANIMATE THE MAP TO latlng boundaries
-                    else if (!show_flag) {
-                        Log.d("after", "show_flag false");
+                    else if(!show_flag)
+                    {
+                        Log.d("after","show_flag false" );
                         //mMap.clear();
                         pos_marker.setVisible(false);
                         LatLngBounds.Builder builder = new LatLngBounds.Builder();
@@ -349,22 +345,24 @@ public class MapsActivity extends FragmentActivity {
                     info.setText("Pointer showing Location to save");
                     Toast.makeText(getApplicationContext(), "Location Marker Removed", Toast.LENGTH_SHORT).show();
                     iv.setVisibility(View.VISIBLE);
-                    // mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(centre_location.latitude, centre_location.longitude), 16.0f));
+                   // mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(centre_location.latitude, centre_location.longitude), 16.0f));
                     flag = true;
                     pos_marker = null;
 
 
+
                     ///ADD PREVIOUS LOCATION MARKER RECEIVED FROM PREVIOUS ACTIVITY
-                    if (prevact == 1) {
-                        prev_marker = mMap.addMarker(new MarkerOptions().position(new LatLng(p_lat, p_lon)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)).title("Current Saved Stop"));
-                        prev_marker.showInfoWindow();
-                    }
-                    pos_marker = null;
+                    prev_marker= mMap.addMarker(new MarkerOptions().position(new LatLng(p_lat, p_lon)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)).title("Current Saved Stop"));
+                    prev_marker.showInfoWindow();
+                    pos_marker=null;
                 }
 
 
             }
         });
+
+
+
 
 
         mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
@@ -379,7 +377,8 @@ public class MapsActivity extends FragmentActivity {
                     try {
 
                         //Place your latitude and longitude
-                        new AsyncTask<Void, Void, Void>() {
+                        new AsyncTask<Void,Void,Void>()
+                        {
                             Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.ENGLISH);
                             List<Address> addresses;
 
@@ -387,7 +386,8 @@ public class MapsActivity extends FragmentActivity {
 
                                 try {
                                     addresses = geocoder.getFromLocation(centre_location.latitude, centre_location.longitude, 1);
-                                } catch (Exception e) {
+                                }catch (Exception e)
+                                {
                                     e.printStackTrace();
                                 }
 
@@ -415,6 +415,8 @@ public class MapsActivity extends FragmentActivity {
                         //List<Address> addresses = geocoder.getFromLocation(centre_location.latitude, centre_location.longitude, 1);
 
 
+
+
                     } catch (Exception e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -422,7 +424,8 @@ public class MapsActivity extends FragmentActivity {
                     }
                 }
             }
-        });
+            });
+
 
 
         /////////////////////////////////////////////FORWARD GEOCODING CODE////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -477,12 +480,14 @@ public class MapsActivity extends FragmentActivity {
             }
         });
     }
-    /////////////////////////////////////////////FORWARD GEOCODING CODE///////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////FORWARD GEOCODING CODE///////////////////////////////////////////////////////////////////////////////////////////////////
 
-    void drawmarkers() {
-        for (int j = 0; j < size; j++) {
+    void drawmarkers()
+    {
+        for(int j=0;j<size;j++)
+        {
             LatLng pos = markersarray.get(j);
-            mMap.addMarker(new MarkerOptions().position(new LatLng(pos.latitude, pos.longitude)));
+            mMap.addMarker(new MarkerOptions().position(new LatLng(pos.latitude,pos.longitude)));
 
         }
         mMap.addMarker(new MarkerOptions().position(new LatLng(28.689224, 77.121460))
@@ -535,16 +540,16 @@ public class MapsActivity extends FragmentActivity {
         LatLng l = new LatLng(28.695693, 77.151955);
         //googleMap.addMarker(new MarkerOptions().position(l).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(l, 14));
-        //   mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+     //   mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
     }
 
-    private String getAutoCompleteUrl(String place) {
+    private String getAutoCompleteUrl(String place){
 
         // Obtain browser key from https://code.google.com/apis/console
-        String key = "key=AIzaSyDzJdVftvsItK72Vwrb9iDRM9DgtJvEzL0";
+        String key ="key=AIzaSyDzJdVftvsItK72Vwrb9iDRM9DgtJvEzL0";
 
         // place to be be searched
-        String input = "input=" + place;
+        String input = "input="+place;
 
         // place type to be searched
         String types = "types=geocode";
@@ -553,48 +558,46 @@ public class MapsActivity extends FragmentActivity {
         String sensor = "sensor=false";
 
         // Building the parameters to the web service
-        String parameters = input + "&" + types + "&" + sensor + "&" + key;
+        String parameters = input+"&"+types+"&"+sensor+"&"+key;
 
         // Output format
         String output = "json";
 
         // Building the url to the web service
-        String url = "https://maps.googleapis.com/maps/api/place/autocomplete/" + output + "?" + parameters;
+        String url = "https://maps.googleapis.com/maps/api/place/autocomplete/"+output+"?"+parameters;
 
         return url;
     }
 
-    private String getPlaceDetailsUrl(String ref) {
+    private String getPlaceDetailsUrl(String ref){
 
         // Obtain browser key from https://code.google.com/apis/console
         String key = "key=AIzaSyDzJdVftvsItK72Vwrb9iDRM9DgtJvEzL0";
 
         // reference of place
-        String reference = "reference=" + ref;
+        String reference = "reference="+ref;
 
         // Sensor enabled
         String sensor = "sensor=false";
 
         // Building the parameters to the web service
-        String parameters = reference + "&" + sensor + "&" + key;
+        String parameters = reference+"&"+sensor+"&"+key;
 
         // Output format
         String output = "json";
 
         // Building the url to the web service
-        String url = "https://maps.googleapis.com/maps/api/place/details/" + output + "?" + parameters;
+        String url = "https://maps.googleapis.com/maps/api/place/details/"+output+"?"+parameters;
 
         return url;
     }
 
-    /**
-     * A method to download json data from url
-     */
-    private String downloadUrl(String strUrl) throws IOException {
+    /** A method to download json data from url */
+    private String downloadUrl(String strUrl) throws IOException{
         String data = "";
         InputStream iStream = null;
         HttpURLConnection urlConnection = null;
-        try {
+        try{
             URL url = new URL(strUrl);
 
             // Creating an http connection to communicate with url
@@ -608,10 +611,10 @@ public class MapsActivity extends FragmentActivity {
 
             BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
 
-            StringBuffer sb = new StringBuffer();
+            StringBuffer sb  = new StringBuffer();
 
             String line = "";
-            while ((line = br.readLine()) != null) {
+            while( ( line = br.readLine())  != null){
                 sb.append(line);
             }
 
@@ -619,9 +622,9 @@ public class MapsActivity extends FragmentActivity {
 
             br.close();
 
-        } catch (Exception e) {
+        }catch(Exception e){
             Log.d("Exception while downloading url", e.toString());
-        } finally {
+        }finally{
             iStream.close();
             urlConnection.disconnect();
         }
@@ -631,10 +634,10 @@ public class MapsActivity extends FragmentActivity {
     // Fetches data from url passed
     private class DownloadTask extends AsyncTask<String, Void, String> {
 
-        private int downloadType = 0;
+        private int downloadType=0;
 
         // Constructor
-        public DownloadTask(int type) {
+        public DownloadTask(int type){
             this.downloadType = type;
         }
 
@@ -644,10 +647,10 @@ public class MapsActivity extends FragmentActivity {
             // For storing data from web service
             String data = "";
 
-            try {
+            try{
                 // Fetching the data from web service
                 data = downloadUrl(url[0]);
-            } catch (Exception e) {
+            }catch(Exception e){
                 Log.d("Background Task", e.toString());
             }
             return data;
@@ -657,7 +660,7 @@ public class MapsActivity extends FragmentActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            switch (downloadType) {
+            switch(downloadType){
                 case PLACES:
                     // Creating ParserTask for parsing Google Places
                     placesParserTask = new ParserTask(PLACES);
@@ -668,7 +671,7 @@ public class MapsActivity extends FragmentActivity {
 
                     break;
 
-                case PLACES_DETAILS:
+                case PLACES_DETAILS :
                     // Creating ParserTask for parsing Google Places
                     placeDetailsParserTask = new ParserTask(PLACES_DETAILS);
 
@@ -679,14 +682,12 @@ public class MapsActivity extends FragmentActivity {
         }
     }
 
-    /**
-     * A class to parse the Google Places in JSON format
-     */
-    private class ParserTask extends AsyncTask<String, Integer, List<HashMap<String, String>>> {
+    /** A class to parse the Google Places in JSON format */
+    private class ParserTask extends AsyncTask<String, Integer, List<HashMap<String,String>>>{
 
         int parserType = 0;
 
-        public ParserTask(int type) {
+        public ParserTask(int type){
             this.parserType = type;
         }
 
@@ -696,22 +697,22 @@ public class MapsActivity extends FragmentActivity {
             JSONObject jObject;
             List<HashMap<String, String>> list = null;
 
-            try {
+            try{
                 jObject = new JSONObject(jsonData[0]);
 
-                switch (parserType) {
-                    case PLACES:
+                switch(parserType){
+                    case PLACES :
                         PlaceJSONParser placeJsonParser = new PlaceJSONParser();
                         // Getting the parsed data as a List construct
                         list = placeJsonParser.parse(jObject);
                         break;
-                    case PLACES_DETAILS:
+                    case PLACES_DETAILS :
                         PlaceDetailsJSONParser placeDetailsJsonParser = new PlaceDetailsJSONParser();
                         // Getting the parsed data as a List construct
                         list = placeDetailsJsonParser.parse(jObject);
                 }
 
-            } catch (Exception e) {
+            }catch(Exception e){
                 Log.d("Exception", e.toString());
             }
             return list;
@@ -720,10 +721,10 @@ public class MapsActivity extends FragmentActivity {
         @Override
         protected void onPostExecute(List<HashMap<String, String>> result) {
 
-            switch (parserType) {
-                case PLACES:
-                    String[] from = new String[]{"description"};
-                    int[] to = new int[]{android.R.id.text1};
+            switch(parserType){
+                case PLACES :
+                    String[] from = new String[] { "description"};
+                    int[] to = new int[] { android.R.id.text1 };
 
                     // Creating a SimpleAdapter for the AutoCompleteTextView
                     SimpleAdapter adapter = new SimpleAdapter(getBaseContext(), result, android.R.layout.simple_list_item_1, from, to);
@@ -731,7 +732,7 @@ public class MapsActivity extends FragmentActivity {
                     // Setting the adapter
                     locationview.setAdapter(adapter);
                     break;
-                case PLACES_DETAILS:
+                case PLACES_DETAILS :
                     HashMap<String, String> hm = result.get(0);
 
                     // Getting latitude from the parsed data
@@ -741,11 +742,12 @@ public class MapsActivity extends FragmentActivity {
                     final double longitude = Double.parseDouble(hm.get("lng"));
 
 
+
                     //Toast.makeText(getApplicationContext(),"Latitude: "+ latitude+ "longitude: "+longitude,Toast.LENGTH_SHORT).show();
 
                     LatLng point = new LatLng(latitude, longitude);
 
-                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(point, 14);
+                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(point,14);
                     mMap.animateCamera(cameraUpdate);
 
                     //CameraUpdate cameraPosition = CameraUpdateFactory.newLatLng(point);
@@ -753,7 +755,7 @@ public class MapsActivity extends FragmentActivity {
 
                     // Showing the user input location in the Google Map
 //                    googleMap.moveCamera(cameraPosition);
-                    //                  googleMap.animateCamera(cameraZoom);
+  //                  googleMap.animateCamera(cameraZoom);
 
 
                    /* MarkerOptions options = new MarkerOptions();
@@ -795,8 +797,9 @@ public class MapsActivity extends FragmentActivity {
                     });*/
 
 
+
                     // Adding the marker in the Google Map
-                    // googleMap.addMarker(options);
+                   // googleMap.addMarker(options);
 
                     break;
             }

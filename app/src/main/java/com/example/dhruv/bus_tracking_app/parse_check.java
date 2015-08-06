@@ -1,15 +1,10 @@
 package com.example.dhruv.bus_tracking_app;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,16 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
-import com.parse.GetDataCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
-import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -45,31 +37,24 @@ import it.gmariotti.cardslib.library.view.CardViewNative;
 public class parse_check extends ActionBarActivity {
 
 
-    TextView tv, route_no;
+    TextView tv,route_no;
     String s;
-    String route, cls, rollno, rowid;
-    Toolbar toolbar;
+    String route,cls,rollno,rowid;
     //static ArrayList<String> names,phones;
-    static ArrayList<Bitmap> f_bmap = new ArrayList<Bitmap>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parse_check);
-        //getSupportActionBar().hide();
-        toolbar = (Toolbar) findViewById(R.id.app_bar_me_p);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-        getSupportActionBar().setTitle("Student Info");
+        getSupportActionBar().hide();
         Bundle b = this.getIntent().getExtras();
-        route_no = (TextView) findViewById(R.id.route_num);
+        route_no = (TextView)findViewById(R.id.route_num);
 
-        route = (String) b.get("route");
-        route_no.setText("Route " + route);
+        route = (String)b.get("route");
+        route_no.setText("Route "+route);
 
 
-        //mediator.names = (ArrayList<String>)b.getStringArrayList("name_list");
-        //mediator.phone = (ArrayList<String>)b.getStringArrayList("phone_list");
+        mediator.names = (ArrayList<String>)b.getStringArrayList("name_list");
+        mediator.phone = (ArrayList<String>)b.getStringArrayList("phone_list");
         //mediator.rollno = (ArrayList<String>)b.getStringArrayList("phone_list");
 
 /*
@@ -97,20 +82,29 @@ public class parse_check extends ActionBarActivity {
         cardView.setCard(card);*/
 
 
-        for (int i = 0; i < mediator.names.size(); i++) {
+        for(int i=0;i<mediator.names.size();i++)
+        {
             cards.add(card);
         }
 
-        CardArrayAdapter madapter = new CustomCardAdapter(this, cards, mediator.names, mediator.phone);
+        CardArrayAdapter madapter = new  CustomCardAdapter(this,cards,mediator.names,mediator.phone);
 
-        CardListView listview = (CardListView) findViewById(R.id.myList);
+        CardListView listview = (CardListView)findViewById(R.id.myList);
 
-        if (listview != null) {
+        if(listview!=null)
+        {
             listview.setAdapter(madapter);
         }
 
 
+
+
     }
+
+
+
+
+
 
 
     @Override
@@ -141,15 +135,14 @@ public class parse_check extends ActionBarActivity {
         Context c;
         ArrayList<String> names;
         ArrayList<String> phones;
-
         public CustomCardAdapter(Context context, List<Card> cards) {
             super(context, cards);
-            c = context;
+            c =context;
         }
 
         public CustomCardAdapter(Context context, ArrayList<Card> cards, ArrayList<String> names, ArrayList<String> phone) {
             super(context, cards);
-            c = context;
+            c =context;
             this.names = names;
             this.phones = phone;
         }
@@ -158,9 +151,10 @@ public class parse_check extends ActionBarActivity {
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
 
-            if (convertView == null) {
-                LayoutInflater inflater = (LayoutInflater) c.getSystemService(c.LAYOUT_INFLATER_SERVICE);
-                convertView = inflater.inflate(R.layout.list_card_thumbnail_layout, null);
+            if(convertView==null)
+            {
+                LayoutInflater inflater = (LayoutInflater)c.getSystemService(c.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(R.layout.list_card_thumbnail_layout,null);
 
             }
 
@@ -170,39 +164,36 @@ public class parse_check extends ActionBarActivity {
             ///n baaki kuch samajh na aye toh call kardiyo
 
             //CardHeader ch = (CardHeader)convertView.findViewById(R.id.card_header_layout);
-
-            TextView tv = (TextView) convertView.findViewById(R.id.name);
-            TextView tv1 = (TextView) convertView.findViewById(R.id.ph_number);
-            TextView st_address = (TextView) convertView.findViewById(R.id.address);
-            final ImageView user_image = (ImageView) convertView.findViewById(R.id.user);
-            Button edit = (Button) convertView.findViewById(R.id.edit);
+            TextView tv =(TextView)convertView.findViewById(R.id.name);
+            Button edit = (Button)convertView.findViewById(R.id.edit);
             edit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    cls = mediator.cls.get(position);
-                    rollno = mediator.rollno.get(position);
-                    Log.d("ab", cls);
-                    Log.d("ab", rollno);
-                    Log.d("ab", route);
-                    ParseQuery<ParseObject> query = ParseQuery.getQuery("r" + route);
+                    cls=mediator.cls.get(position);
+                    rollno=mediator.rollno.get(position);
+                    Log.d("ab",cls);
+                    Log.d("ab",rollno);
+                    Log.d("ab",route);
+                    ParseQuery<ParseObject> query = ParseQuery.getQuery("r"+route);
                     query.whereEqualTo("class", cls);
                     query.whereEqualTo("rollno", rollno);
                     try {
                         List<ParseObject> lPo = query.find();
-                        Log.d("asd", "size" + lPo.size());
-                        if (lPo.size() > 0) {
+                        Log.d("asd","size"+lPo.size());
+                        if(lPo.size()>0)
+                        {
                             //Log.d("asd",lPo.get(0).getObjectId());
-                            rowid = lPo.get(0).getObjectId();
+                            rowid=lPo.get(0).getObjectId();
                             //Log.d("asd","r"+rollno);
                         }
                     } catch (ParseException e) {
-                        Log.d("asd", e.getLocalizedMessage());
+                        Log.d("asd",e.getLocalizedMessage());
                     }
 
-                    Intent i = new Intent(getApplicationContext(), studentinfoedit.class);
-                    i.putExtra("routeno", route);
-                    i.putExtra("rowno", rowid);
-                    i.putExtra("studentno", position);
+                    Intent i = new Intent(getApplicationContext(),studentinfoedit.class);
+                    i.putExtra("routeno",route);
+                    i.putExtra("rowno",rowid);
+                    i.putExtra("studentno",position);
                     startActivity(i);
                     finish();
 
@@ -210,32 +201,9 @@ public class parse_check extends ActionBarActivity {
             });
             String name = names.get(position).toString();
             String phone = phones.get(position).toString();
-            String address = mediator.address.get(position).toString();
-
-
             tv.setText(name);
-            tv1.setText(phone);
-            st_address.setText(address);
-
-
-
-
-
-
-                    ParseFile fileoject = (ParseFile) mediator.the_route.get(position).get("photo");
-                    fileoject.getDataInBackground(new GetDataCallback() {
-                        @Override
-                        public void done(byte[] bytes, ParseException e) {
-                            if (e == null)
-
-                            {
-                                Log.d("parse", "success" + position);
-                                Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                                //f_bmap.set(position, bmp);
-                                user_image.setImageBitmap(bmp);
-                            }
-                        }
-                    });
+            TextView tv1 =(TextView)convertView.findViewById(R.id.ph_number);
+               tv1.setText(phone);
 
 
             return convertView;

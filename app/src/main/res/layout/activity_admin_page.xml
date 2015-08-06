@@ -4,13 +4,6 @@
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fab="http://schemas.android.com/apk/res-auto">
-
-    <include
-        android:id="@+id/app_bar_me"
-        layout="@layout/app_bar"
-
-        ></include>
-
 <RelativeLayout
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
@@ -23,6 +16,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:text="The current routes are listed as follows"
             android:textSize="18dp"
             android:textStyle="bold"/>
@@ -37,7 +33,7 @@
             android:textAlignment="center"
             android:numColumns="3"
             android:verticalSpacing="0dp"
-            android:horizontalSpacing="7dp"
+            android:horizontalSpacing="2dp"
             android:stretchMode="columnWidth"
 
 
@@ -70,8 +66,8 @@
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/pink"
             fab:fab_title="Add Route"
+            fab:fab_colorNormal="#000000"
             fab:fab_size="mini"
             android:id="@+id/addroute"
             fab:fab_colorPressed="@color/white_pressed"/>
@@ -79,7 +75,7 @@
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/pink"
+            fab:fab_colorNormal="#000000"
             fab:fab_title="Add Teacher"
             fab:fab_size="mini"
             android:id="@+id/addteach"
@@ -88,8 +84,8 @@
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/pink"
             fab:fab_size="mini"
+            fab:fab_colorNormal="#000000"
             android:id="@+id/addstud"
             fab:fab_title="Add Student"
             fab:fab_colorPressed="@color/white_pressed"/>

@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -13,8 +15,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.parse.CountCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 /**
@@ -22,11 +27,12 @@ import com.parse.ParseUser;
  */
 public class Auth_Diag extends Dialog {
 
-
+    static int noofroute;
     public Activity c;
     public Dialog d;
     public Button ok;
-    String usr, pass, getUser, getPass;
+    ProgressDialog mProgressDialog;
+    static String studentid;
     EditText u, p;
 
     public Auth_Diag(Activity a) {
@@ -51,9 +57,38 @@ public class Auth_Diag extends Dialog {
                 ParseUser.logInInBackground(u.getText().toString(), p.getText().toString(), new LogInCallback() {
                     public void done(ParseUser user, ParseException e) {
                         if (user != null) {
-                            Intent i = new Intent(c.getApplicationContext(),AdminPage.class);
-                            c.startActivity(i);
+                            String s = user.get("type").toString();
+                            Log.d("asd",s);
+                            String k=MainActivity.type;
+                            if(k.equals(s) && k.equals("admin")) {
+                                //Log.d("asd", "abc");
+                                mProgressDialog = new ProgressDialog(c);
+                                // Set progressdialog title
+                                mProgressDialog.setTitle("Please Wait.." +
+                                        "\nLoading Student Information");
+                                // Set progressdialog message
+                                mProgressDialog.setMessage("Loading...");
+                                mProgressDialog.setIndeterminate(false);
+                                // Show progressdialog
+                                mProgressDialog.show();
+                                ParseQuery<ParseObject> query = ParseQuery.getQuery("liveloc");
+                                try {
+                                    noofroute=query.count();
+                                    mProgressDialog.dismiss();
+                                } catch (ParseException e1) {
+                                    e1.printStackTrace();
+                                }
 
+                                Intent i = new Intent(c.getApplicationContext(), AdminPage.class);
+                                c.startActivity(i);
+                            }
+                            if(k.equals(s) && k.equals("parent")) {
+                                studentid=user.get("studentid").toString();
+                                Intent i = new Intent(c.getApplicationContext(), parentactivity.class);
+
+                                i.putExtra("route",user.get("route").toString());
+                                c.startActivity(i);
+                            }
                         } else {
                             Toast.makeText(c.getApplicationContext(),"Sign In Failed",Toast.LENGTH_SHORT).show();
 

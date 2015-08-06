@@ -21,7 +21,7 @@ import com.parse.SignUpCallback;
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
     Button b1,b2,b3,b4;
-
+    static String type;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,12 +106,16 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         switch(v.getId())
         {
             case R.id.admin_mode:
+                type="admin";
                 break;
             case R.id.teacher_mode:
+                type="teacher";
                 break;
             case R.id.parent_mode:
+                type="parent";
                 break;
             case R.id.driver_mode:
+                type="driver";
                 break;
 
 

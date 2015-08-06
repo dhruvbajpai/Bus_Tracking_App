@@ -36,91 +36,25 @@
         <!-- Compound view for Header Card
              If you want to customize this element use attr card:card_header_layout_resourceID
              You can also use your CardHeader subclass-->
-
+        <it.gmariotti.cardslib.library.view.component.CardHeaderView
+            style="@style/card.header_outer_layout"
+            android:id="@+id/card_header_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="40dp"
+            android:orientation="horizontal">
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height ="120dp"
-                    android:src="@drawable/user"
-                    android:id="@+id/user"
-                    android:layout_weight="1"/>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:id="@+id/name"
-                        android:layout_marginLeft="10dp"
-                        android:text="DHRUV BAJPAI"
-                        android:textSize="25dp"
-                        android:textStyle="bold"
-                        android:gravity="left"
-                        android:layout_gravity="left"
-                        android:textColor="#000000" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:id="@+id/address"
-                        android:layout_marginLeft="10dp"
-                        android:text="Maurya Enclave, Pitampura"
-                        android:textSize="14dp"
-
-                        android:gravity="left"
-                        android:layout_gravity="left"
-                        android:textColor="#44BBA4" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/st_class"
-                        android:layout_marginLeft="10dp"
-                        android:text="VII-C"
-                        android:textSize="14dp"
-
-                        android:gravity="left"
-                        android:layout_gravity="left"
-                        android:textColor="#E7BB41" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/ph_number"
-                        android:layout_marginLeft="10dp"
-                        android:text="9899881387"
-                        android:textSize="14dp"
-
-                        android:gravity="left"
-                        android:layout_gravity="left"
-                        android:textColor="#6C5A49" />
-
-
-
-                    </LinearLayout>
-
-
-
-
-
-                </LinearLayout>
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:id="@+id/name"
+                android:layout_marginLeft="10dp"
+                android:text="DHRUV BAJPAI"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="#000000" />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -130,13 +64,59 @@
                 android:text="EDIT INFO"
                 android:textColor="#EA5D58"
                 android:textStyle="bold"
-
+                android:layout_marginLeft="60dp"
 
                 android:layout_gravity="right"/>
             </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+
+                android:layout_marginLeft="10dp"
+                android:text="Route No. "
+                android:textStyle="bold"
+                android:textColor="#F1B125" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:id="@+id/rt_number"
+                android:layout_marginLeft="10dp"
+                android:text="1"
+                android:textStyle="bold"
+                android:textColor="#000000" />
 
 
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:textColor="#34E07B"
+                android:layout_marginLeft="10dp"
+                android:text="Phone Number:  "
+                android:textStyle="bold"
+                 />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:id="@+id/ph_number"
+                android:textColor="#000000"
+
+                android:layout_marginLeft="10dp"
+                android:text="9899881387"
+                android:textStyle="bold"
+                 />
+
+
+        </LinearLayout>
 
 
       <!--  <LinearLayout

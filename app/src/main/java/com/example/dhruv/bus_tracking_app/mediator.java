@@ -1,6 +1,5 @@
 package com.example.dhruv.bus_tracking_app;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -23,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class mediator extends Activity {
+public class mediator extends ActionBarActivity {
 
     Integer route_no;
     String route;
@@ -33,13 +32,11 @@ public class mediator extends Activity {
     int count=0;
     Intent u;
     List<ParseObject> ob;
-    static String tr = "p";
-    static ArrayList<String> names,phone,cls,longi,latti,rollno,address;
-    static List<ParseObject> the_route;
+    static ArrayList<String> names,phone,cls,longi,latti,rollno;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mediator);
-//        getSupportActionBar().hide();
+        getSupportActionBar().hide();
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if (extras == null) {
@@ -50,15 +47,12 @@ public class mediator extends Activity {
         } else
             route_no = (Integer) savedInstanceState.getSerializable("rt_number");
 
-        route_no++;
         route = route_no.toString();
-
         Log.d("a",route);
         //////////////////////////////////////////////////////////////////////////////////////////
         names = new ArrayList<String>();
         phone = new ArrayList<String>();
         cls = new ArrayList<String>();
-        address = new ArrayList<String>();
         longi = new ArrayList<String>();
         latti = new ArrayList<String>();
         rollno = new ArrayList<String>();
@@ -83,7 +77,7 @@ public class mediator extends Activity {
                     Integer i = scoreList.size();
                     String s = i.toString();
                     Toast.makeText(getApplicationContext(),s+" students",Toast.LENGTH_SHORT).show();
-                    the_route = scoreList;
+
                     if(Route_info.i==1) {
                         u = new Intent(getApplicationContext(), parse_check.class);
                     }
@@ -98,7 +92,6 @@ public class mediator extends Activity {
                         latti.add(scoreList.get(k).get("latitude").toString());
                         longi.add(scoreList.get(k).get("longitude").toString());
                         rollno.add(scoreList.get(k).get("rollno").toString());
-                        address.add(scoreList.get(k).get("Address").toString());
                         //Toast.makeText(get)
                         //Log.d("latitude_med",latti.get(0).toString()+scoreList.get(k).get("latitude").toString());
                         //Log.d("longitude_med",longi.get(0).toString()+scoreList.get(k).get("longitude").toString());

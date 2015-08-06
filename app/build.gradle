@@ -31,5 +31,5 @@ dependencies {
     compile 'com.getbase:floatingactionbutton:1.10.0'
     compile 'com.wrapp.floatlabelededittext:library:0.0.6'
     //compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
-
+    //compile 'com.android.support:design:22.2.0'
 }

@@ -1,11 +1,10 @@
 package com.example.dhruv.bus_tracking_app;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.parse.CountCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -31,38 +31,30 @@ import it.gmariotti.cardslib.library.view.CardGridView;
 import it.gmariotti.cardslib.library.view.CardViewNative;
 
 
-public class AdminPage extends ActionBarActivity{
-
-    TextView tv1;
-  Toolbar toolbar;
-
-
+public class AdminPage extends ActionBarActivity {
+        ProgressDialog mProgressDialog;
+        Card card;
+        ArrayList<Card> cards;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_page);
 
-        if(mediator.tr =="f")
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-        else {
-            Toast.makeText(this,"hey",Toast.LENGTH_SHORT).show();
-            overridePendingTransition(R.anim.slide_out, R.anim.slide_in);
-        }
-        //getSupportActionBar().hide();
-        toolbar = (Toolbar)findViewById(R.id.app_bar_me);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Current Route Grid");
+        overridePendingTransition(R.anim.slidefromleft, R.anim.slidetoleft);
+        getSupportActionBar().hide();
+
+        Toast.makeText(this,String.valueOf(Auth_Diag.noofroute),Toast.LENGTH_SHORT).show();
 
         //-----------------Populate the cardview------------------
-        ArrayList<Card> cards = new ArrayList<Card>();
+        cards = new ArrayList<Card>();
 
         //Create a Card
-        Card card = new Card(this);
+        card = new Card(this);
 
         //Create a CardHeader
         CardHeader header = new CardHeader(this);
         //Add Header to card
         card.addCardHeader(header);
-        for(int i=0;i<17;i++)
+        for(int i=0;i<Auth_Diag.noofroute;i++)
         {
 
             cards.add(card);
@@ -77,20 +69,23 @@ public class AdminPage extends ActionBarActivity{
 
         }
 
-       /* gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent q = new Intent(getApplicationContext(),Route_info.class);
-                q.putExtra("rt_number",position);
-                startActivity(q);
-            }
-        });*/
-
         FloatingActionButton addroute = (FloatingActionButton) findViewById(R.id.addroute);
         addroute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "route", Toast.LENGTH_SHORT).show();
+
+
+                Toast.makeText(getApplicationContext(), "Route Added", Toast.LENGTH_SHORT).show();
+                Auth_Diag.noofroute+=1;
+                ParseObject gameScore = new ParseObject("liveloc");
+                gameScore.put("rootname", "r"+String.valueOf(Auth_Diag.noofroute));
+                gameScore.put("longitude", "77.121460");
+                gameScore.put("latitude", "28.689224");
+                gameScore.saveInBackground();
+
+                Intent i = new Intent(getApplicationContext(),AdminPage.class);
+                startActivity(i);
+                finish();
             }
         });
 
@@ -99,6 +94,8 @@ public class AdminPage extends ActionBarActivity{
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(),"teacher",Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getApplicationContext(),addteacher.class);
+                startActivity(i);
             }
         });
 
@@ -172,6 +169,4 @@ public class AdminPage extends ActionBarActivity{
 
         return super.onOptionsItemSelected(item);
     }
-
-
 }

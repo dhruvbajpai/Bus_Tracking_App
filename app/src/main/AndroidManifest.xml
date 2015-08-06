@@ -22,8 +22,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-<!-- <android:uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
+    <!-- <android:uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -39,22 +40,14 @@
         <activity
             android:name=".AdminPage"
             android:label="@string/title_activity_admin_page" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
         </activity>
         <activity
             android:name=".Route_info"
-            android:label="@string/title_activity_route_info"
-            android:parentActivityName=".AdminPage">
+            android:label="@string/title_activity_route_info" >
         </activity>
         <activity
             android:name=".parse_check"
-            android:label="@string/title_activity_parse_check"
-            android:launchMode="singleTop">
+            android:label="@string/title_activity_parse_check" >
         </activity>
         <activity
             android:name=".mediator"
@@ -78,8 +71,7 @@
         </activity>
         <activity
             android:name=".studentinfoedit"
-            android:label="@string/title_activity_studentinfoedit"
-            android:parentActivityName=".parse_check">
+            android:label="@string/title_activity_studentinfoedit" >
         </activity>
         <activity
             android:name=".Google_Map_Upload"
@@ -88,8 +80,11 @@
         <activity
             android:name=".startpage"
             android:label="@string/title_activity_startpage" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".teacherinfoedit"
@@ -101,10 +96,28 @@
         </activity>
         <activity
             android:name=".addstudent"
-            android:label="@string/title_activity_addstudent"
-            android:parentActivityName=".AdminPage">
+            android:label="@string/title_activity_addstudent" >
         </activity>
-
+        <activity
+            android:name=".addteacher"
+            android:label="@string/title_activity_addteacher" >
+        </activity>
+        <activity
+            android:name=".parentactivity"
+            android:label="@string/title_activity_parentactivity" >
+        </activity>
+        <activity
+            android:name=".parentpageone"
+            android:label="Bus_Tracking_App" >
+        </activity>
+        <activity
+            android:name=".parentmapfull"
+            android:label="@string/title_activity_parentmapfull" >
+        </activity>
+        <activity
+            android:name=".addroute"
+            android:label="@string/title_activity_addroute" >
+        </activity>
     </application>
 
 </manifest>

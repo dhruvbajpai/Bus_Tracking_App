@@ -1,14 +1,17 @@
 <resources>
 
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
 
 
     <style name="PauseDialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowAnimationStyle">@style/PauseDialogAnimation</item>
     </style>
     <style name="menu_labels_style">
-        <!--<item name="android:background">@drawable/ic_launcher</item>-->
-        <item name="android:textColor">@color/new_dod</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:background">@drawable/fab_label_background</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="PauseDialogAnimation">
@@ -16,16 +19,21 @@
         <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
     </style>
 
+    <style name="Theme" parent="@android:style/Theme.Holo">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:actionBarStyle">@style/MyTheme.ActionBar</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!--<item name="android:windowBackground">@color/accent</item>-->
+    </style>
+    <style name="MyTheme.ActionBar" parent="android:Widget.Holo.ActionBar">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:backgroundStacked">@android:color/transparent</item>
+        <!--<item name="android:displayOptions">showTitle</item>-->
+        <!--<item name="android:titleTextStyle">@style/MyTheme.ActionBar.TitleTextStyle</item>
+-->
 
-
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="AppTheme.Base">
-        <!-- Customize your theme here. -->
     </style>
 
-    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryDark">@color/primaryColorDark</item>
-        <item name="colorAccent">@color/accentColor </item>
-    </style>
+
+
 </resources>
