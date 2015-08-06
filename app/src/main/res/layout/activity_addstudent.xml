@@ -1,21 +1,32 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:float="http://schemas.android.com/apk/res-auto"
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include
+        android:id="@+id/app_bar_me_add"
+        layout="@layout/app_bar"
+
+        ></include>
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/my_scroll"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.dhruv.bus_tracking_app.editteacher">
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:float="http://schemas.android.com/apk/res-auto">
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
+
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="250dp"
+            android:layout_height="100dp"
             android:layout_marginLeft="6dp"
             android:layout_marginRight="6dp"
             android:layout_marginBottom="6dp">
@@ -30,7 +41,7 @@
                     android:layout_width="fill_parent"
                     android:scaleType="centerCrop"
                     android:layout_height="fill_parent"
-                    android:src="@drawable/profilepic"
+                    android:src="@drawable/ic_launcher"
                     android:id="@+id/showimage"/>
             </LinearLayout>
             <ImageButton
@@ -118,6 +129,8 @@
                     android:hint="CLASS" />
             </com.wrapp.floatlabelededittext.FloatLabeledEditText>
         </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -209,17 +222,19 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_marginTop="15dp"
+
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="95dp"
-                android:text="MAP LOCATION:-"
+                android:text="MAP LOCATION"
                 android:textColor="#899ca4"
                 android:textSize="15dp"
                 android:textStyle="bold">
@@ -228,9 +243,10 @@
 
 
             <Button
-                android:layout_width="100dp"
+                android:layout_width="0dp"
                 android:layout_height="30dp"
-                android:layout_marginRight="10dp"
+
+                android:layout_weight="1"
                 android:textSize="10dp"
                 android:id="@+id/editloc"
                 android:background="#58FAF4"
@@ -238,7 +254,7 @@
                 android:textColor="#000000"
                 android:text="ADD LOCATION"
                 android:textStyle="bold"
-                android:layout_marginLeft="120dp"
+                android:layout_marginLeft="10dp"
 
                 />
         </LinearLayout>
@@ -248,11 +264,29 @@
             android:layout_marginTop="3dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
             android:background="@android:color/darker_gray"/>
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+            android:layout_height="150dp" android:id="@+id/student_map"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            tools:context="com.example.dhruv.bus_tracking_app.Google_Map_Upload"
+            android:name="com.google.android.gms.maps.SupportMapFragment" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="23dp"
+            android:background="#58a4f0"
+            android:textStyle="bold"
+            android:id="@+id/st_address_info"
+            android:gravity="center"
+            android:text="Maurya Enclave, Pitampura"/>
+
 
         <Button
             android:layout_width="270dp"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:layout_gravity="center_horizontal"
             android:textSize="15dp"
@@ -263,6 +297,11 @@
 
             />
 
+
+
+
+
     </LinearLayout>
     </ScrollView>
-</RelativeLayout>
+
+</LinearLayout>

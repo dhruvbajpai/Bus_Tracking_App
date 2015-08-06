@@ -101,7 +101,7 @@
             <ImageView
                 android:id="@+id/img_pointer"
                 android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_height="70dp"
                 android:src="@drawable/map23"
                 android:layout_centerInParent="true"/>
             <Button

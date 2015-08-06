@@ -1,13 +1,17 @@
 package com.example.dhruv.bus_tracking_app;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,8 +20,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.GetCallback;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
@@ -27,36 +40,55 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 
-public class addstudent extends ActionBarActivity implements View.OnClickListener{
+public class addstudent extends ActionBarActivity implements View.OnClickListener, OnMapReadyCallback {
     static ImageView imageView;
     static int RESULT_LOAD_IMG;
-    static int check = 0;
+    static int check = -1;
     ParseFile file;
     int bmsize;
-    static String filename="",extension;
+    static String filename = "", extension;
     static Bitmap bm;
     static dialogstudent dialog;
     static Uri mCapturedImageURI;
     ImageButton imagechange;
-    Button save;
-    String root;
-    EditText name,phn,cls,roll,route;
+    Button save,edit_loc;
+    EditText name, phn, cls, roll, route;
+    TextView address_info;
+    ScrollView sv;
+
+    public GoogleMap mMap;
+    SupportMapFragment mapFragment;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addstudent);
-
-        imageView =(ImageView)findViewById(R.id.showimage);
-        save = (Button)findViewById(R.id.btsave);
+        toolbar = (Toolbar) findViewById(R.id.app_bar_me_add);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Add New Student");
+        sv = (ScrollView)findViewById(R.id.my_scroll);
+        imageView = (ImageView) findViewById(R.id.showimage);
+        save = (Button) findViewById(R.id.btsave);
         save.setOnClickListener(this);
-        name= (EditText)findViewById(R.id.name);
-        cls = (EditText)findViewById(R.id.cls);
-        roll = (EditText)findViewById(R.id.rollno);
-        phn= (EditText)findViewById(R.id.phn);
-        route= (EditText)findViewById(R.id.route);
-        imagechange = (ImageButton)findViewById(R.id.upload);
+        edit_loc = (Button) findViewById(R.id.editloc);
+        name = (EditText) findViewById(R.id.name);
+        cls = (EditText) findViewById(R.id.cls);
+        roll = (EditText) findViewById(R.id.rollno);
+        phn = (EditText) findViewById(R.id.phn);
+        route = (EditText) findViewById(R.id.route);
+        address_info = (TextView)findViewById(R.id.st_address_info);
+        imagechange = (ImageButton) findViewById(R.id.upload);
         imagechange.setOnClickListener(this);
+        edit_loc.setOnClickListener(this);
+        mapFragment =(SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.student_map);
+        mapFragment.getMapAsync(this);
+        mMap = mapFragment.getMap();
+        mapFragment.getView().setVisibility(View.GONE);
+        address_info.setVisibility(View.GONE);
+        /*FragmentManager manager = getFragmentManager();
+        manager.beginTransaction().hide(mapFragment).commit();*/
 
     }
 
@@ -75,6 +107,10 @@ public class addstudent extends ActionBarActivity implements View.OnClickListene
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if(id==R.id.home)
+        {
+            NavUtils.navigateUpFromSameTask(this);
+        }
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -83,10 +119,22 @@ public class addstudent extends ActionBarActivity implements View.OnClickListene
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
+
     public void onClick(View v) {
-        if(v.getId()==R.id.upload)
+
+
+
+        if(v.getId() == R.id.editloc)
         {
+
+            int k = 0;
+            Intent i = new Intent(this, MapsActivity.class);
+            i.putExtra("activityname", k);
+            i.putExtra("position", -1);
+            startActivityForResult(i, 1);
+
+        }
+        if (v.getId() == R.id.upload) {
             //Log.d("asd", "tttbeforeclick");
             dialog = new dialogstudent(this);
             dialog.getWindow().getAttributes().windowAnimations = R.style.PauseDialogAnimation;
@@ -96,11 +144,12 @@ public class addstudent extends ActionBarActivity implements View.OnClickListene
             //Log.d("asd","tttclick");
         }
 
-        if(v.getId()==R.id.btsave)
-        {
+        if (v.getId() == R.id.btsave) {
 
-            root=route.getText().toString();
-            Log.d("asd",filename);
+
+            Log.d("asd", filename);
+
+
         /*if(filename=="") {
             Toast.makeText(getApplicationContext(), "a", Toast.LENGTH_SHORT).show();
             bm = BitmapFactory.decodeResource(getResources(),
@@ -110,12 +159,12 @@ public class addstudent extends ActionBarActivity implements View.OnClickListene
             // Convert it to byte
         }*/
 
-            if(filename!="") {
+            if (filename != "") {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 //bmsize = sizeOf(bm);
-                Log.d("asd",String.valueOf(bmsize));
+                Log.d("asd", String.valueOf(bmsize));
 
-                Toast.makeText(getApplicationContext(),String.valueOf(bmsize),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), String.valueOf(bmsize), Toast.LENGTH_SHORT).show();
                 if (extension == "png") {
                     // Compress image to lower quality scale 1 - 100
                     bm.compress(Bitmap.CompressFormat.PNG, 100, stream);
@@ -131,26 +180,24 @@ public class addstudent extends ActionBarActivity implements View.OnClickListene
             // Create the ParseFile
 
 
+            ParseObject imgupload = new ParseObject("r" + route);
+            if (filename != "") {
+                imgupload.put("photo", file);
 
-            ParseObject imgupload = new ParseObject("r"+root);
-            if(filename!="") {
-                            //imgupload.put("photo", file);
+            } else {
+                //imgupload.remove("photo");
 
-                        }else{
-                            //imgupload.remove("photo");
+            }
 
-                        }
-
-                        imgupload.put("s_name", name.getText().toString());
-                        imgupload.put("class", cls.getText().toString());
-                        imgupload.put("rollno", roll.getText().toString());
-                        imgupload.put("phone", phn.getText().toString());
-                        imgupload.saveInBackground();
-                        Toast.makeText(getApplicationContext(),"uploaded",Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                    {Toast.makeText(getApplicationContext(),"failed",Toast.LENGTH_SHORT).show();}
-
+            imgupload.put("s_name", name.getText().toString());
+            imgupload.put("class", cls.getText().toString());
+            imgupload.put("rollno", roll.getText().toString());
+            imgupload.put("phone", phn.getText().toString());
+            imgupload.saveInBackground();
+            Toast.makeText(getApplicationContext(), "uploaded", Toast.LENGTH_SHORT).show();
+        } else {
+            //Toast.makeText(getApplicationContext(), "failed", Toast.LENGTH_SHORT).show();
+        }
 
 
     }
@@ -158,15 +205,43 @@ public class addstudent extends ActionBarActivity implements View.OnClickListene
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                Double lat = data.getDoubleExtra("lat", 0.0);
+                Double lon = data.getDoubleExtra("lon", 0.0);
+                String address = data.getStringExtra("address");
+                mapFragment.getView().setVisibility(View.VISIBLE);
+                address_info.setText(address);
+                address_info.setVisibility(View.VISIBLE);
+                mMap.clear();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(lat,lon)).title("Bus Stop Marked")).showInfoWindow();
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat + 0.0005, lon), 16.0f));
+                edit_loc.setText("Edit Location");
+                Handler h = new Handler();
+
+                h.postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        sv.smoothScrollTo(0, 600);
+                    }
+                }, 1000);
+                Toast.makeText(getApplicationContext(), "Lat: " + lat + "Long: " + lon, Toast.LENGTH_SHORT).show();
+            }
+            if (resultCode == RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
         if (check == 0) {
             try {
                 bm = MediaStore.Images.Media.getBitmap(
-                        getApplicationContext().getContentResolver(),mCapturedImageURI);
+                        getApplicationContext().getContentResolver(), mCapturedImageURI);
             } catch (IOException e) {
                 e.printStackTrace();
             }
             imageView.setImageBitmap(bm);
-            String[] projection = { MediaStore.Images.Media.DATA};
+            String[] projection = {MediaStore.Images.Media.DATA};
             Cursor cursor = managedQuery(mCapturedImageURI, projection, null, null, null);
             int column_index_data = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             cursor.moveToFirst();
@@ -174,15 +249,14 @@ public class addstudent extends ActionBarActivity implements View.OnClickListene
             Toast.makeText(getApplicationContext(), capturedImageFilePath, Toast.LENGTH_SHORT).show();
             //File file = new File(capturedImageFilePath);
             //bm = BitmapFactory.decodeFile(file.getAbsolutePath());
-            filename=capturedImageFilePath.substring(capturedImageFilePath.lastIndexOf("/")+1);
-            Log.d("asd",filename);
-            extension=filename.substring(filename.lastIndexOf(".")+1);
-            Log.d("asd",extension);
+            filename = capturedImageFilePath.substring(capturedImageFilePath.lastIndexOf("/") + 1);
+            Log.d("asd", filename);
+            extension = filename.substring(filename.lastIndexOf(".") + 1);
+            Log.d("asd", extension);
             dialog.dismiss();
+            check = -1;
 
-        }
-        else
-        {
+        } else {
             try {
                 // When an Image is picked
                 if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK
@@ -190,7 +264,7 @@ public class addstudent extends ActionBarActivity implements View.OnClickListene
                     // Get the Image from data
 
                     Uri selectedImage = data.getData();
-                    String[] filePathColumn = { MediaStore.Images.Media.DATA };
+                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
                     // Get the cursor
                     Cursor cursor = getContentResolver().query(selectedImage,
@@ -200,11 +274,11 @@ public class addstudent extends ActionBarActivity implements View.OnClickListene
 
                     int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                     String imgDecodableString = cursor.getString(columnIndex);
-                    Log.d("asd",imgDecodableString);
-                    filename=imgDecodableString.substring(imgDecodableString.lastIndexOf("/")+1);
-                    Log.d("asd",filename);
-                    extension=filename.substring(filename.lastIndexOf(".")+1);
-                    Log.d("asd",extension);
+                    Log.d("asd", imgDecodableString);
+                    filename = imgDecodableString.substring(imgDecodableString.lastIndexOf("/") + 1);
+                    Log.d("asd", filename);
+                    extension = filename.substring(filename.lastIndexOf(".") + 1);
+                    Log.d("asd", extension);
                     cursor.close();
                     //Toast.makeText(this,imgDecodableString,Toast.LENGTH_SHORT).show();
                     //ImageView imgView = (ImageView) findViewById(R.id.imageView1);
@@ -212,6 +286,7 @@ public class addstudent extends ActionBarActivity implements View.OnClickListene
                     bm = BitmapFactory.decodeFile(imgDecodableString);
                     imageView.setImageBitmap(bm);
                     dialog.dismiss();
+                    check = -1;
                 } else {
                     Toast.makeText(this, "You haven't picked Image",
                             Toast.LENGTH_LONG).show();
@@ -224,4 +299,8 @@ public class addstudent extends ActionBarActivity implements View.OnClickListene
         }
     }
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+    }
 }

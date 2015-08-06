@@ -105,7 +105,7 @@
     <dimen name="card_main_content_native_simple_title_text_size">16sp</dimen>
 
     <!-- Shadow -->
-    <dimen name="card_shadow_height">3dp</dimen>
+    <dimen name="card_shadow_height">6dp</dimen>
     <dimen name="card_shadow_view_margin_top">0dp</dimen>
     <dimen name="card_shadow_view_margin_left">@dimen/card_background_default_radius</dimen>
     <dimen name="card_shadow_view_margin_bottom">0dp</dimen>
@@ -141,8 +141,8 @@
     <!-- List -->
     <dimen name="native_list_card_margin_left">0dp</dimen>
     <dimen name="native_list_card_margin_right">0dp</dimen>
-    <dimen name="native_list_card_margin_bottom">1dp</dimen>
-    <dimen name="native_list_card_margin_top">1dp</dimen>
+    <dimen name="native_list_card_margin_bottom">6dp</dimen>
+    <dimen name="native_list_card_margin_top">6dp</dimen>
 
     <!-- RecyclerView -->
     <dimen name="native_recyclerview_card_margin_left">0dp</dimen>

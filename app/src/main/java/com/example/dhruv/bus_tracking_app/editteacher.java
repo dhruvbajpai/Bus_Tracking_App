@@ -60,7 +60,7 @@ public class editteacher extends Activity implements View.OnClickListener {
         phn.setText(Route_info.teachphn);
         user.setText(Route_info.teachuser);
         pass.setText(Route_info.teachpass);
-        route.setText(Route_info.route_no.toString());
+        route.setText(Route_info.route);
         imagechange = (ImageButton)findViewById(R.id.change);
         imagechange.setOnClickListener(this);
         Log.d("asd","ttt");

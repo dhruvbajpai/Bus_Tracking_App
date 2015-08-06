@@ -4,6 +4,11 @@
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fab="http://schemas.android.com/apk/res-auto">
+    <include
+        android:id="@+id/app_bar_rt_admin"
+        layout="@layout/app_bar"
+
+        ></include>
 <RelativeLayout
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">

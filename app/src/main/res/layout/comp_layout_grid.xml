@@ -22,11 +22,11 @@
     xmlns:card="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     style="@style/card.native"
-    android:id="@+id/cardcolor"
+    android:id="@+id/ll"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-       <!-- Card visible layout -->
+    <!-- Card visible layout -->
     <it.gmariotti.cardslib.library.view.ForegroundLinearLayout
         android:id="@+id/card_main_layout"
         style="@style/card.native.main_layout_foreground"
@@ -34,18 +34,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
+        <FrameLayout
+            android:id="@+id/card_content_expand_layout1"
+            style="@style/card.native.main_contentExpand"
+            android:layout_width="match_parent"
+            android:layout_height="7dp"
+            >
 
+        </FrameLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:id="@+id/text2"
             android:text="Route 1"
-            android:textColor="#ffffff"
-            android:textSize="15dp"
+            android:textSize="30dp"
             card:backgroundTint="@color/abc_background_cache_hint_selector_material_light"
             android:gravity="center"
             android:longClickable="true"
-            />
+            android:textStyle="bold"/>
 
         <!-- Compound view for Header Card
              If you want to customize this element use attr card:card_header_layout_resourceID
@@ -58,5 +64,13 @@
     </it.gmariotti.cardslib.library.view.ForegroundLinearLayout>
 
     <!-- Expand layout. You can customize this element with your CardExpand class -->
+    <FrameLayout
+        android:id="@+id/card_content_expand_layout"
+        style="@style/card.native.main_contentExpand"
+        android:layout_width="match_parent"
+        android:layout_height="7dp"
+        >
+
+    </FrameLayout>
 
 </LinearLayout>

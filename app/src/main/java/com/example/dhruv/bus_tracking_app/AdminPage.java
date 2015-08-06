@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,12 +36,16 @@ public class AdminPage extends ActionBarActivity {
         ProgressDialog mProgressDialog;
         Card card;
         ArrayList<Card> cards;
+    Toolbar toolbar;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_page);
 
         overridePendingTransition(R.anim.slidefromleft, R.anim.slidetoleft);
-        getSupportActionBar().hide();
+        toolbar = (Toolbar) findViewById(R.id.app_bar_rt_admin);
+        setSupportActionBar(toolbar);
+        //getSupportActionBar().hide();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Toast.makeText(this,String.valueOf(Auth_Diag.noofroute),Toast.LENGTH_SHORT).show();
 

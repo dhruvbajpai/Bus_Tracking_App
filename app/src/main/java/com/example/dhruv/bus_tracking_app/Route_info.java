@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,10 +32,14 @@ public class Route_info extends ActionBarActivity {
     Button std,bttch,viewlive;
     static int i;
     static Bitmap image;
+    Toolbar toolbar;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route_info);
-        getSupportActionBar().hide();
+        toolbar =(Toolbar)findViewById(R.id.app_bar_rt_info);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().hide();
         std = (Button)findViewById(R.id.students);
         std.setOnClickListener(new View.OnClickListener() {
             @Override

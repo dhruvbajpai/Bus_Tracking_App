@@ -25,7 +25,7 @@ public class parentpageone extends ActionBarActivity implements ActionBar.TabLis
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(android.R.style.Theme);
+        //setTheme(android.R.style.Theme);
         //getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         super.onCreate(savedInstanceState);
         /*if(android.os.Build.VERSION.SDK_INT < 11) {
@@ -43,8 +43,8 @@ public class parentpageone extends ActionBarActivity implements ActionBar.TabLis
 
 
 
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#330000ff")));
-        actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#3f51b5")));
+ //       actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#330000ff")));
+   //     actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#3f51b5")));
         //actionBar.setDisplayHomeAsUpEnabled(true);
         //actionBar.setDisplayShowHomeEnabled(false);
         //actionBar.setDisplayShowTitleEnabled(false);

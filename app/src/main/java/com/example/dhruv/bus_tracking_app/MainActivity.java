@@ -1,8 +1,10 @@
 package com.example.dhruv.bus_tracking_app;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,16 +20,21 @@ import com.parse.SignUpCallback;
 //import com.parse.ParseObject;
 
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener {
+public class MainActivity extends Activity implements View.OnClickListener {
 
     Button b1,b2,b3,b4;
     static String type;
-
+    Toolbar toolbar;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // Enable Local Datastore.
+        /*toolbar = (Toolbar) findViewById(R.id.app_bar_rt_admin);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().hide();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
+
 
 
         //Parse.enableLocalDatastore(this);
@@ -58,7 +65,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
 
 
-        this.getSupportActionBar().hide();
+       // this.getSupportActionBar().hide();
         b1 = (Button) findViewById(R.id.admin_mode);
         b1.setOnClickListener(this);
         b2 = (Button) findViewById(R.id.teacher_mode);

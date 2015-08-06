@@ -4,4 +4,12 @@
     tools:context="com.example.dhruv.bus_tracking_app.Route_info">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
+
+    <item
+        android:id="@+id/navigate"
+        android:icon="@drawable/ic_home_white_48dp"
+        android:orderInCategory="200"
+        android:title="@string/app_home"
+
+        app:showAsAction="always"></item>
 </menu>

@@ -34,7 +34,7 @@ public class teacherinfoedit extends Activity {
         phn.setText(Route_info.teachphn);
         user.setText(Route_info.teachuser);
         pass.setText(Route_info.teachpass);
-        route.setText(Route_info.route_no.toString());
+        route.setText(Route_info.route);
 
         imageView1 = (ImageView) findViewById(R.id.iv);
         //Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.person);

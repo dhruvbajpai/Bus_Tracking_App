@@ -2,14 +2,17 @@ package com.example.dhruv.bus_tracking_app;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,18 +32,26 @@ public class studentinfoedit extends ActionBarActivity implements View.OnClickLi
 
     private GoogleMap mMap;
     int studentno;
-    String name,phn,cls,root,longitutde,latitude,rowid,rollno;
+    String name,phn,cls,root,longitutde,latitude,rowid,rollno,my_add;
     EditText etname,etphn,etcls,etroute,etroll;
     Float longi,latti;
     Button btsave,btedit;
+    TextView address_info;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_studentinfoedit);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
+        toolbar = (Toolbar) findViewById(R.id.app_bar_s_edit);
+        setSupportActionBar(toolbar);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        getSupportActionBar().setTitle("Student Info");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         longitutde =  mediator.longi.get(studentno).toString();
         latitude =  mediator.latti.get(studentno).toString();
         setUpMapIfNeeded();
+        address_info = (TextView) findViewById(R.id.address_info);
         etname = (EditText)findViewById(R.id.etname);
         etphn = (EditText)findViewById(R.id.etphn);
         etroll = (EditText)findViewById(R.id.etroll);
@@ -82,6 +93,7 @@ public class studentinfoedit extends ActionBarActivity implements View.OnClickLi
         etroll.setText(rollno);
         etcls.setText(cls);
         etroute.setText(root);
+        address_info.setText(mediator.address.get(studentno).toString());
 
 
 
@@ -96,7 +108,7 @@ public class studentinfoedit extends ActionBarActivity implements View.OnClickLi
         latitude =  mediator.latti.get(studentno).toString();
         Double lat = Double.parseDouble(latitude);
         Double lon = Double.parseDouble(longitutde);
-
+        address_info.setText(mediator.address.get(studentno).toString());
         //mMap.addMarker(new MarkerOptions().position(new LatLng(lat,lon)));
         setUpMap();
     }
@@ -116,6 +128,15 @@ public class studentinfoedit extends ActionBarActivity implements View.OnClickLi
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+        if(id==R.id.home)
+        {
+            /*Intent i = new Intent(getApplicationContext(),parse_check.class);
+            Integer j = studentno;
+            String s = j.toString();
+            i.putExtra("route",j);
+            startActivity(i);*/
+            finish();
+        }
         if (id == R.id.action_settings) {
             return true;
         }
@@ -163,6 +184,7 @@ public class studentinfoedit extends ActionBarActivity implements View.OnClickLi
             root=etroute.getText().toString();
             latitude=mediator.latti.get(studentno);
             longitutde=mediator.longi.get(studentno);
+
             ParseQuery<ParseObject> query = ParseQuery.getQuery("r"+root);
             Log.d("abc",rowid);
 // Retrieve the object by id
@@ -180,6 +202,7 @@ public class studentinfoedit extends ActionBarActivity implements View.OnClickLi
                         parseObject.put("latitude",latitude);
                         parseObject.put("longitude",longitutde);
                         parseObject.put("phone_no",phn);
+                        parseObject.put("Address",mediator.address.get(studentno).toString());
                         parseObject.saveInBackground();
                         Toast.makeText(getApplicationContext(),"saved",Toast.LENGTH_SHORT).show();
 
