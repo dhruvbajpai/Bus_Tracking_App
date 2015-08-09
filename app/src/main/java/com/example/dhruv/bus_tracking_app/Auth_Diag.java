@@ -73,6 +73,7 @@ public class Auth_Diag extends Dialog {
                                 mProgressDialog.show();
                                 ParseQuery<ParseObject> query = ParseQuery.getQuery("liveloc");
                                 try {
+                                    
                                     noofroute=query.count();//to count the number of routes using the liveloc table
                                     mProgressDialog.dismiss();//
                                 } catch (ParseException e1) {

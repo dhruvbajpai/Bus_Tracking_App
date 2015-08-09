@@ -80,13 +80,17 @@ public class AdminPage extends ActionBarActivity {
             public void onClick(View view) {
 
 
-                Toast.makeText(getApplicationContext(), "Route Added", Toast.LENGTH_SHORT).show();
-                Auth_Diag.noofroute+=1;
+
+                Auth_Diag.noofroute+=1;// Increment the global route count
+                ParseObject newr = new ParseObject("r"+String.valueOf(Auth_Diag.noofroute));
+                newr.saveInBackground();
                 ParseObject gameScore = new ParseObject("liveloc");
                 gameScore.put("rootname", "r"+String.valueOf(Auth_Diag.noofroute));
                 gameScore.put("longitude", "77.121460");
                 gameScore.put("latitude", "28.689224");
+
                 gameScore.saveInBackground();
+                Toast.makeText(getApplicationContext(), "Route Added", Toast.LENGTH_SHORT).show();
 
                 Intent i = new Intent(getApplicationContext(),AdminPage.class);
                 startActivity(i);
