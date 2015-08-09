@@ -41,6 +41,7 @@ public class fraglive extends android.support.v4.app.Fragment {
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
         FloatingActionButton addroute = (FloatingActionButton) v.findViewById(R.id.live);
+        addroute.setTitle("Full Screen");
         addroute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

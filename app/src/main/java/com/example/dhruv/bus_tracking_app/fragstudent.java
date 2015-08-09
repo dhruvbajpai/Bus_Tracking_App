@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -14,6 +15,7 @@ import android.widget.TextView;
 public class fragstudent extends android.support.v4.app.Fragment {
 
     TextView name,cls,phn,root,rollno;
+    ImageView iv;
 
 
     @Override
@@ -26,7 +28,9 @@ public class fragstudent extends android.support.v4.app.Fragment {
         phn= (TextView)v.findViewById(R.id.phn);
         root= (TextView)v.findViewById(R.id.route);
         rollno= (TextView)v.findViewById(R.id.rollno);
+        iv = (ImageView)v.findViewById(R.id.showimage_me);
 
+        iv.setImageBitmap(parentactivity.studentimage);
         name.setText(parentactivity.sname);
         cls.setText(parentactivity.sclass);
         phn.setText(parentactivity.sphone);
