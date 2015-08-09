@@ -110,7 +110,8 @@ public class parentactivity extends Activity {
 
 
 
-                    Intent i = new Intent(getApplicationContext(),parentpageone.class);
+                    //Intent i = new Intent(getApplicationContext(),parentpageone.class);
+                    Intent i = new Intent(getApplicationContext(),Parent_first_page.class);
                     tusername=scoreList.getString("username").toString();
                     tname=scoreList.getString("teacher_name").toString();
                     tphone=scoreList.getString("phone").toString();

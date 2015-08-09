@@ -73,8 +73,8 @@ public class Auth_Diag extends Dialog {
                                 mProgressDialog.show();
                                 ParseQuery<ParseObject> query = ParseQuery.getQuery("liveloc");
                                 try {
-                                    noofroute=query.count();
-                                    mProgressDialog.dismiss();
+                                    noofroute=query.count();//to count the number of routes using the liveloc table
+                                    mProgressDialog.dismiss();//
                                 } catch (ParseException e1) {
                                     e1.printStackTrace();
                                 }
@@ -82,8 +82,8 @@ public class Auth_Diag extends Dialog {
                                 Intent i = new Intent(c.getApplicationContext(), AdminPage.class);
                                 c.startActivity(i);
                             }
-                            if(k.equals(s) && k.equals("parent")) {
-                                studentid=user.get("studentid").toString();
+                            if(k.equals(s) && k.equals("parent")) {// if the account is a parent account then it has a student id associated with it in the USER TABLE.
+                                studentid=user.get("studentid").toString();// if its not a parent account then it the studentId field in the user table holds NULL value.
                                 Intent i = new Intent(c.getApplicationContext(), parentactivity.class);
 
                                 i.putExtra("route",user.get("route").toString());

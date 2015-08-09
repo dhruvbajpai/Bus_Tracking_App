@@ -1,7 +1,7 @@
 package com.example.dhruv.bus_tracking_app;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +15,7 @@ public class fragstudent extends android.support.v4.app.Fragment {
 
     TextView name,cls,phn,root,rollno;
 
-    @Nullable
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

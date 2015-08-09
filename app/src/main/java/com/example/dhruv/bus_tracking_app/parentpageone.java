@@ -18,8 +18,9 @@ public class parentpageone extends ActionBarActivity implements ActionBar.TabLis
     static String x="abc";
     public static ViewPager viewPager;
     private TabsPagerAdapter mAdapter;
-    private android.support.v7.app.ActionBar actionBar;
+    //private android.support.v7.app.ActionBar actionBar;
     // Tab titles
+    ActionBar actionBar;
     ImageView iv;
     private String[] tabs = {"Student", "Teacher", "View Live"};
 
@@ -37,7 +38,7 @@ public class parentpageone extends ActionBarActivity implements ActionBar.TabLis
         iv = (ImageView)findViewById(R.id.showimage);
         iv.setImageBitmap(parentactivity.studentimage);
         viewPager = (ViewPager) findViewById(R.id.pager);
-        actionBar = getSupportActionBar();
+        actionBar = getActionBar();
         //actionBar.isHideOnContentScrollEnabled();
         //actionBar.setHideOnContentScrollEnabled(true);
 
@@ -54,7 +55,7 @@ public class parentpageone extends ActionBarActivity implements ActionBar.TabLis
         viewPager.setAdapter(mAdapter);
         //actionBar.setHomeButtonEnabled(false);
         //actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        actionBar.setNavigationMode(android.support.v7.app.ActionBar.NAVIGATION_MODE_TABS);
+//        actionBar.setNavigationMode(android.support.v7.app.ActionBar.NAVIGATION_MODE_TABS);
         // Adding Tabs
         for (String tab_name : tabs) {
             actionBar.addTab(actionBar.newTab().setText(tab_name)

@@ -2,7 +2,7 @@ package com.example.dhruv.bus_tracking_app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +30,7 @@ public class fraglive extends android.support.v4.app.Fragment {
     String latitude,longitude;
     Float lat,lon;
     int i=0;
-    @Nullable
+
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_fraglive,container,false);
@@ -81,7 +81,7 @@ public class fraglive extends android.support.v4.app.Fragment {
 
                     // do something in the loop
                     try {
-                        Thread.sleep(3000);
+                        Thread.sleep(8000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

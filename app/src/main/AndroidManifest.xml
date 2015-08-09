@@ -23,7 +23,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 
-<!-- <android:uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -39,18 +38,16 @@
         <activity
             android:name=".AdminPage"
             android:label="@string/title_activity_admin_page" >
-
-
         </activity>
         <activity
             android:name=".Route_info"
             android:label="@string/title_activity_route_info"
-            android:parentActivityName=".AdminPage">
+            android:parentActivityName=".AdminPage" >
         </activity>
         <activity
             android:name=".parse_check"
             android:label="@string/title_activity_parse_check"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop" >
         </activity>
         <activity
             android:name=".mediator"
@@ -75,7 +72,7 @@
         <activity
             android:name=".studentinfoedit"
             android:label="@string/title_activity_studentinfoedit"
-            android:parentActivityName=".parse_check">
+            android:parentActivityName=".parse_check" >
         </activity>
         <activity
             android:name=".Google_Map_Upload"
@@ -114,14 +111,15 @@
             android:name=".parentmapfull"
             android:label="parentmapfull" >
         </activity>
-
-
         <activity
             android:name=".addstudent"
             android:label="@string/title_activity_addstudent"
-            android:parentActivityName=".AdminPage">
+            android:parentActivityName=".AdminPage" >
         </activity>
-
+        <activity
+            android:name=".Parent_first_page"
+            android:label="@string/title_activity_parent_first_page" >
+        </activity>
     </application>
 
 </manifest>
