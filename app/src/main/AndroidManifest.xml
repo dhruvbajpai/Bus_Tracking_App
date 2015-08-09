@@ -118,7 +118,8 @@
         </activity>
         <activity
             android:name=".Parent_first_page"
-            android:label="@string/title_activity_parent_first_page" >
+            android:label="@string/title_activity_parent_first_page"
+            android:parentActivityName=".startpage">
         </activity>
     </application>
 
