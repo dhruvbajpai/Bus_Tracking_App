@@ -25,7 +25,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp">
 
-            <com.example.dhruv.bus_tracking_app.CustomAutoCompleteTextView
+            <enroute.arpit.dhruv.bus_tracking_app.CustomAutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:textSize="10dp"

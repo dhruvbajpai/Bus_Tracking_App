@@ -28,7 +28,16 @@
         <item name="colorPrimaryDark">@color/primaryColorDark</item>
         <item name="colorAccent">@color/accentColor </item>
     </style>
+    <style name="Button">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:minWidth">88dp</item>
+        <item name="android:minHeight">36dp</item>
+        <item name="android:layout_margin">3dp</item>
 
+
+<!--        <item name="android:background">@drawable/primary_round</item>-->
+    </style>
 
 
     <style name="Theme" parent="@android:style/Theme.Holo">

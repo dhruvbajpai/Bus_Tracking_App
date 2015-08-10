@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.dhruv.bus_tracking_app.parentpageone">
+    tools:context="enroute.arpit.dhruv.bus_tracking_app.parentpageone">
 
     <ImageView
     android:layout_width="fill_parent"
