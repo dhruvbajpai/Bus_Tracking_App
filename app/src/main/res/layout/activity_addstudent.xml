@@ -272,7 +272,7 @@
             android:layout_height="150dp" android:id="@+id/student_map"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
-            tools:context="enroute.arpit.dhruv.bus_tracking_app.Google_Map_Upload"
+            tools:context="enroute.pallavi.chugh.bus_tracking_app.Google_Map_Upload"
             android:name="com.google.android.gms.maps.SupportMapFragment" />
         <TextView
             android:layout_width="match_parent"

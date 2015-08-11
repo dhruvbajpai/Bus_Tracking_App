@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="enroute.arpit.dhruv.bus_tracking_app" >
+    package="enroute.pallavi.chugh.bus_tracking_app" >
 
     <uses-sdk android:minSdkVersion="11" />
 
@@ -24,7 +24,7 @@
 
 
     <application
-        android:name="enroute.arpit.dhruv.bus_tracking_app.App"
+        android:name="enroute.pallavi.chugh.bus_tracking_app.App"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
         android:icon="@drawable/ic_launcher"
@@ -32,29 +32,29 @@
         android:largeHeap="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="enroute.arpit.dhruv.bus_tracking_app.MainActivity"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.MainActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="enroute.arpit.dhruv.bus_tracking_app.AdminPage"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.AdminPage"
             android:label="@string/title_activity_admin_page" >
         </activity>
         <activity
-            android:name="enroute.arpit.dhruv.bus_tracking_app.Route_info"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.Route_info"
             android:label="@string/title_activity_route_info"
-            android:parentActivityName="enroute.arpit.dhruv.bus_tracking_app.AdminPage" >
+            android:parentActivityName="enroute.pallavi.chugh.bus_tracking_app.AdminPage" >
         </activity>
         <activity
-            android:name="enroute.arpit.dhruv.bus_tracking_app.parse_check"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.parse_check"
             android:label="@string/title_activity_parse_check"
             android:launchMode="singleTop" >
         </activity>
         <activity
-            android:name="enroute.arpit.dhruv.bus_tracking_app.mediator"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.mediator"
             android:label="@string/title_activity_mediator" >
         </activity>
         <activity
-            android:name="enroute.arpit.dhruv.bus_tracking_app.live_view"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.live_view"
             android:label="@string/title_activity_live_view" >
         </activity>
 
@@ -69,20 +69,20 @@
             android:value="AIzaSyB2mAg5K1h-FrhuC77jQioLTO7CS5bCICk"></meta-data>
 
         <activity
-            android:name="enroute.arpit.dhruv.bus_tracking_app.MapsActivity"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.MapsActivity"
             android:label="@string/title_activity_maps" >
         </activity>
         <activity
-            android:name="enroute.arpit.dhruv.bus_tracking_app.studentinfoedit"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.studentinfoedit"
             android:label="@string/title_activity_studentinfoedit"
-            android:parentActivityName="enroute.arpit.dhruv.bus_tracking_app.parse_check" >
+            android:parentActivityName="enroute.pallavi.chugh.bus_tracking_app.parse_check" >
         </activity>
         <activity
-            android:name="enroute.arpit.dhruv.bus_tracking_app.Google_Map_Upload"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.Google_Map_Upload"
             android:label="Google_Map_Upload" >
         </activity>
         <activity
-            android:name="enroute.arpit.dhruv.bus_tracking_app.startpage"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.startpage"
             android:label="@string/title_activity_startpage" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -91,38 +91,38 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="enroute.arpit.dhruv.bus_tracking_app.teacherinfoedit"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.teacherinfoedit"
             android:label="@string/title_activity_teacherinfoedit" >
         </activity>
         <activity
-            android:name="enroute.arpit.dhruv.bus_tracking_app.editteacher"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.editteacher"
             android:label="@string/title_activity_editteacher" >
         </activity>
         <activity
-            android:name="enroute.arpit.dhruv.bus_tracking_app.addteacher"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.addteacher"
             android:label="add_teacher" >
         </activity>
         <activity
-            android:name="enroute.arpit.dhruv.bus_tracking_app.parentactivity"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.parentactivity"
             android:label="parentactivity" >
         </activity>
         <activity
-            android:name="enroute.arpit.dhruv.bus_tracking_app.parentpageone"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.parentpageone"
             android:label="Bus_Tracking_App" >
         </activity>
         <activity
-            android:name="enroute.arpit.dhruv.bus_tracking_app.parentmapfull"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.parentmapfull"
             android:label="parentmapfull" >
         </activity>
         <activity
-            android:name="enroute.arpit.dhruv.bus_tracking_app.addstudent"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.addstudent"
             android:label="@string/title_activity_addstudent"
-            android:parentActivityName="enroute.arpit.dhruv.bus_tracking_app.AdminPage" >
+            android:parentActivityName="enroute.pallavi.chugh.bus_tracking_app.AdminPage" >
         </activity>
         <activity
-            android:name="enroute.arpit.dhruv.bus_tracking_app.Parent_first_page"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.Parent_first_page"
             android:label="@string/title_activity_parent_first_page"
-            android:parentActivityName="enroute.arpit.dhruv.bus_tracking_app.startpage">
+            android:parentActivityName="enroute.pallavi.chugh.bus_tracking_app.startpage">
         </activity>
     </application>
 

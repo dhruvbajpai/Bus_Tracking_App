@@ -20,7 +20,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="enroute.arpit.dhruv.bus_tracking_app.studentinfoedit">
+        tools:context="enroute.pallavi.chugh.bus_tracking_app.studentinfoedit">
 
         <ScrollView
             android:layout_width="fill_parent"
@@ -185,7 +185,7 @@
                     android:name="com.google.android.gms.maps.SupportMapFragment"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    tools:context="enroute.arpit.dhruv.bus_tracking_app.MapsActivity" />
+                    tools:context="enroute.pallavi.chugh.bus_tracking_app.MapsActivity" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="23dp"
