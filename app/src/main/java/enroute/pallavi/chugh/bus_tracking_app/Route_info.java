@@ -161,20 +161,25 @@ public class Route_info extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         //android:parentActivityName="enroute.pallavi.chugh.bus_tracking_app.AdminPage"
         int id = item.getItemId();
-        if(id==android.R.id.home)
+
+        switch(id)
         {
-            mediator.tr_flag=1;
+            case android.R.id.home:
+                mediator.tr_flag=1;
+                Intent i = new Intent(Route_info.this,AdminPage.class);
+                startActivity(i);
+                //finish();
+                //Route_info.this.overridePendingTransition(R.anim.slide_from_right,R.anim.slide_to_right);
+                //NavUtils.navigateUpFromSameTask(this);
+                return true;
+            case R.id.action_settings:
+                return true;
 
-            Intent i = new Intent(Route_info.this,AdminPage.class);
-            startActivity(i);
-            //NavUtils.navigateUpFromSameTask(this);
-            return true;
         }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
+
+
 
         return super.onOptionsItemSelected(item);
     }

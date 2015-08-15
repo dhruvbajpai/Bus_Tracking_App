@@ -61,6 +61,7 @@ public class MyAdapter_grid extends CardGridArrayAdapter {
                 Intent q = new Intent(c,Route_info.class);
                 q.putExtra("rt_number",position+1);
                 mediator.tr = "f";
+                mediator.tr_flag=0;
                 c.startActivity(q);
             }
         });
@@ -86,6 +87,7 @@ public class MyAdapter_grid extends CardGridArrayAdapter {
                 Intent q = new Intent(c,Route_info.class);
                 q.putExtra("rt_number",position);
                 mediator.tr = "f";
+                mediator.tr_flag=0;
                 c.startActivity(q);
             }
         });

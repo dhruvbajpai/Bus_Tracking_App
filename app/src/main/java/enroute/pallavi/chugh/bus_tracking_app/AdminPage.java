@@ -92,6 +92,7 @@ public class AdminPage extends ActionBarActivity {
                 Toast.makeText(getApplicationContext(), "Route Added", Toast.LENGTH_SHORT).show();
 
                 Intent i = new Intent(getApplicationContext(),AdminPage.class);
+
                 startActivity(i);
                 finish();
             }
