@@ -28,6 +28,7 @@ public class mediator extends Activity {
     String[] numbers;
     int count=0;
     Intent u;
+    static int tr_flag = 0;
     List<ParseObject> ob;
     static String tr = "p";
     static ArrayList<String> names,phone,cls,longi,latti,rollno,address;

@@ -38,11 +38,16 @@
         <activity
             android:name="enroute.pallavi.chugh.bus_tracking_app.AdminPage"
             android:label="@string/title_activity_admin_page" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name="enroute.pallavi.chugh.bus_tracking_app.Route_info"
             android:label="@string/title_activity_route_info"
-            android:parentActivityName="enroute.pallavi.chugh.bus_tracking_app.AdminPage" >
+             >
         </activity>
         <activity
             android:name="enroute.pallavi.chugh.bus_tracking_app.parse_check"
@@ -84,11 +89,7 @@
         <activity
             android:name="enroute.pallavi.chugh.bus_tracking_app.startpage"
             android:label="@string/title_activity_startpage" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="enroute.pallavi.chugh.bus_tracking_app.teacherinfoedit"

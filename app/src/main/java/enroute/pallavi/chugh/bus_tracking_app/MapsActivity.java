@@ -161,8 +161,8 @@ public class MapsActivity extends FragmentActivity {
         geoflag = true;
         iv = (ImageView) findViewById(R.id.img_pointer);
 
-        x = (iv.getLeft() + iv.getRight()) / 2;
-        y = iv.getBottom();
+    /*    x = (iv.getLeft() + iv.getRight()) / 2;
+        y = iv.getBottom();*/
 
 
         save = (Button) findViewById(R.id.btn_save);

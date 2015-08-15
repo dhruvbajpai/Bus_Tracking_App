@@ -3,6 +3,7 @@ package enroute.pallavi.chugh.bus_tracking_app;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -70,7 +71,14 @@ public class Route_info extends ActionBarActivity {
         });
      //   Parse.enableLocalDatastore(this);
        // Parse.initialize(this, "1Jrskl4dgS112TdPVInJXwVNr8z5OXjWX0ZwKhOo", "2dGzy0gSBLmwffakLISmKlUN1Nkzhgw3gqkWLGlZ");
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        if(mediator.tr_flag==0)
+        {
+            overridePendingTransition(R.anim.slidefromleft, R.anim.slidetoleft);
+        }
+        else if(mediator.tr_flag==1)
+        {
+            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_right);
+        }
 
 
 
@@ -151,7 +159,17 @@ public class Route_info extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+        //android:parentActivityName="enroute.pallavi.chugh.bus_tracking_app.AdminPage"
         int id = item.getItemId();
+        if(id==android.R.id.home)
+        {
+            mediator.tr_flag=1;
+
+            Intent i = new Intent(Route_info.this,AdminPage.class);
+            startActivity(i);
+            //NavUtils.navigateUpFromSameTask(this);
+            return true;
+        }
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {

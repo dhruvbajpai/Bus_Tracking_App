@@ -47,7 +47,7 @@ public class Google_Map_Upload extends FragmentActivity {
     Integer size;
     ArrayList<LatLng> markersarray;
     ArrayList<Marker> markers;
-
+    String route;
     List<Polyline> plist;
     //GetRouteTask getRoute;
     int cam_f=0;
@@ -118,6 +118,22 @@ public class Google_Map_Upload extends FragmentActivity {
         setContentView(R.layout.activity_google__map__upload);
         setUpMapIfNeeded();
         LocationManager locationManager ;
+
+
+        if(savedInstanceState==null)
+        {
+            Bundle extras = getIntent().getExtras();
+            if(extras==null)
+            {
+                route="r1";
+            }
+            else
+                route = extras.getString("route");
+
+        }else
+            route = (String)savedInstanceState.getSerializable("route");
+
+
 
         locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
@@ -235,10 +251,8 @@ public class Google_Map_Upload extends FragmentActivity {
 
 
                 ParseQuery<ParseObject> query = ParseQuery.getQuery("liveloc");
-                //query.whereEqualTo("rootname", "r1");
-
-
-                query.getInBackground("2CPL78c5U9",new GetCallback<ParseObject>() {
+                query.whereEqualTo("rootname", route);
+                query.getFirstInBackground(new GetCallback<ParseObject>() {
                     @Override
                     public void done(ParseObject parseObject, com.parse.ParseException e) {
                         if (e == null) {

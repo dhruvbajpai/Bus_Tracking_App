@@ -30,8 +30,17 @@ public class AdminPage extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_page);
+        //overridePendingTransition(R.anim.slidefromleft, R.anim.slidetoleft);
+        if(mediator.tr_flag==0)
+        {
+            overridePendingTransition(R.anim.slidefromleft, R.anim.slidetoleft);
+        }
+        else
+        {
+            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_right);
+        }
 
-        overridePendingTransition(R.anim.slidefromleft, R.anim.slidetoleft);
+
         toolbar = (Toolbar) findViewById(R.id.app_bar_rt_admin);
         setSupportActionBar(toolbar);
         //getSupportActionBar().hide();
