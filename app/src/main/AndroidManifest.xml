@@ -47,11 +47,13 @@
         <activity
             android:name="enroute.pallavi.chugh.bus_tracking_app.Route_info"
             android:label="@string/title_activity_route_info"
+            android:parentActivityName=".AdminPage"
              >
         </activity>
         <activity
             android:name="enroute.pallavi.chugh.bus_tracking_app.parse_check"
             android:label="@string/title_activity_parse_check"
+            android:parentActivityName=".Route_info"
             android:launchMode="singleTop" >
         </activity>
         <activity

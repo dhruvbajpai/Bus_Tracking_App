@@ -81,7 +81,7 @@ public class MyAdapter_grid extends CardGridArrayAdapter {
 
 
 
-        convertView.setOnClickListener(new View.OnClickListener() {
+        /*convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent q = new Intent(c,Route_info.class);
@@ -90,7 +90,7 @@ public class MyAdapter_grid extends CardGridArrayAdapter {
                 mediator.tr_flag=0;
                 c.startActivity(q);
             }
-        });
+        });*/
 
         return convertView;
     }

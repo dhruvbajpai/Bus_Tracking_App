@@ -152,7 +152,7 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
@@ -163,6 +163,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
                         android:text="Map Location:"
                         android:textSize="15dp" />
 
@@ -174,11 +176,12 @@
                         android:text="EDIT LOCATION"
                         android:textColor="#EA5D58"
                         android:textSize="10dp"
+                        android:layout_alignParentRight="true"
                         android:textStyle="bold"
 
                         />
 
-                </LinearLayout>
+                </RelativeLayout>
 
                 <fragment
                     android:id="@+id/my_map"

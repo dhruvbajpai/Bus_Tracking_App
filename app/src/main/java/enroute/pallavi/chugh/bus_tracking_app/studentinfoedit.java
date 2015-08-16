@@ -1,6 +1,7 @@
 package enroute.pallavi.chugh.bus_tracking_app;
 
 import android.content.Intent;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -41,7 +42,11 @@ public class studentinfoedit extends ActionBarActivity implements View.OnClickLi
         //getSupportActionBar().hide();
         toolbar = (Toolbar) findViewById(R.id.app_bar_s_edit);
         setSupportActionBar(toolbar);
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        if (mediator.tr_flag == 0) {
+            overridePendingTransition(R.anim.slidefromleft, R.anim.slidetoleft);
+        } else if (mediator.tr_flag == 1) {
+            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_right);
+        }
         getSupportActionBar().setTitle("Student Info");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         longitutde =  mediator.longi.get(studentno).toString();
@@ -123,16 +128,29 @@ public class studentinfoedit extends ActionBarActivity implements View.OnClickLi
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if(id==R.id.home)
+        switch (id)
         {
-            /*Intent i = new Intent(getApplicationContext(),parse_check.class);
+            case android.R.id.home:
+                mediator.tr_flag=1;
+                Intent i = new Intent(studentinfoedit.this,parse_check.class);
+                i.putExtra("route",root);
+                startActivity(i);
+                //NavUtils.navigateUpFromSameTask(this);
+                break;
+            case R.id.action_settings:
+                return true;
+        }
+
+        //noinspection SimplifiableIfStatement
+        /*if(id==R.id.home)
+        {
+            *//*Intent i = new Intent(getApplicationContext(),parse_check.class);
             Integer j = studentno;
             String s = j.toString();
             i.putExtra("route",j);
-            startActivity(i);*/
+            startActivity(i);*//*
             finish();
-        }
+        }*/
         if (id == R.id.action_settings) {
             return true;
         }

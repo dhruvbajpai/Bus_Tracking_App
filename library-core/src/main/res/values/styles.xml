@@ -381,7 +381,10 @@
     </style>
 
     <!-- Base list -->
-    <style name="native_list_card.base" >
+    <style name="native_list_card.base">
+
+
+
 
     </style>
 

@@ -47,7 +47,7 @@ public class mediator extends Activity {
         } else
             route_no = (Integer) savedInstanceState.getSerializable("rt_number");
 
-        route_no++;
+
         route = route_no.toString();
 
         Log.d("a",route);

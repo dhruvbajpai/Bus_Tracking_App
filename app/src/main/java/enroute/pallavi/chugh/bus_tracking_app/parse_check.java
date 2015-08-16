@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -49,13 +50,29 @@ public class parse_check extends ActionBarActivity {
         toolbar = (Toolbar) findViewById(R.id.app_bar_me_p);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        if (mediator.tr_flag == 0) {
+            overridePendingTransition(R.anim.slidefromleft, R.anim.slidetoleft);
+        } else if (mediator.tr_flag == 1) {
+            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_right);
+        }
         getSupportActionBar().setTitle("Student Info");
-        Bundle b = this.getIntent().getExtras();
         route_no = (TextView) findViewById(R.id.route_num);
 
-        route = (String) b.get("route");
+        //Bundle b = this.getIntent().getExtras();
+        //route = (String) b.get("route");
+
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if (extras == null) {
+                route = "1";
+            } else
+                route = extras.getString("route");
+
+        } else
+            route = (String) savedInstanceState.getSerializable("route");
+
         route_no.setText("Route " + route);
+
 
 
         //mediator.names = (ArrayList<String>)b.getStringArrayList("name_list");
@@ -117,10 +134,19 @@ public class parse_check extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch(id)
+        {
+            case android.R.id.home:
+                mediator.tr_flag=1;
+
+                NavUtils.navigateUpFromSameTask(this);
+                break;
+            case R.id.action_settings:
+                return true;
+
         }
+
+
 
         return super.onOptionsItemSelected(item);
     }

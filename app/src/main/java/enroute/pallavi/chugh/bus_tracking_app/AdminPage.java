@@ -43,6 +43,7 @@ public class AdminPage extends ActionBarActivity {
 
         toolbar = (Toolbar) findViewById(R.id.app_bar_rt_admin);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Route Grid");
         //getSupportActionBar().hide();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
