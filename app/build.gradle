@@ -8,8 +8,8 @@ android {
         applicationId "enroute.pallavi.chugh.bus_tracking_app"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 10
-        versionName "2.1"
+        versionCode 11
+        versionName "2.2"
     }
     buildTypes {
         release {

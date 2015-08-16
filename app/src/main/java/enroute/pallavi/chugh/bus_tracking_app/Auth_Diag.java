@@ -23,7 +23,7 @@ import com.parse.ParseUser;
  */
 public class Auth_Diag extends Dialog {
 
-    static int noofroute=5;
+    static int noofroute=0;
     public Activity c;
     public Dialog d;
     public Button ok;
