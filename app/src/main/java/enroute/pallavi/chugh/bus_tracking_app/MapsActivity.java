@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -52,6 +53,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
@@ -82,18 +84,53 @@ public class MapsActivity extends FragmentActivity {
     ArrayList<LatLng> markersarray;
     ArrayList<Marker> markers;
     Marker pos_marker, prev_marker;
-
+    boolean route_gen_flag=false;
     final int PLACES = 0;
     final int PLACES_DETAILS = 1;
     MarkerOptions o;
     Integer size;// (The size of the array list of markers)
 
     Double p_lat, p_lon;
+    LinkedList<Polyline> lpoly= new LinkedList<>();
+    HashMap<Integer, List<LatLng>> point_list = new HashMap<>();
 
 
     ///CREATE A SAVE BUTTON AND SAVE THE COORDINATES OF THE LOCATION ON PARSE TABLE IN STRING FIELDS.
     Integer position, prevact;
 
+    void generate_markers()
+    {
+
+        Marker school = mMap.addMarker(new MarkerOptions().position(new LatLng(28.689224, 77.121460))    //SCHOOL MARKER
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Apeejay School"));
+        school.showInfoWindow();
+
+        for(int i=0;i<markersarray.size();i++)
+        {
+            mMap.addMarker(new MarkerOptions().position(new LatLng(markersarray.get(i).latitude,markersarray.get(i).longitude)));
+            //markers.get(i).setVisible(true);
+        }
+        if (prevact == 1) {
+            prev_marker = mMap.addMarker(new MarkerOptions().position(new LatLng(p_lat, p_lon)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Current Saved Stop"));
+            //prev_marker.showInfoWindow();
+            markers.add(prev_marker);
+        }
+        info.setText("Bus Stops Marked in Orange");
+        animate_bound();
+
+
+    }
+    void animate_bound()
+    {
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        for (Marker marker : markers) {
+            builder.include(marker.getPosition());
+        }
+        LatLngBounds bounds = builder.build();
+        int padding = 150;
+        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+        mMap.animateCamera(cu);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,17 +139,46 @@ public class MapsActivity extends FragmentActivity {
         setUpMapIfNeeded();
         info = (TextView) findViewById(R.id.info);
         ck = (CheckBox) findViewById(R.id.gen_route);
-        ck.setOnClickListener(new View.OnClickListener() {
+       ck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+           @Override
+           public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+              // if (show_flag)
+               //{
+                   if (isChecked == true)//Checked state of the button for route generation
+                   {
+                       Log.d("here", "is checked:true");
+                       if (route_gen_flag == false) {///route generated for the first time
+                           route_gen_flag = true;
+                           info.setText("Generating Route form server...");
+                           connectAsyncTask ck = new connectAsyncTask();
+                           ck.execute();
+                       } else {
+                           Log.d("here", "Polyline made second");
+                           for (int i = 0; i < point_list.size(); i++) {   //lpoly.get(i).setVisible(true);
+                               drawpoly(point_list.get(i));
+                           }
+
+                       }
+                   } else {
+                       mMap.clear();
+                       generate_markers();
+                       //animate_bound();
+                   }
+//           }
+
+           }
+
+       });
+
+        /*ck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                // for (int i = 0; i < markersarray.size() - 1; i++) {
                     // String makeurl = makeURL(markersarray.get(i).latitude,markersarray.get(i).longitude,markersarray.get(i+1).latitude,markersarray.get(i+1).longitude);
-                    info.setText("Generating Route form server...");
-                    connectAsyncTask ck = new connectAsyncTask();
-                    ck.execute();
+
                 //}
             }
-        });
+        });*/
         /*if(savedInstanceState==null)
         {*/
            /* Bundle extras = getIntent().getExtras();
@@ -238,62 +304,66 @@ public class MapsActivity extends FragmentActivity {
                     dialog.setMessage("Marking points on map");
                     info.setText("Marking Stop Points on Map....");
                     //dialog.show();
+                    if(!(markersarray.size()>0)) {                      ////CHECK IF THE BUTTON IS CLICKED FOR THE FIRST TIME...QUERY EXECUTION ONLY ONCE
+                        // USE object retreived in MEdiator   the_route instaed of another query for this//
+                        ParseQuery<ParseObject> query = ParseQuery.getQuery("r1");
+                        //query.whereEqualTo("playerName", "Dan Stemkoski");
+                        query.orderByAscending("Priority");
+                        query.findInBackground(new FindCallback<ParseObject>() {
+                            public void done(List<ParseObject> scoreList, ParseException e) {
+                                if (e == null) {
 
-                    // USE object retreived in MEdiator   the_route instaed of another query for this//
-                    ParseQuery<ParseObject> query = ParseQuery.getQuery("r1");
-                    //query.whereEqualTo("playerName", "Dan Stemkoski");
-                    query.orderByAscending("Priority");
-                    query.findInBackground(new FindCallback<ParseObject>() {
-                        public void done(List<ParseObject> scoreList, ParseException e) {
-                            if (e == null) {
+                                    size = scoreList.size();
+                                    Log.d("after", size.toString());
+                                    Toast.makeText(getApplicationContext(), "Showing Route Stops On Map", Toast.LENGTH_SHORT).show();
 
-                                size = scoreList.size();
-                                Log.d("after", size.toString());
-                                Toast.makeText(getApplicationContext(), "Showing Route Stops On Map", Toast.LENGTH_SHORT).show();
 
-                                Marker school = mMap.addMarker(new MarkerOptions().position(new LatLng(28.689224, 77.121460))    //SCHOOL MARKER
-                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Apeejay School"));
-                                school.showInfoWindow();
-                                markers.add(school);
-                                markersarray.add(new LatLng(28.689224, 77.121460));
+                                    Marker school = mMap.addMarker(new MarkerOptions().position(new LatLng(28.689224, 77.121460))    //SCHOOL MARKER
+                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Apeejay School"));
+                                    school.showInfoWindow();
+                                    markers.add(school);
+                                    markersarray.add(new LatLng(28.689224, 77.121460));
 
-                                for (int j = 0; j < size; j++) {
-                                    Float lt = Float.parseFloat(scoreList.get(j).get("latitude").toString());
+                                    for (int j = 0; j < size; j++) {
+                                        Float lt = Float.parseFloat(scoreList.get(j).get("latitude").toString());
 
-                                    //latitudes.add(lt);
 
-                                    Float lg = Float.parseFloat(scoreList.get(j).get("longitude").toString());
-                                    //longitudes.add(lg);
 
-                                    markersarray.add(new LatLng(lt, lg));// array of the lat lng points to be taken in consideration for generating the POLYLINES.
-                                    markers.add(mMap.addMarker(new MarkerOptions().position(new LatLng(lt, lg))));
+                                        Float lg = Float.parseFloat(scoreList.get(j).get("longitude").toString());
+
+
+                                        markersarray.add(new LatLng(lt, lg));// array of the lat lng points to be taken in consideration for generating the POLYLINES.
+                                        markers.add(mMap.addMarker(new MarkerOptions().position(new LatLng(lt, lg))));
+                                        //markers.add(new MarkerOptions().position(new LatLng(lt, lg)));
+
+                                    }
+                                    animate_bound();// for animating to the marker space
+                                    ck.callOnClick();
+
+
+                                    //markers.add(mMap.addMarker(new MarkerOptions().position(new LatLng(lt,lg))));
+                                    // dialog.dismiss();
+                                    // drawmarkers();
+
+                                    ///ADD PREVIOUS LOCATION MARKER RECEIVED FROM PREVIOUS ACTIVITY IF COMING FROM PREV ACTIVITY
+                                    if (prevact == 1) {
+                                        prev_marker = mMap.addMarker(new MarkerOptions().position(new LatLng(p_lat, p_lon)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Current Saved Stop"));
+                                        //prev_marker.showInfoWindow();
+                                        markers.add(prev_marker);
+                                    }
+                                    info.setText("Bus Stops Marked in Orange");
+
+
+
+
                                 }
-
-                                //markers.add(mMap.addMarker(new MarkerOptions().position(new LatLng(lt,lg))));
-                                // dialog.dismiss();
-                                // drawmarkers();
-
-                                ///ADD PREVIOUS LOCATION MARKER RECEIVED FROM PREVIOUS ACTIVITY IF COMING FROM PREV ACTIVITY
-                                if (prevact == 1) {
-                                    prev_marker = mMap.addMarker(new MarkerOptions().position(new LatLng(p_lat, p_lon)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Current Saved Stop"));
-                                    //prev_marker.showInfoWindow();
-                                    markers.add(prev_marker);
-                                }
-                                info.setText("Bus Stops Marked in Orange");
-
-                                LatLngBounds.Builder builder = new LatLngBounds.Builder();
-                                for (Marker marker : markers) {
-                                    builder.include(marker.getPosition());
-                                }
-                                LatLngBounds bounds = builder.build();
-                                int padding = 100;
-                                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
-                                mMap.animateCamera(cu);
-
-
                             }
-                        }
-                    });
+                        });
+                    }
+                    else
+                    {
+                        generate_markers();
+                    }
                     show_markers.setText("Remove Route Markers");
                     show_flag = false;
 
@@ -880,6 +950,9 @@ public class MapsActivity extends FragmentActivity {
                     .add(new LatLng(src.latitude, src.longitude), new LatLng(dest.latitude, dest.longitude))
                     .width(4)
                     .color(Color.BLUE).geodesic(true));
+            Polyline add = line;
+            lpoly.add(add);
+
         }
     }
 
@@ -929,7 +1002,7 @@ public class MapsActivity extends FragmentActivity {
 
         HashMap<Integer, String> h_url = new HashMap<>();
         HashMap<Integer, String> h_json = new HashMap<>();
-        HashMap<Integer, List<LatLng>> point_list = new HashMap<>();
+//        HashMap<Integer, List<LatLng>> point_list = new HashMap<>();
 
         @Override
         protected void onPreExecute() {
