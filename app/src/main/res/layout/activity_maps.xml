@@ -91,6 +91,7 @@
                    android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
+                    android:id="@+id/gen_route"
                     android:text="Auto Generate Route"
                     android:background="#e5d67c"
 

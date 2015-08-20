@@ -25,6 +25,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import it.gmariotti.cardslib.library.internal.Card;
@@ -42,6 +43,7 @@ public class parse_check extends ActionBarActivity {
     Toolbar toolbar;
     //static ArrayList<String> names,phones;
     static ArrayList<Bitmap> f_bmap = new ArrayList<Bitmap>();
+    HashMap<Integer,Bitmap> hm = new HashMap<Integer,Bitmap>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -219,8 +221,9 @@ public class parse_check extends ActionBarActivity {
                     i.putExtra("routeno", route);
                     i.putExtra("rowno", rowid);
                     i.putExtra("studentno", position);
+                    mediator.tr_flag=0;
                     startActivity(i);
-                    finish();
+                    //finish();
 
                 }
             });
@@ -237,21 +240,27 @@ public class parse_check extends ActionBarActivity {
 
 
 
+                    if(hm.get(position)==null) {
+                        ParseFile fileoject = (ParseFile) mediator.the_route.get(position).get("photo");
+                        fileoject.getDataInBackground(new GetDataCallback() {
+                            @Override
+                            public void done(byte[] bytes, ParseException e) {
+                                if (e == null)
 
-                    ParseFile fileoject = (ParseFile) mediator.the_route.get(position).get("photo");
-                    fileoject.getDataInBackground(new GetDataCallback() {
-                        @Override
-                        public void done(byte[] bytes, ParseException e) {
-                            if (e == null)
-
-                            {
-                                Log.d("parse", "success" + position);
-                                Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                                //f_bmap.set(position, bmp);
-                                user_image.setImageBitmap(bmp);
+                                {
+                                    Log.d("parse", "success" + position);
+                                    Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                    //f_bmap.set(position, bmp);
+                                    hm.put(position,bmp);
+                                    user_image.setImageBitmap(bmp);
+                                }
                             }
-                        }
-                    });
+                        });
+                    }else
+                    {
+                        user_image.setImageBitmap(hm.get(position));
+                    }
+
 
 
             return convertView;

@@ -132,10 +132,10 @@ public class studentinfoedit extends ActionBarActivity implements View.OnClickLi
         {
             case android.R.id.home:
                 mediator.tr_flag=1;
-                Intent i = new Intent(studentinfoedit.this,parse_check.class);
+                /*Intent i = new Intent(studentinfoedit.this,parse_check.class);
                 i.putExtra("route",root);
-                startActivity(i);
-                //NavUtils.navigateUpFromSameTask(this);
+                startActivity(i);*/
+                NavUtils.navigateUpFromSameTask(this);
                 break;
             case R.id.action_settings:
                 return true;

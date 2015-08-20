@@ -2,6 +2,7 @@ package enroute.pallavi.chugh.bus_tracking_app;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.location.Address;
 import android.location.Geocoder;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -31,11 +33,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -57,6 +63,7 @@ public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     AutoCompleteTextView locationview;
+    CheckBox ck;
     Button set, save, show_markers;
     TextView info;
     ImageView iv;
@@ -94,6 +101,18 @@ public class MapsActivity extends FragmentActivity {
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
         info = (TextView) findViewById(R.id.info);
+        ck = (CheckBox) findViewById(R.id.gen_route);
+        ck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // for (int i = 0; i < markersarray.size() - 1; i++) {
+                    // String makeurl = makeURL(markersarray.get(i).latitude,markersarray.get(i).longitude,markersarray.get(i+1).latitude,markersarray.get(i+1).longitude);
+                    info.setText("Generating Route form server...");
+                    connectAsyncTask ck = new connectAsyncTask();
+                    ck.execute();
+                //}
+            }
+        });
         /*if(savedInstanceState==null)
         {*/
            /* Bundle extras = getIntent().getExtras();
@@ -108,15 +127,20 @@ public class MapsActivity extends FragmentActivity {
             if (extras == null) {
                 position = 0;
                 prevact = -1;
-            } else
-                position = extras.getInt("position");
-            prevact = extras.getInt("activityname");
+            }// else
+            //       position = extras.getInt("position");
+            //  prevact = extras.getInt("activityname");
 
         } else {
             position = (Integer) savedInstanceState.getSerializable("position");
             prevact = (Integer) savedInstanceState.getSerializable("activityname");
 
         }
+        ///////////////////////TODELETE///////////////////////
+        position = 1;
+        prevact = 0;
+
+        ///////////////////////TODELETE///////////////////////
 
 // 0 for addstudent-add location
 // 1 for studentinfoedit-editlocation
@@ -214,9 +238,11 @@ public class MapsActivity extends FragmentActivity {
                     dialog.setMessage("Marking points on map");
                     info.setText("Marking Stop Points on Map....");
                     //dialog.show();
+
+                    // USE object retreived in MEdiator   the_route instaed of another query for this//
                     ParseQuery<ParseObject> query = ParseQuery.getQuery("r1");
                     //query.whereEqualTo("playerName", "Dan Stemkoski");
-                    query.orderByAscending("s_name");
+                    query.orderByAscending("Priority");
                     query.findInBackground(new FindCallback<ParseObject>() {
                         public void done(List<ParseObject> scoreList, ParseException e) {
                             if (e == null) {
@@ -224,6 +250,12 @@ public class MapsActivity extends FragmentActivity {
                                 size = scoreList.size();
                                 Log.d("after", size.toString());
                                 Toast.makeText(getApplicationContext(), "Showing Route Stops On Map", Toast.LENGTH_SHORT).show();
+
+                                Marker school = mMap.addMarker(new MarkerOptions().position(new LatLng(28.689224, 77.121460))    //SCHOOL MARKER
+                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Apeejay School"));
+                                school.showInfoWindow();
+                                markers.add(school);
+                                markersarray.add(new LatLng(28.689224, 77.121460));
 
                                 for (int j = 0; j < size; j++) {
                                     Float lt = Float.parseFloat(scoreList.get(j).get("latitude").toString());
@@ -236,17 +268,17 @@ public class MapsActivity extends FragmentActivity {
                                     markersarray.add(new LatLng(lt, lg));// array of the lat lng points to be taken in consideration for generating the POLYLINES.
                                     markers.add(mMap.addMarker(new MarkerOptions().position(new LatLng(lt, lg))));
                                 }
-                                Marker school = mMap.addMarker(new MarkerOptions().position(new LatLng(28.689224, 77.121460))    //SCHOOL MARKER
-                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Apeejay School"));
-                                school.showInfoWindow();
-                                markers.add(school);
+
                                 //markers.add(mMap.addMarker(new MarkerOptions().position(new LatLng(lt,lg))));
                                 // dialog.dismiss();
                                 // drawmarkers();
-                                ///ADD PREVIOUS LOCATION MARKER RECEIVED FROM PREVIOUS ACTIVITY
-                                prev_marker = mMap.addMarker(new MarkerOptions().position(new LatLng(p_lat, p_lon)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Current Saved Stop"));
-                                //prev_marker.showInfoWindow();
-                                markers.add(prev_marker);
+
+                                ///ADD PREVIOUS LOCATION MARKER RECEIVED FROM PREVIOUS ACTIVITY IF COMING FROM PREV ACTIVITY
+                                if (prevact == 1) {
+                                    prev_marker = mMap.addMarker(new MarkerOptions().position(new LatLng(p_lat, p_lon)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Current Saved Stop"));
+                                    //prev_marker.showInfoWindow();
+                                    markers.add(prev_marker);
+                                }
                                 info.setText("Bus Stops Marked in Orange");
 
                                 LatLngBounds.Builder builder = new LatLngBounds.Builder();
@@ -281,8 +313,10 @@ public class MapsActivity extends FragmentActivity {
 
                 }
                 ///ADD PREVIOUS LOCATION MARKER RECEIVED FROM PREVIOUS ACTIVITY
-                prev_marker = mMap.addMarker(new MarkerOptions().position(new LatLng(p_lat, p_lon)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)).title("Current Saved Stop"));
-                prev_marker.showInfoWindow();
+                if (prevact == 1) {
+                    prev_marker = mMap.addMarker(new MarkerOptions().position(new LatLng(p_lat, p_lon)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)).title("Current Saved Stop"));
+                    prev_marker.showInfoWindow();
+                }
 
 
             }
@@ -800,4 +834,164 @@ public class MapsActivity extends FragmentActivity {
         }
     }
 
+    ///MAKES THE URL TO MAKE THE HTTP REQUEST BY THE JSONPARSER CLASS
+    public String makeURL(double sourcelat, double sourcelog, double destlat, double destlog) {
+        StringBuilder urlString = new StringBuilder();
+        urlString.append("http://maps.googleapis.com/maps/api/directions/json");
+        urlString.append("?origin=");// from
+        urlString.append(Double.toString(sourcelat));
+        urlString.append(",");
+        urlString
+                .append(Double.toString(sourcelog));
+        urlString.append("&destination=");// to
+        urlString
+                .append(Double.toString(destlat));
+        urlString.append(",");
+        urlString.append(Double.toString(destlog));
+        urlString.append("&sensor=false&mode=driving&alternatives=true");
+        return urlString.toString();
+    }
+
+    ///RETURNS A LIST OF LATLNG POINTS TO BE THEN MARKED TO CREATE ONE POLYLINE BY drawPoly function
+    public List<LatLng> getPath(String result) {
+        List<LatLng> list = new ArrayList<>();
+
+        try {
+            //Tranform the string into a json object
+            final JSONObject json = new JSONObject(result);
+            JSONArray routeArray = json.getJSONArray("routes");
+            JSONObject routes = routeArray.getJSONObject(0);
+            JSONObject overviewPolylines = routes.getJSONObject("overview_polyline");
+            String encodedString = overviewPolylines.getString("points");
+            list = decodePoly(encodedString);
+            //return list;
+        } catch (JSONException e) {
+
+        }
+        return list;
+    }
+
+    //// DRAWS A POLYLINE AFTER RECEIVING A LIST OF LATLNG POINTS
+    public void drawpoly(List<LatLng> list) {
+        for (int z = 0; z < list.size() - 1; z++) {
+            LatLng src = list.get(z);
+            LatLng dest = list.get(z + 1);
+            Polyline line = mMap.addPolyline(new PolylineOptions()
+                    .add(new LatLng(src.latitude, src.longitude), new LatLng(dest.latitude, dest.longitude))
+                    .width(4)
+                    .color(Color.BLUE).geodesic(true));
+        }
+    }
+
+    //USED BY GETPATH TO DECODE THE DATA RECEIVED
+    private List<LatLng> decodePoly(String encoded) {
+
+        List<LatLng> poly = new ArrayList<LatLng>();
+        int index = 0, len = encoded.length();
+        int lat = 0, lng = 0;
+
+        while (index < len) {
+            int b, shift = 0, result = 0;
+            do {
+                b = encoded.charAt(index++) - 63;
+                result |= (b & 0x1f) << shift;
+                shift += 5;
+            } while (b >= 0x20);
+            int dlat = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+            lat += dlat;
+
+            shift = 0;
+            result = 0;
+            do {
+                b = encoded.charAt(index++) - 63;
+                result |= (b & 0x1f) << shift;
+                shift += 5;
+            } while (b >= 0x20);
+            int dlng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+            lng += dlng;
+
+            LatLng p = new LatLng((((double) lat / 1E5)),
+                    (((double) lng / 1E5)));
+            poly.add(p);
+        }
+
+        return poly;
+    }
+
+    private class connectAsyncTask extends AsyncTask<Void, Void, String> {
+        private ProgressDialog progressDialog;
+        String url;
+        Integer ia;
+      /* connectAsyncTask(Integer i, String urlPass){
+            url = urlPass;
+            ia =i;
+        }*/
+
+        HashMap<Integer, String> h_url = new HashMap<>();
+        HashMap<Integer, String> h_json = new HashMap<>();
+        HashMap<Integer, List<LatLng>> point_list = new HashMap<>();
+
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(MapsActivity.this);
+            progressDialog.setMessage("Fetching route, Please wait...");
+            progressDialog.setIndeterminate(true);
+            Log.d("here","1");
+            //progressDialog.show();
+
+            for (int i = 0; i < markersarray.size() - 1; i++) {
+                h_url.put(i, makeURL(markersarray.get(i).latitude, markersarray.get(i).longitude, markersarray.get(i + 1).latitude, markersarray.get(i + 1).longitude));
+            }
+
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            for (int j = 0; j < markersarray.size() - 1; j++) {
+                JSONParser jParser = new JSONParser();
+                String json = jParser.getJSONFromUrl(h_url.get(j));
+                List<LatLng> result = getPath(json);
+                point_list.put(j, result);
+                Log.d("here","Did: "+j);
+
+            }
+            return new String();
+            // return result;
+            /*for(int j=0;j<markersarray.size()-1;j++) {
+
+                h_json.put(j,json);
+                List<LatLng> s = getPath(h_json.get(j));
+                drawpoly(s);*/
+
+            //   return json;
+            //}
+            // return new String();
+
+        }
+
+        protected void onPostExecute(String result) {
+            Log.d("here","OnPost");
+            for (int k = 0; k < markersarray.size() - 1; k++) {
+                drawpoly(point_list.get(k));
+                Log.d("here", "drawed" + k);
+            }
+            info.setText("Route Marked on Map");
+            /*for(int k=0;k<markersarray.size()-1;k++)
+            {
+
+            }*/
+            /*
+            if(result!=null){
+                List<LatLng> l  = getPath(result);
+                drawpoly(l);
+            }*/
+            // progressDialog.hide();
+            Toast.makeText(getApplicationContext(), "Done Routing", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
+
+
+
