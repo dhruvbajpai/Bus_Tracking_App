@@ -7,6 +7,8 @@ import android.graphics.Point;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -84,9 +86,10 @@ public class MapsActivity extends FragmentActivity {
     ArrayList<LatLng> markersarray;
     ArrayList<Marker> markers;
     Marker pos_marker, prev_marker;
-    boolean route_gen_flag=false;
+    boolean route_gen_flag=false,marker_gen_flag=false;
     final int PLACES = 0;
     final int PLACES_DETAILS = 1;
+    boolean checkboxflag = false;
     MarkerOptions o;
     Integer size;// (The size of the array list of markers)
 
@@ -110,6 +113,9 @@ public class MapsActivity extends FragmentActivity {
             mMap.addMarker(new MarkerOptions().position(new LatLng(markersarray.get(i).latitude,markersarray.get(i).longitude)));
             //markers.get(i).setVisible(true);
         }
+
+
+
         if (prevact == 1) {
             prev_marker = mMap.addMarker(new MarkerOptions().position(new LatLng(p_lat, p_lon)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Current Saved Stop"));
             //prev_marker.showInfoWindow();
@@ -132,6 +138,43 @@ public class MapsActivity extends FragmentActivity {
         mMap.animateCamera(cu);
     }
 
+    void ifchecktrue()  // function to draw polylines if auto check on
+    {
+        //Log.d("here", "is checked:true");
+        Log.d("marker","1");
+        if(marker_gen_flag) {
+            Log.d("marker","2");
+            if (route_gen_flag == false) {///route generated for the first time
+                route_gen_flag = true;
+                info.setText("Generating Route form server...");
+                connectAsyncTask ck = new connectAsyncTask();
+                ck.execute();
+            } else {
+                Log.d("here", "Polyline made second");
+                //for (int i = 0; i < point_list.size(); i++) {   //lpoly.get(i).setVisible(true);
+                   // drawpoly(point_list.get(i));
+                    new CountDownTimer((point_list.size()+1)*100, 100) {
+                        int q=0;
+                        public void onFinish() {
+                            // When timer is finished
+                            // Execute your code here
+                        }
+
+                        public void onTick(long millisUntilFinished) {
+                            if(q<point_list.size()) {
+                                drawpoly(point_list.get(q));
+                                q++;
+                            }
+                            // millisUntilFinished    The amount of time until finished.
+                        }
+                    }.start();
+
+
+                //}
+
+            }
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,24 +188,20 @@ public class MapsActivity extends FragmentActivity {
               // if (show_flag)
                //{
                    if (isChecked == true)//Checked state of the button for route generation
-                   {
-                       Log.d("here", "is checked:true");
-                       if (route_gen_flag == false) {///route generated for the first time
-                           route_gen_flag = true;
-                           info.setText("Generating Route form server...");
-                           connectAsyncTask ck = new connectAsyncTask();
-                           ck.execute();
-                       } else {
-                           Log.d("here", "Polyline made second");
-                           for (int i = 0; i < point_list.size(); i++) {   //lpoly.get(i).setVisible(true);
-                               drawpoly(point_list.get(i));
-                           }
+                   {    Log.d("marker","start");
+                       checkboxflag =true;
+                       if(!show_flag)
+                       ifchecktrue();
 
-                       }
+
                    } else {
-                       mMap.clear();
-                       generate_markers();
-                       //animate_bound();
+                       checkboxflag = false;
+                        if(!show_flag) {
+                            mMap.clear();
+                            generate_markers();
+
+                            //animate_bound();
+                        }
                    }
 //           }
 
@@ -202,20 +241,24 @@ public class MapsActivity extends FragmentActivity {
             prevact = (Integer) savedInstanceState.getSerializable("activityname");
 
         }
-        ///////////////////////TODELETE///////////////////////
-        position = 1;
-        prevact = 0;
+        ///////////////////////TODELETE/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        position = 3;
+        prevact = 1;
 
-        ///////////////////////TODELETE///////////////////////
+        ///////////////////////TODELETE/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // 0 for addstudent-add location
 // 1 for studentinfoedit-editlocation
 // 2 for addstudent-edit location
         if (prevact == 1) {
             info.setText("Previous Bus Stop Marked on Map");
-            p_lat = Double.parseDouble(mediator.latti.get(position));
 
-            p_lon = Double.parseDouble(mediator.longi.get(position));
+            p_lat = 28.689102;
+            p_lon = 77.142498;
+
+            //p_lat = Double.parseDouble(mediator.latti.get(position));
+
+            //p_lon = Double.parseDouble(mediator.longi.get(position));
             prev_marker = mMap.addMarker(new MarkerOptions().position(new LatLng(p_lat, p_lon)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)).title("Current Saved Stop"));
             prev_marker.showInfoWindow();
 
@@ -338,8 +381,9 @@ public class MapsActivity extends FragmentActivity {
 
                                     }
                                     animate_bound();// for animating to the marker space
-                                    ck.callOnClick();
+                                    //ck.callOnClick();
 
+                                    marker_gen_flag=true;
 
                                     //markers.add(mMap.addMarker(new MarkerOptions().position(new LatLng(lt,lg))));
                                     // dialog.dismiss();
@@ -363,6 +407,12 @@ public class MapsActivity extends FragmentActivity {
                     else
                     {
                         generate_markers();
+                    }
+                    if(checkboxflag)/// TO GENERATE THE ROUTE ON THE MAP ON MARKER SHOW PRESS IF CHECKBOX IS TICKED
+                    {
+                        Log.d("marker","checkboxflag");
+                        Log.d("marker",String.valueOf(marker_gen_flag));
+                        ifchecktrue();
                     }
                     show_markers.setText("Remove Route Markers");
                     show_flag = false;

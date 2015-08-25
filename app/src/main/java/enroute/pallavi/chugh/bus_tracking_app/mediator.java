@@ -73,7 +73,9 @@ public class mediator extends Activity {
         mProgressDialog.show();
         ParseQuery<ParseObject> query = ParseQuery.getQuery("r"+route);
         //query.whereEqualTo("playerName", "Dan Stemkoski");
-        query.orderByAscending("s_name");
+        //query.orderByAscending("s_name");
+
+        query.orderByAscending("Priority");
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> scoreList, ParseException e) {
                 if (e == null) {
