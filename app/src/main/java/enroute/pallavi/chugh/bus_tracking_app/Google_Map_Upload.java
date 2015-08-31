@@ -50,6 +50,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import enroute.pallavi.chugh.bus_tracking_app.Classes.TimenDistance;
+
 public class Google_Map_Upload extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
@@ -155,36 +157,10 @@ public class Google_Map_Upload extends FragmentActivity {
 
                     }
                     marker_flag = true;
-                    {
-                       /* Bitmap.Config conf = Bitmap.Config.ARGB_8888;
-                        Bitmap bmp = Bitmap.createBitmap(80, 80, conf);
-                        Canvas canvas1 = new Canvas(bmp);
 
-// paint defines the text color,
-// stroke width, size
-                        Paint color = new Paint();
-                        color.setTextSize(35);
-                        color.setColor(Color.BLACK);
 
-//modify canvas
-//                        canvas1.drawBitmap(BitmapFactory.decodeResource(getResources(),
-                        //                              R.drawable.school), 0, 0, color);
-                        canvas1.drawText("Apeejay School", 30, 40, color);
-*/
-//add marker to Map
-                        Marker school = mMap.addMarker(new MarkerOptions().position(new LatLng(28.689224, 77.121460)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("School"));
-                        school.showInfoWindow();
-                        markers.add(school);
-
-                        /*markers.add(mMap.addMarker(new MarkerOptions().position(new LatLng(28.689224, 77.121460))
-                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
-                                        // Specifies the anchor to be at a particular point in the marker image.
-  iuiuiu99999iuiuuuuu9999999999999uuu7uuuuuuuuuuuuuuuuuuuuuuuuu777769i                              .anchor(0.5f, 1).title("School")));
-*/
-                    }
-                    // markers.add(mMap.addMarker(new MarkerOptions().position().title("Apeejay School").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))));
-
-                    Toast.makeText(getApplicationContext(), size.toString(), Toast.LENGTH_SHORT).show();
+                        addSchoolMarker();
+                         Toast.makeText(getApplicationContext(), size.toString(), Toast.LENGTH_SHORT).show();
 
 
                     dialog.dismiss();
@@ -214,7 +190,6 @@ public class Google_Map_Upload extends FragmentActivity {
 
                 current_location = location;
                 updateUI(location);
-
                 /*
                 mMap.clear();
 
@@ -222,8 +197,7 @@ public class Google_Map_Upload extends FragmentActivity {
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()),17.0f));
                 */
 
-
-                ParseQuery<ParseObject> query = ParseQuery.getQuery("liveloc");
+               ParseQuery<ParseObject> query = ParseQuery.getQuery("liveloc");
                 query.whereEqualTo("rootname", route);
                 query.getFirstInBackground(new GetCallback<ParseObject>() {
                     @Override
@@ -265,14 +239,20 @@ public class Google_Map_Upload extends FragmentActivity {
 
         /////////////////////////////////////////////////////////////////////////--------------------MAIN LOGIC--------------------------------------/////////////////////////////////////////////////
 
-      Thread thread =   new Thread(new Runnable() {
+          calculateNotification();      // Notification time and Google API query executes here
+
+
+    }
+
+    private void calculateNotification() {
+        Thread thread =   new Thread(new Runnable() {
             @Override
             public void run() {
 
                 Log.d("TAG",String.valueOf(marker_flag));
                 ///THREAD TO RUN ONLY AFTER MARKERS ARE SET
                 while (!marker_flag) {
-                        Log.d("TAG",String.valueOf(marker_flag));
+                    Log.d("TAG",String.valueOf(marker_flag));
                     try {
                         Thread.sleep(1000);
                     } catch (Exception e) {
@@ -311,7 +291,13 @@ public class Google_Map_Upload extends FragmentActivity {
             }
         });
 
-          thread.start();
+        thread.start();
+    }
+
+    private void addSchoolMarker() {
+        Marker school = mMap.addMarker(new MarkerOptions().position(new LatLng(28.689224, 77.121460)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("School"));
+        school.showInfoWindow();
+        markers.add(school);
     }
 
     public static String makeURL(LatLng from, LatLng to) {
@@ -444,56 +430,7 @@ public class Google_Map_Upload extends FragmentActivity {
         }
     }
 
-    public class TimenDistance {
-        String time;
-        String distance;
-        String t_value;
-        String d_value;
 
-        public TimenDistance(String time, String distance, String t_value, String d_values) {
-            this.time = time;
-            this.distance = distance;
-            this.t_value = t_value;
-            this.d_value = d_values;
-        }
-
-        public TimenDistance(String time, String distance) {
-            this.time = time;
-            this.distance = distance;
-        }
-
-        public void setTime(String time) {
-            this.time = time;
-        }
-
-        public void setDistance(String distance) {
-            this.distance = distance;
-        }
-
-        public void setT_value(String t_value) {
-            this.t_value = t_value;
-        }
-
-        public void setD_values(String d_values) {
-            this.d_value = d_values;
-        }
-
-        public String getTime() {
-            return time;
-        }
-
-        public String getDistance() {
-            return distance;
-        }
-
-        public String getT_value() {
-            return t_value;
-        }
-
-        public String getD_values() {
-            return d_value;
-        }
-    }
 
 
     /////////////////////////////////////////////////////////////////////////--------------------MAIN LOGIC--------------------------------------/////////////////////////////////////////////////
@@ -541,7 +478,7 @@ public class Google_Map_Upload extends FragmentActivity {
         // mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
     }
 
-    private String getDirectionsUrl(LatLng origin, LatLng dest) {
+   /* private String getDirectionsUrl(LatLng origin, LatLng dest) {
         // Origin of route
         String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
         // Destination of route
@@ -556,12 +493,9 @@ public class Google_Map_Upload extends FragmentActivity {
         String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters;
 
         return url;
-    }
-
-    public void getDistanceTime() {
+    }*/
 
 
-    }
     public void drawmarkers() {
 
         //Toast.makeText(getApplicationContext(),latitudes.get(0).toString(),Toast.LENGTH_SHORT).show();
