@@ -68,14 +68,15 @@ public class MapsActivity extends FragmentActivity {
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     AutoCompleteTextView locationview;
     CheckBox ck;
-    Button set, save, show_markers;
+    Button set, save, show_markers,al_mar;
     TextView info;
     ImageView iv;
     int x, y;
     boolean geoflag, are_markers_marked = false;
-    boolean flag, show_flag = true;
+    boolean flag, show_flag = true,al_flag=false;
     ProgressDialog dialog;
     LatLng centre_location, p_position;
+    Marker toOrange;
     DownloadTask placesDownloadTask;
     DownloadTask placeDetailsDownloadTask;
     ParserTask placesParserTask;
@@ -104,20 +105,25 @@ public class MapsActivity extends FragmentActivity {
     void generate_markers()
     {
 
-        Marker school = mMap.addMarker(new MarkerOptions().position(new LatLng(28.689224, 77.121460))    //SCHOOL MARKER
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Apeejay School"));
-        school.showInfoWindow();
+
 
         for(int i=0;i<markersarray.size();i++)
         {
+           /* if(i==position+1)   //////////////////////////////////////////////////////////////////////////////*//**************************************************************************
+                continue;*/
             mMap.addMarker(new MarkerOptions().position(new LatLng(markersarray.get(i).latitude,markersarray.get(i).longitude)));
             //markers.get(i).setVisible(true);
         }
 
+        //This has to be below other marker generation to see the blue marker for school as markersarray also contains the school location.(for route calculation)
+        Marker school = mMap.addMarker(new MarkerOptions().position(new LatLng(28.689224, 77.121460))    //SCHOOL MARKER
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Apeejay School"));
+        school.showInfoWindow();
+
 
 
         if (prevact == 1) {
-            prev_marker = mMap.addMarker(new MarkerOptions().position(new LatLng(p_lat, p_lon)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Current Saved Stop"));
+            prev_marker = mMap.addMarker(new MarkerOptions().position(new LatLng(p_lat, p_lon)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)).title("Current Saved Stop"));
             //prev_marker.showInfoWindow();
             markers.add(prev_marker);
         }
@@ -153,7 +159,7 @@ public class MapsActivity extends FragmentActivity {
                 Log.d("here", "Polyline made second");
                 //for (int i = 0; i < point_list.size(); i++) {   //lpoly.get(i).setVisible(true);
                    // drawpoly(point_list.get(i));
-                    new CountDownTimer((point_list.size()+1)*100, 100) {
+                    new CountDownTimer((point_list.size()+3)*100, 100) {
                         int q=0;
                         public void onFinish() {
                             // When timer is finished
@@ -180,8 +186,21 @@ public class MapsActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
+        al_mar = (Button)(findViewById(R.id.already_set));
+        al_mar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                al_flag= true;
+                set.setVisibility(View.GONE);
+                iv.setVisibility(View.GONE);
+
+                //show_markers.setVisibility(View.GONE);
+            }
+        });
         info = (TextView) findViewById(R.id.info);
         ck = (CheckBox) findViewById(R.id.gen_route);
+        ck.setVisibility(View.GONE);
        ck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
            @Override
            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -232,9 +251,10 @@ public class MapsActivity extends FragmentActivity {
             if (extras == null) {
                 position = 0;
                 prevact = -1;
-            }// else
-            //       position = extras.getInt("position");
-            //  prevact = extras.getInt("activityname");
+            } else {
+                position = extras.getInt("position");
+                prevact = extras.getInt("activityname");
+            }
 
         } else {
             position = (Integer) savedInstanceState.getSerializable("position");
@@ -242,8 +262,8 @@ public class MapsActivity extends FragmentActivity {
 
         }
         ///////////////////////TODELETE/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        position = 3;
-        prevact = 1;
+       // position = 3;
+        //prevact = 1;
 
         ///////////////////////TODELETE/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -252,13 +272,14 @@ public class MapsActivity extends FragmentActivity {
 // 2 for addstudent-edit location
         if (prevact == 1) {
             info.setText("Previous Bus Stop Marked on Map");
+//////////////////////////////////////////////////////////////////////TO DELETE/////////////////////////////////////////
+           // p_lat = 28.689102;
+            //p_lon = 77.142498;
+//////////////////////////////////////////////////////////////////////TO DELETE/////////////////////////////////////////
 
-            p_lat = 28.689102;
-            p_lon = 77.142498;
+            p_lat = Double.parseDouble(mediator.latti.get(position));
 
-            //p_lat = Double.parseDouble(mediator.latti.get(position));
-
-            //p_lon = Double.parseDouble(mediator.longi.get(position));
+            p_lon = Double.parseDouble(mediator.longi.get(position));
             prev_marker = mMap.addMarker(new MarkerOptions().position(new LatLng(p_lat, p_lon)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)).title("Current Saved Stop"));
             prev_marker.showInfoWindow();
 
@@ -307,8 +328,8 @@ public class MapsActivity extends FragmentActivity {
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if (pos_marker != null) {
+            public void onClick(View v) {//CLICKED SAVE BUTTON
+                if (pos_marker != null) {//IF POSITION IS DEFINED AND STORED IN pos_marker
 
                     LatLng ab = pos_marker.getPosition();
                     Double lat = ab.latitude;
@@ -336,9 +357,32 @@ public class MapsActivity extends FragmentActivity {
         });
 
 
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                try{
+                    toOrange.setIcon(BitmapDescriptorFactory.defaultMarker());
+                }catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+                toOrange = marker;// To make the previous selection to default color
+                pos_marker = marker;
+                info.setText("Selected Marker shown in Green");
+                marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                marker.setTitle("This Marker Selected");
+                marker.showInfoWindow();
+
+                return false;
+            }
+        });
+
+
         show_markers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ck.setVisibility(View.VISIBLE);
 
                 if (show_flag) {// show flag clicked for the first time
                     dialog = new ProgressDialog(getBaseContext());
@@ -368,6 +412,7 @@ public class MapsActivity extends FragmentActivity {
                                     markersarray.add(new LatLng(28.689224, 77.121460));
 
                                     for (int j = 0; j < size; j++) {
+
                                         Float lt = Float.parseFloat(scoreList.get(j).get("latitude").toString());
 
 
@@ -376,6 +421,9 @@ public class MapsActivity extends FragmentActivity {
 
 
                                         markersarray.add(new LatLng(lt, lg));// array of the lat lng points to be taken in consideration for generating the POLYLINES.
+                                       /* if(j==position)
+                                            continue;       ///SO THAT THE CURRENT SAVED LOCATION POINTER IS NOT CREATED AGAIN.*/
+                                        ///////////////////////////////////////////////////////////////////////////////**************************************************************************
                                         markers.add(mMap.addMarker(new MarkerOptions().position(new LatLng(lt, lg))));
                                         //markers.add(new MarkerOptions().position(new LatLng(lt, lg)));
 
@@ -391,7 +439,7 @@ public class MapsActivity extends FragmentActivity {
 
                                     ///ADD PREVIOUS LOCATION MARKER RECEIVED FROM PREVIOUS ACTIVITY IF COMING FROM PREV ACTIVITY
                                     if (prevact == 1) {
-                                        prev_marker = mMap.addMarker(new MarkerOptions().position(new LatLng(p_lat, p_lon)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Current Saved Stop"));
+                                        prev_marker = mMap.addMarker(new MarkerOptions().position(new LatLng(p_lat, p_lon)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)).title("Current Saved Stop"));
                                         //prev_marker.showInfoWindow();
                                         markers.add(prev_marker);
                                     }
@@ -407,6 +455,7 @@ public class MapsActivity extends FragmentActivity {
                     else
                     {
                         generate_markers();
+
                     }
                     if(checkboxflag)/// TO GENERATE THE ROUTE ON THE MAP ON MARKER SHOW PRESS IF CHECKBOX IS TICKED
                     {
@@ -521,12 +570,28 @@ public class MapsActivity extends FragmentActivity {
         mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
             @Override
             public void onCameraChange(CameraPosition cameraPosition) {
+                if (prevact == 1) {
+                    if(prev_marker!=null)
+                        prev_marker.setVisible(true);
+                    if(!al_flag)// because this if selecting pointers executes after show window of selecting pointer executes
+                    prev_marker.showInfoWindow();
+                  /*  else if(al_flag)// Selecting already made markers
+                    {
+
+
+                    }*/
+
+                }
                 centre_location = mMap.getCameraPosition().target;
                 //locationview.setText(centre_location.toString());
 
                 //Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.ENGLISH);
                 if (geoflag == true) {// position pointer not set yet
+
+                    if(!al_flag)
                     info.setText("Pointer Showing Location to Save");
+                    else
+                    info.setText("Select Marker from Map");
                     try {
 
                         //Place your latitude and longitude
@@ -1076,6 +1141,7 @@ public class MapsActivity extends FragmentActivity {
                 JSONParser jParser = new JSONParser();
                 String json = jParser.getJSONFromUrl(h_url.get(j));
                 List<LatLng> result = getPath(json);
+                Log.d("SIZE= ",String.valueOf(markersarray.size()));
                 point_list.put(j, result);
                 Log.d("here","Did: "+j);
 
@@ -1096,10 +1162,26 @@ public class MapsActivity extends FragmentActivity {
 
         protected void onPostExecute(String result) {
             Log.d("here","OnPost");
-            for (int k = 0; k < markersarray.size() - 1; k++) {
+
+            new CountDownTimer((point_list.size()+3)*100, 100) {///dont know why increase +2,+3 works here..have to check
+                int q=0;
+                public void onFinish() {
+                    // When timer is finished
+                    // Execute your code here
+                }
+
+                public void onTick(long millisUntilFinished) {
+                    if(q<markersarray.size()-1) {///////////////////////////////////////////////////////////////////////////////**************************************************************************
+                        drawpoly(point_list.get(q));
+                        q++;
+                    }
+                    // millisUntilFinished    The amount of time until finished.
+                }
+            }.start();
+           /* for (int k = 0; k < markersarray.size() - 1; k++) {
                 drawpoly(point_list.get(k));
                 Log.d("here", "drawed" + k);
-            }
+            }*/
             info.setText("Route Marked on Map");
             /*for(int k=0;k<markersarray.size()-1;k++)
             {

@@ -1,5 +1,102 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:id="@+id/map"
-    tools:context="enroute.pallavi.chugh.bus_tracking_app.Google_Map_Upload"
-    android:name="com.google.android.gms.maps.SupportMapFragment" />
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="80dp"
+        android:text="Distance"
+        android:textSize="20sp"
+        android:textColor="@color/primary"
+        android:textStyle="bold"
+        android:id="@+id/distance"
+        android:gravity="center"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:textColor="@color/primary"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_height="80dp"
+        android:text="From 1"
+        android:id="@+id/from"
+        android:gravity="center"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:textSize="20sp"
+        android:textColor="@color/primary"
+        android:textStyle="bold"
+        android:layout_height="80dp"
+        android:text="Time"
+        android:id="@+id/time"
+        android:gravity="center"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="80dp"
+            android:text="Distance"
+            android:textSize="20sp"
+            android:textColor="@color/primary"
+            android:textStyle="bold"
+            android:id="@+id/di"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textColor="@color/primary"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_height="80dp"
+            android:text="From 2"
+            android:id="@+id/dd"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:textColor="@color/primary"
+            android:textStyle="bold"
+            android:layout_height="80dp"
+            android:text="Count"
+            android:id="@+id/count"
+            android:gravity="center"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/map"
+            tools:context="enroute.pallavi.chugh.bus_tracking_app.Google_Map_Upload"
+            android:name="com.google.android.gms.maps.SupportMapFragment" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
+

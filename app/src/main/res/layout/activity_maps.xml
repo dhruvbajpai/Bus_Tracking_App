@@ -66,6 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:text="Set here"
+                    android:layout_marginTop="5dp"
                     android:textSize="10sp"
                     android:id="@+id/set_pointer"
                     android:background="#e5d67c"
@@ -73,6 +74,7 @@
                     />
                 <Button
                     android:layout_width="0dp"
+                    android:layout_height="40dp"
                     android:text="Show Route markers"
                     android:textSize="10sp"
 
@@ -83,7 +85,7 @@
 
                     android:background="#e5d67c"
 
-                    android:layout_height="40dp"
+
 
 
                     />
@@ -114,6 +116,20 @@
                 android:layout_marginRight="10dp"
                 android:id="@+id/btn_save"
                 android:layout_alignParentBottom="true"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:text=" Set Already Marked "
+                android:layout_marginTop="5dp"
+                android:layout_above="@id/btn_save"
+                android:layout_marginBottom="7dp"
+                android:textSize="10sp"
+                android:id="@+id/already_set"
+                android:background="#e5d67c"
+
+                />
         </RelativeLayout>
 
 
