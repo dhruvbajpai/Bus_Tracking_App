@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.SEND_SMS"></uses-permission>
     <!--
  The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but are recommended.
@@ -87,11 +88,8 @@
         <activity
             android:name="enroute.pallavi.chugh.bus_tracking_app.Google_Map_Upload"
             android:label="Google_Map_Upload" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
 
 
 
@@ -100,8 +98,11 @@
         <activity
             android:name="enroute.pallavi.chugh.bus_tracking_app.startpage"
             android:label="@string/title_activity_startpage" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity

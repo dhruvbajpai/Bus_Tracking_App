@@ -393,7 +393,7 @@ public class MapsActivity extends FragmentActivity {
                     //dialog.show();
                     if(!(markersarray.size()>0)) {                      ////CHECK IF THE BUTTON IS CLICKED FOR THE FIRST TIME...QUERY EXECUTION ONLY ONCE
                         // USE object retreived in MEdiator   the_route instaed of another query for this//
-                        ParseQuery<ParseObject> query = ParseQuery.getQuery("r1");
+                        ParseQuery<ParseObject> query = ParseQuery.getQuery("r3");
                         //query.whereEqualTo("playerName", "Dan Stemkoski");
                         query.orderByAscending("Priority");
                         query.findInBackground(new FindCallback<ParseObject>() {

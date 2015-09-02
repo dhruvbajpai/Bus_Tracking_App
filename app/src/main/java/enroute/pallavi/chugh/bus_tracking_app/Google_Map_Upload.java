@@ -13,6 +13,7 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +31,7 @@ import com.google.android.gms.maps.model.Polyline;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -50,6 +52,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import enroute.pallavi.chugh.bus_tracking_app.Classes.MyJSONParse;
 import enroute.pallavi.chugh.bus_tracking_app.Classes.TimenDistance;
 
 public class Google_Map_Upload extends FragmentActivity {
@@ -64,12 +67,22 @@ public class Google_Map_Upload extends FragmentActivity {
     ArrayList<Marker> markers;
     boolean marker_flag = false;
 
-    int time_constraint = 300;// second for notifications
-    int stop_done_counter = 0;
+    List<ParseObject> the_table = new ArrayList<>();
 
+    String key1_dbcoolster = "AIzaSyCCVkfMFqSE838nAiMrRnx4kcoydtn4a-Y";
+    String key2_wisemasses = "AIzaSyBLbR8skvduOHTOE4agMeDFhXj4QoUqt1g";
+    boolean key_flag= false;
+    int time_constraint = 300;// second for notifications
+    int stop_done_counter = 0;   /// FOR NORMAL DAYS....WITHOUT PRIORITY CHECK DAY
+    ArrayList<Integer> alreadyUpdatedPriorityList = new ArrayList<>();
+
+    HashMap<Integer,TimenDistance> p_check_map = new HashMap<>();
+    HashMap<Integer,TimenDistance> p_check_map_previous = new HashMap<>();
+    int priority_to_put=1;
+    int stop_done_on_priority_day=0;
     Location current_location = null;
     TextView t_distance, t_time;
-    String route;
+    String route = "r3";
     List<Polyline> plist;
     //GetRouteTask getRoute;
     int cam_f = 0;
@@ -99,7 +112,7 @@ public class Google_Map_Upload extends FragmentActivity {
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if (extras == null) {
-                route = "r1";
+                route = "r3";
             } else
                 route = extras.getString("route");
 
@@ -134,14 +147,14 @@ public class Google_Map_Upload extends FragmentActivity {
         dialog.setIndeterminate(false);
         dialog.setMessage("Marking points on map");
         dialog.show();
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("r1");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(route);
         //query.whereEqualTo("playerName", "Dan Stemkoski");
-        query.orderByDescending("Priority");
+        query.orderByAscending("Priority"); ///////////////////// TO CHANGE FOR MORNING/EVENING
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> scoreList, ParseException e) {
                 if (e == null) {
                     size = scoreList.size();
-
+                    the_table = scoreList;
                     for (int j = 0; j < size; j++) {
                         Float lt = Float.parseFloat(scoreList.get(j).get("latitude").toString());
 
@@ -239,27 +252,244 @@ public class Google_Map_Upload extends FragmentActivity {
 
         /////////////////////////////////////////////////////////////////////////--------------------MAIN LOGIC--------------------------------------/////////////////////////////////////////////////
 
-          calculateNotification();      // Notification time and Google API query executes here
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                if(isPriorityCheckDay())
+                {
+                    priorityCheckDay() ;
+                    Log.d("TAG","priorityCheckDay() ;");
+                }
+                else {
+                    calculateNotification();
+                    Log.d("TAG","NORMAL DAY");
+                    // Notification time and Google API query executes here
+                }
+               // calculateNotification();
+            }
+        });
+        thread.start();
+
 
 
     }
 
+
+    public boolean isPriorityCheckDay()
+    {
+        List<ParseObject> results = new ArrayList<>();
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("p_check");
+        try{
+             results =query.find();
+
+            for(int i=0;i<query.count();i++)
+            {
+                if (route.equals(results.get(i).get("name").toString()))
+                {
+                    Log.d("PDAY","TRUE");
+                    return true;
+                }
+            }
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
+        return false;
+
+    }
+
+
+    public void priorityCheckDay(){
+
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                stop_done_on_priority_day = 0; // to be increamented for stopping useless calculations... Stops done till now in the BUS RUN
+                sleepUntilMarkerGenerated();
+                Log.d("TILL HERE","1");
+                int loop_count =0;
+
+
+                while(true) //change this condition// till the time last location occurs
+                {
+                    loop_count++;       /// loop for the thread..  i.e maintains how many times the GET REQUEST WAS MADE
+                    Location location = current_location;
+
+                    Log.d("TILL HERE", "2");
+
+                    for (int i = 0; i < markersarray.size(); i++) {
+                        if (loop_count == 1) {
+                            Log.d("TILL HERE", "3");
+                            LatLng to = markersarray.get(i);
+                            String url = makeURL(new LatLng(location.getLatitude(), location.getLongitude()), to);
+
+                            String res = GET(url);
+
+                            TimenDistance current = new TimenDistance(MyJSONParse.TimeInMins(res), MyJSONParse.DistanceInKm(res), MyJSONParse.TimeVal(res), MyJSONParse.Dist_val(res));
+                            p_check_map.put(i, current);
+                        } else if (loop_count > 1)// The previous HashMap has values .ie. Its not null
+                        {
+                            if (p_check_map.get(i).isPriority_set() == false) {
+                                Log.d("TILL HERE", "3");
+                                LatLng to = markersarray.get(i);
+                                String url = makeURL(new LatLng(location.getLatitude(), location.getLongitude()), to);
+
+                                String res = GET(url);
+
+                                TimenDistance current = new TimenDistance(MyJSONParse.TimeInMins(res), MyJSONParse.DistanceInKm(res), MyJSONParse.TimeVal(res), MyJSONParse.Dist_val(res));
+
+                                TimenDistance prev = p_check_map.get(i);
+                                p_check_map.put(i, average_object(prev, current));    /// UPDATE OF DISTANCE-TIME MAP by taking 2 value average
+                                Log.d("TILL HERE", "4");
+                                Log.d("TAG", "Distance of " + String.valueOf(i) + " is " + p_check_map.get(i).getDistance());
+                            }
+
+                        }
+
+
+                        // p_check_map stores the Distance_Time data of the corresponding row of the route(based on index values)
+                    }
+
+                    sendSMSifRequired();
+
+                    priorityUpdateCall();
+
+
+                    try {
+                        Thread.sleep(20000);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+            }
+        });
+        thread.start();
+
+    }
+
+    public void sendSMSifRequired()
+    {
+        //CHECK FOR ALL AND SEND MESSAGE TO WHEREVER REQUIRED////
+        for(int j=0;j<markersarray.size();j++)
+        {
+            Integer time = Integer.parseInt(p_check_map.get(j).getT_value());
+
+            if(time<300&&p_check_map.get(j).isSmsSent()==false)
+            {
+
+                Log.d("TAG","Send message to "+ j);
+                try {
+                    SmsManager smsManager = SmsManager.getDefault();
+                    smsManager.sendTextMessage("9910908279", null, "Your child "+the_table.get(j).get("s_name")+"will reach the bus stop in 5 mins", null, null);
+                    smsManager.sendTextMessage("9899881387", null, "Your child "+the_table.get(j).get("s_name")+"will reach the bus stop in 5 mins", null, null);
+                    p_check_map.get(j).setSmsSent(true);
+                    Toast.makeText(getApplicationContext(), "Message Sent",
+                            Toast.LENGTH_LONG).show();
+                } catch (Exception ex) {
+                    Toast.makeText(getApplicationContext(),
+                            ex.getMessage().toString(),
+                            Toast.LENGTH_LONG).show();
+                    ex.printStackTrace();
+                }
+            }
+        }
+        //CHECK FOR ALL AND SEND MESSAGE TO WHEREVER REQUIRED////
+    }
+
+    public TimenDistance average_object(TimenDistance a1, TimenDistance a2)
+    {
+
+
+        Integer avg_dis_val = (Integer.parseInt(a1.getD_values())+Integer.parseInt(a2.getD_values()))/2;
+
+        Integer avg_time_val = (Integer.parseInt(a1.getT_value()))+Integer.parseInt(a2.getT_value())/2;
+
+
+
+        String time = (int)avg_time_val/60 + " min";
+
+        String distance = avg_dis_val/1000 +" km";
+
+        boolean a1_p = a1.isPriority_set();
+        boolean a2_p = a2.isPriority_set();
+
+        TimenDistance result = new TimenDistance(time,distance,String.valueOf(avg_time_val),String.valueOf(avg_dis_val));
+
+        result.setPriority_set(a1_p || a2_p);// if one of the object i.e. previous object has priority set(= true) then new updated object should also have that.
+
+        return result;
+    }
+
+    public void priorityUpdateCall()
+    {
+        for(int i=0;i<p_check_map.size();i++)
+        {
+            Integer distance = Integer.parseInt(p_check_map.get(i).getD_values());
+
+            if(distance<200)
+            {
+                p_check_map.get(i).setPriority_set(true);
+                updatePriority(i);
+
+               /* if(!alreadyUpdatedPriorityList.contains(i)) {
+                    updatePriority(i);
+                    alreadyUpdatedPriorityList.add(i);
+                }*/
+                ///DO SOMETHING ABOUT THE stop_update_counter here... it has to be not just incremented..it has to be changed..something has to be done here..
+            }
+        }
+    }
+
+    public void updatePriority(int index_on_db)
+    {
+        List<ParseObject> objectList = new ArrayList<>();
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(route);
+        query.orderByAscending("Priority");
+        try{
+            objectList = query.find();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        objectList.get(index_on_db).put("Priority",priority_to_put);
+        objectList.get(index_on_db).saveInBackground();
+
+        priority_to_put++;
+    }
+
+
+
+    public void sleepUntilMarkerGenerated() {
+        while (!marker_flag) {
+            Log.d("TAG", String.valueOf(marker_flag));
+            try {
+                Thread.sleep(1000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
     private void calculateNotification() {
         Thread thread =   new Thread(new Runnable() {
             @Override
             public void run() {
 
-                Log.d("TAG",String.valueOf(marker_flag));
+                Log.d("TAG MAKER FLAG",String.valueOf(marker_flag));
                 ///THREAD TO RUN ONLY AFTER MARKERS ARE SET
-                while (!marker_flag) {
-                    Log.d("TAG",String.valueOf(marker_flag));
-                    try {
-                        Thread.sleep(1000);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
 
-                }
+                sleepUntilMarkerGenerated();
+
+
                 while (stop_done_counter < markersarray.size()) {
 
                     int first = stop_done_counter;// the index values for getting location coordinates of the next two stops from markersarray
@@ -300,7 +530,7 @@ public class Google_Map_Upload extends FragmentActivity {
         markers.add(school);
     }
 
-    public static String makeURL(LatLng from, LatLng to) {
+    public  String makeURL(LatLng from, LatLng to) {
         String base = "https://maps.googleapis.com/maps/api/distancematrix/json?";
 
         String from_lat = String.valueOf(from.latitude);
@@ -313,7 +543,18 @@ public class Google_Map_Upload extends FragmentActivity {
         // String origin = base +"origins=" + "28.580037,77.183290";//"28.694326,77.149902";
 
         String key = "AIzaSyCCVkfMFqSE838nAiMrRnx4kcoydtn4a-Y";
-        String destination = origin + "&destinations=" + to_lat + "," + to_lon + "&key=" + key; //"AIzaSyCCVkfMFqSE838nAiMrRnx4kcoydtn4a-Y";//"AIzaSyBLbR8skvduOHTOE4agMeDFhXj4QoUqt1g";-----"28.703944,77.146044"
+
+        String destination = "";
+
+        if(!key_flag){
+             destination = origin + "&destinations=" + to_lat + "," + to_lon + "&key=" + key1_dbcoolster; //"AIzaSyCCVkfMFqSE838nAiMrRnx4kcoydtn4a-Y";//"AIzaSyBLbR8skvduOHTOE4agMeDFhXj4QoUqt1g";-----"28.703944,77.146044"
+            key_flag=true;
+        }else
+        {
+            destination = origin + "&destinations=" + to_lat + "," + to_lon + "&key=" + key2_wisemasses; //"AIzaSyCCVkfMFqSE838nAiMrRnx4kcoydtn4a-Y";//"AIzaSyBLbR8skvduOHTOE4agMeDFhXj4QoUqt1g";-----"28.703944,77.146044"
+            key_flag=false;
+        }
+
 
 
         //|28.580037,77.183290
@@ -380,7 +621,7 @@ public class Google_Map_Upload extends FragmentActivity {
 
             try {
                 //JSONArray jsonArray = new JSONArray(res);
-                JSONObject jsonObject = new JSONObject(res);
+               /* JSONObject jsonObject = new JSONObject(res);
                 //abc = jsonObject.getString("destination_addresses");
 
                 JSONArray jo = jsonObject.getJSONArray("rows");
@@ -394,12 +635,12 @@ public class Google_Map_Upload extends FragmentActivity {
 
                 JSONObject d_time = elements.getJSONObject("duration");
 
-                JSONObject d_distance = elements.getJSONObject("distance");
+                JSONObject d_distance = elements.getJSONObject("distance");*/
 
-                String time = d_time.getString("text");
-                String distance = d_distance.getString("text");
-                String t_value = d_time.getString("value");
-                String d_value = d_distance.getString("value");
+                String time = MyJSONParse.TimeInMins(res);
+                String distance = MyJSONParse.DistanceInKm(res);
+                String t_value = MyJSONParse.TimeVal(res);
+                String d_value = MyJSONParse.Dist_val(res);
 
                 hm.put(stop_number, new TimenDistance(time, distance, t_value, d_value));
 
@@ -421,7 +662,7 @@ public class Google_Map_Upload extends FragmentActivity {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                      abc = jsonObject.getJSONObject("rows").getJSONObject("elements").getJSONObject("duration").getString("text");
                 }*/
-                Log.d("TAG", "Time: " + time.toString() + "  Distance: " + distance);
+                Log.d("TAG", "Time to "+ stop_number+" : " + time.toString() + "  Distance: " + distance);
             } catch (Exception e) {
                 e.printStackTrace();
             }

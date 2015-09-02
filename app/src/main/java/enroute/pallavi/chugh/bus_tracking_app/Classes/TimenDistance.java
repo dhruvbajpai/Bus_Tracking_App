@@ -8,6 +8,8 @@ public class TimenDistance {
     String distance;
     String t_value;
     String d_value;
+    boolean priority_set= false;
+    boolean smsSent = false;
 
     public TimenDistance(String time, String distance, String t_value, String d_values) {
         this.time = time;
@@ -16,9 +18,34 @@ public class TimenDistance {
         this.d_value = d_values;
     }
 
+    public boolean isSmsSent() {
+        return smsSent;
+    }
+
+    public void setSmsSent(boolean smsSent) {
+        this.smsSent = smsSent;
+    }
+
     public TimenDistance(String time, String distance) {
         this.time = time;
         this.distance = distance;
+    }
+
+
+    public boolean isPriority_set() {
+        return priority_set;
+    }
+
+    public void setPriority_set(boolean priority_set) {
+        this.priority_set = priority_set;
+    }
+
+    public String getD_value() {
+        return d_value;
+    }
+
+    public void setD_value(String d_value) {
+        this.d_value = d_value;
     }
 
     public void setTime(String time) {

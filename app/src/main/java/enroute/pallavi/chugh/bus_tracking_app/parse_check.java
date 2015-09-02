@@ -239,26 +239,31 @@ public class parse_check extends ActionBarActivity {
 
 
 
+                    try {
 
-                    if(hm.get(position)==null) {
-                        ParseFile fileoject = (ParseFile) mediator.the_route.get(position).get("photo");
-                        fileoject.getDataInBackground(new GetDataCallback() {
-                            @Override
-                            public void done(byte[] bytes, ParseException e) {
-                                if (e == null)
 
-                                {
-                                    Log.d("parse", "success" + position);
-                                    Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                                    //f_bmap.set(position, bmp);
-                                    hm.put(position,bmp);
-                                    user_image.setImageBitmap(bmp);
+                        if (hm.get(position) == null) {
+                            ParseFile fileoject = (ParseFile) mediator.the_route.get(position).get("photo");
+                            fileoject.getDataInBackground(new GetDataCallback() {
+                                @Override
+                                public void done(byte[] bytes, ParseException e) {
+                                    if (e == null)
+
+                                    {
+                                        Log.d("parse", "success" + position);
+                                        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                        //f_bmap.set(position, bmp);
+                                        hm.put(position, bmp);
+                                        user_image.setImageBitmap(bmp);
+                                    }
                                 }
-                            }
-                        });
-                    }else
+                            });
+                        } else {
+                            user_image.setImageBitmap(hm.get(position));
+                        }
+                    }catch (Exception e)
                     {
-                        user_image.setImageBitmap(hm.get(position));
+                        e.printStackTrace();
                     }
 
 
