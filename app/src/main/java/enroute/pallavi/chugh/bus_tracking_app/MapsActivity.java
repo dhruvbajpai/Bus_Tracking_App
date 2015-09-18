@@ -116,9 +116,14 @@ public class MapsActivity extends FragmentActivity {
         }
 
         //This has to be below other marker generation to see the blue marker for school as markersarray also contains the school location.(for route calculation)
-        Marker school = mMap.addMarker(new MarkerOptions().position(new LatLng(28.689224, 77.121460))    //SCHOOL MARKER
+        //Marker school = mMap.addMarker(new MarkerOptions().position(new LatLng(28.689224, 77.121460))    //SCHOOL MARKER
+          //      .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Apeejay School"));
+        Marker school = mMap.addMarker(new MarkerOptions().position(new LatLng(28.670252,77.084699))    //SCHOOL MARKER for testing
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Apeejay School"));
+
         school.showInfoWindow();
+
+
 
 
 
@@ -393,7 +398,7 @@ public class MapsActivity extends FragmentActivity {
                     //dialog.show();
                     if(!(markersarray.size()>0)) {                      ////CHECK IF THE BUTTON IS CLICKED FOR THE FIRST TIME...QUERY EXECUTION ONLY ONCE
                         // USE object retreived in MEdiator   the_route instaed of another query for this//
-                        ParseQuery<ParseObject> query = ParseQuery.getQuery("r3");
+                        ParseQuery<ParseObject> query = ParseQuery.getQuery("r4");
                         //query.whereEqualTo("playerName", "Dan Stemkoski");
                         query.orderByAscending("Priority");
                         query.findInBackground(new FindCallback<ParseObject>() {
@@ -405,11 +410,13 @@ public class MapsActivity extends FragmentActivity {
                                     Toast.makeText(getApplicationContext(), "Showing Route Stops On Map", Toast.LENGTH_SHORT).show();
 
 
-                                    Marker school = mMap.addMarker(new MarkerOptions().position(new LatLng(28.689224, 77.121460))    //SCHOOL MARKER
+                                    Marker school = mMap.addMarker(new MarkerOptions().position(new LatLng(28.670252,77.084699))    //SCHOOL MARKER for testing
                                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Apeejay School"));
                                     school.showInfoWindow();
                                     markers.add(school);
-                                    markersarray.add(new LatLng(28.689224, 77.121460));
+
+                                    markersarray.add(new LatLng(28.670252,77.084699));
+                                    //markersarray.add(new LatLng(28.689224, 77.121460)); //actual marker apeejay
 
                                     for (int j = 0; j < size; j++) {
 

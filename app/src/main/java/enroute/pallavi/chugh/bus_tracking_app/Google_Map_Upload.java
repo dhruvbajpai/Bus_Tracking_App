@@ -82,7 +82,7 @@ public class Google_Map_Upload extends FragmentActivity {
     int stop_done_on_priority_day=0;
     Location current_location = null;
     TextView t_distance, t_time;
-    String route = "r3";
+    String route = "r4";
     List<Polyline> plist;
     //GetRouteTask getRoute;
     int cam_f = 0;
@@ -333,6 +333,7 @@ public class Google_Map_Upload extends FragmentActivity {
 
                             TimenDistance current = new TimenDistance(MyJSONParse.TimeInMins(res), MyJSONParse.DistanceInKm(res), MyJSONParse.TimeVal(res), MyJSONParse.Dist_val(res));
                             p_check_map.put(i, current);
+                            p_check_map_previous.put(i,current);
                         } else if (loop_count > 1)// The previous HashMap has values .ie. Its not null
                         {
                             if (p_check_map.get(i).isPriority_set() == false) {
@@ -344,10 +345,12 @@ public class Google_Map_Upload extends FragmentActivity {
 
                                 TimenDistance current = new TimenDistance(MyJSONParse.TimeInMins(res), MyJSONParse.DistanceInKm(res), MyJSONParse.TimeVal(res), MyJSONParse.Dist_val(res));
 
-                                TimenDistance prev = p_check_map.get(i);
+                                TimenDistance prev = p_check_map_previous.get(i);
+
                                 p_check_map.put(i, average_object(prev, current));    /// UPDATE OF DISTANCE-TIME MAP by taking 2 value average
+                                p_check_map_previous.put(i,current);
                                 Log.d("TILL HERE", "4");
-                                Log.d("TAG", "Distance of " + String.valueOf(i) + " is " + p_check_map.get(i).getDistance());
+                                Log.d("TAG", "Distance of " + String.valueOf(i) + " is " + p_check_map.get(i).getD_values());
                             }
 
                         }
@@ -362,7 +365,7 @@ public class Google_Map_Upload extends FragmentActivity {
 
 
                     try {
-                        Thread.sleep(20000);
+                        Thread.sleep(10000);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -421,8 +424,12 @@ public class Google_Map_Upload extends FragmentActivity {
         boolean a1_p = a1.isPriority_set();
         boolean a2_p = a2.isPriority_set();
 
+        boolean a1_sms = a1.isSmsSent();
+        boolean a2_sms = a2.isSmsSent();
+
         TimenDistance result = new TimenDistance(time,distance,String.valueOf(avg_time_val),String.valueOf(avg_dis_val));
 
+        result.setSmsSent(a1_sms||a2_sms);
         result.setPriority_set(a1_p || a2_p);// if one of the object i.e. previous object has priority set(= true) then new updated object should also have that.
 
         return result;
@@ -433,7 +440,7 @@ public class Google_Map_Upload extends FragmentActivity {
         for(int i=0;i<p_check_map.size();i++)
         {
             Integer distance = Integer.parseInt(p_check_map.get(i).getD_values());
-
+            Log.d("TAG","Distance to check with 200 is : "+ distance);
             if(distance<200)
             {
                 p_check_map.get(i).setPriority_set(true);
@@ -460,9 +467,10 @@ public class Google_Map_Upload extends FragmentActivity {
         {
             e.printStackTrace();
         }
-
+        Log.d("Priority PUT","Priority: "+ priority_to_put+" queued");
         objectList.get(index_on_db).put("Priority",priority_to_put);
         objectList.get(index_on_db).saveInBackground();
+        Log.d("Priority PUT","Priority: "+ priority_to_put+" uploaded");
 
         priority_to_put++;
     }
