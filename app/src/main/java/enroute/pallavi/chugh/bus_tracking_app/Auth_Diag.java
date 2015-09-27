@@ -86,6 +86,13 @@ public class Auth_Diag extends Dialog {
                                 i.putExtra("route",user.get("route").toString());
                                 c.startActivity(i);
                             }
+                            if(k.equals(s) && k.equals("teacher")) {// if the account is a parent account then it has a student id associated with it in the USER TABLE.
+                                studentid=user.get("studentid").toString();// if its not a parent account then it the studentId field in the user table holds NULL value.
+                                Intent i = new Intent(c.getApplicationContext(), parentactivity.class);
+
+                                i.putExtra("route",user.get("route").toString());
+                                c.startActivity(i);
+                            }
                             if(k.equals(s) && k.equals("driver")) {// if the account is a parent account then it has a student id associated with it in the USER TABLE.
                                 //String route=user.get("route").toString();// if its not a parent account then it the studentId field in the user table holds NULL value.
                                 Intent i = new Intent(c.getApplicationContext(),Google_Map_Upload.class);

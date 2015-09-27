@@ -9,11 +9,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.GetCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+
+import java.util.List;
 
 
 public class parentactivity extends Activity {
@@ -22,6 +26,7 @@ public class parentactivity extends Activity {
     static String route,studentid;
     static String sname,sclass,srollno,sphone,slatti,slongi,tusername,tname,tphone;
     static Bitmap studentimage,teacherimage;
+    public static String driver_name, driver_phone, driver_route;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +98,23 @@ public class parentactivity extends Activity {
 
             });
 
+        ParseQuery<ParseObject> driver_query = ParseQuery.getQuery("drivers");
+
+        driver_query.whereEqualTo("route",route);
+        driver_query.getFirstInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject parseObject, ParseException e) {
+                    driver_name = parseObject.get("name").toString();
+                    driver_phone = parseObject.getString("phone");
+                    driver_route = route;
+            }
+        });
+        /*driver_query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> parseObjects, ParseException e) {
+
+            }
+        });*/
 
         ParseQuery<ParseObject> query1 = ParseQuery.getQuery("route_teacher");
         query1.whereEqualTo("route_no", route.substring(1));

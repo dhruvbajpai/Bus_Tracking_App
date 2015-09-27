@@ -53,6 +53,11 @@
             android:layout_height="40dp"
             android:id="@+id/live"
             android:text="View Live Location"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/p_day"
+            android:text="Register for Priority day"/>
 
     </LinearLayout>
 

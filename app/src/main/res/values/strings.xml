@@ -20,5 +20,6 @@
     <string name="title_activity_dialogstudent">dialogstudent</string>
     <string name="app_home">app_home</string>
     <string name="title_activity_parent_first_page">Parent_first_page</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

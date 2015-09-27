@@ -16,11 +16,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+
+import java.util.List;
 
 
 public class Route_info extends ActionBarActivity {
@@ -30,7 +33,7 @@ public class Route_info extends ActionBarActivity {
     ProgressDialog d;
     String teachphotoname;
     TextView rt, tchr_name,std_cnt;
-    Button std, bttch, viewlive;
+    Button std, bttch, viewlive,p_day_register;
     static int i;
     static Bitmap image;
     Toolbar toolbar;
@@ -44,6 +47,37 @@ public class Route_info extends ActionBarActivity {
         getSupportActionBar().setTitle("Route Information");
         //getSupportActionBar().hide();
         std = (Button) findViewById(R.id.students);
+        p_day_register = (Button)findViewById(R.id.p_day);
+        p_day_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("p_check");
+                query.findInBackground(new FindCallback<ParseObject>() {
+                    @Override
+                    public void done(List<ParseObject> parseObjects, ParseException e) {
+                        boolean flag = true;// for checking if the p_check table already contains the given route or not
+                        for(int i=0;i<parseObjects.size();i++)
+                        {
+                            if(parseObjects.get(i).get("name").toString().equals("r"+route_no.toString()))
+                            {
+                                flag = false;
+                            }
+                        }
+                        if (flag)
+                        {
+                            ParseObject p = new ParseObject("p_check");
+                            p.put("name","r"+route_no.toString());
+                            p.saveInBackground();
+                            Toast.makeText(getApplicationContext(),"Registered for Route Recalculation",Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(getApplicationContext(),"This route already Registered",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
         std_cnt = (TextView) findViewById(R.id.student_count);
         std.setOnClickListener(new View.OnClickListener() {
             @Override
