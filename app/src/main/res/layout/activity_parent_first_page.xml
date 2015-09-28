@@ -1,0 +1,43 @@
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include
+        android:id="@+id/app_bar_parent"
+        layout="@layout/app_bar"
+
+        ></include>
+
+    <enroute.pallavi.chugh.bus_tracking_app.tabs.SlidingTabLayout
+        android:layout_width="match_parent"
+        android:id="@+id/tabs"
+        android:layout_gravity="center"
+
+
+        android:layout_height="wrap_content"></enroute.pallavi.chugh.bus_tracking_app.tabs.SlidingTabLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#59656F">
+
+        <android.support.v4.view.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/mpager"
+            ></android.support.v4.view.ViewPager>
+
+        <!-- hack to fix ugly black artefact with maps v2 -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent" />
+
+    </FrameLayout>
+
+
+
+    </LinearLayout>
+
