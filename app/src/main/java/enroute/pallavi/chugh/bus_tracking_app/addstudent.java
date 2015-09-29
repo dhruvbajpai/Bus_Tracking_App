@@ -30,6 +30,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 
@@ -171,7 +172,12 @@ public class addstudent extends ActionBarActivity implements View.OnClickListene
                 byte[] image = stream.toByteArray();
                 file = new ParseFile(filename, image);
                 // Upload the image into Parse Cloud
-                file.saveInBackground();
+                //file.saveInBackground();
+                try {
+                    file.save();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
 
             }
             // Create the ParseFile

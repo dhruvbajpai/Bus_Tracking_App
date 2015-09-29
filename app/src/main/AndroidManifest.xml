@@ -34,6 +34,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="enroute.pallavi.chugh.bus_tracking_app.MainActivity"
+
             android:label="@string/app_name" >
 
         </activity>
@@ -88,11 +89,6 @@
         <activity
             android:name="enroute.pallavi.chugh.bus_tracking_app.Google_Map_Upload"
             android:label="Google_Map_Upload" >
-
-
-
-
-
         </activity>
 
         <activity
@@ -141,6 +137,20 @@
             android:label="@string/title_activity_parent_first_page"
             android:parentActivityName="enroute.pallavi.chugh.bus_tracking_app.startpage">
         </activity>
+
+        <activity
+            android:name=".teacheractivity"
+            android:label="@string/title_activity_teacheractivity" >
+        </activity>
+        <activity
+            android:name=".teacher_first_page"
+            android:label="@string/title_activity_teacher_first_page" >
+        </activity>
+        <activity
+            android:name=".teachermapfull"
+            android:label="@string/title_activity_teachermapfull" >
+        </activity>
+
     </application>
 
 </manifest>

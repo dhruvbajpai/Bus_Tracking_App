@@ -21,6 +21,9 @@ public class MyAdapter_grid extends CardGridArrayAdapter {
 
     Context c ;
     int pos=0;
+    int i;
+    String[] colors = {"#B2000000","#808080","#e91e63","#ec407a","#805677fc","#80738ffe",
+            "#3f51b5","#303f9f","#F06292","#E91E63","#C2185B"};
     Integer[] numbers = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30};
     public MyAdapter_grid(Context context, List<Card> cards) {
         super(context, cards);
@@ -38,13 +41,17 @@ public class MyAdapter_grid extends CardGridArrayAdapter {
 
         }
 
-        LinearLayout l = (LinearLayout)convertView.findViewById(R.id.top_layout);
-        LinearLayout ll = (LinearLayout)convertView.findViewById(R.id.ll);
+        //LinearLayout l = (LinearLayout)convertView.findViewById(R.id.top_layout);
+        //LinearLayout ll = (LinearLayout)convertView.findViewById(R.id.ll);
 
-        ll.setBackgroundColor(Color.parseColor("#E3F3F8"));
+        LinearLayout ll = (LinearLayout)convertView.findViewById(R.id.cardcolor);
+
+        i=position;
+
+        ll.setBackgroundColor(Color.parseColor(colors[i%colors.length]));
 
         TextView tv = (TextView)convertView.findViewById(R.id.text2);
-        tv.setText("Route "+ numbers[position].toString());
+        tv.setText("Route " + numbers[position].toString());
 
        /* tv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +62,7 @@ public class MyAdapter_grid extends CardGridArrayAdapter {
             }
         });*/
 
-        l.setOnClickListener(new View.OnClickListener() {
+        tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent q = new Intent(c,Route_info.class);
@@ -81,7 +88,7 @@ public class MyAdapter_grid extends CardGridArrayAdapter {
 
 
 
-        /*convertView.setOnClickListener(new View.OnClickListener() {
+        convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent q = new Intent(c,Route_info.class);
@@ -90,7 +97,7 @@ public class MyAdapter_grid extends CardGridArrayAdapter {
                 mediator.tr_flag=0;
                 c.startActivity(q);
             }
-        });*/
+        });
 
         return convertView;
     }

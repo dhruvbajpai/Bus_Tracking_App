@@ -269,7 +269,7 @@ public class Google_Map_Upload extends FragmentActivity {
                // calculateNotification();
             }
         });
-        thread.start();
+        //thread.start();
 
 
 
@@ -391,8 +391,8 @@ public class Google_Map_Upload extends FragmentActivity {
                 Log.d("TAG","Send message to "+ j);
                 try {
                     SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage("9910908279", null, "Your child "+the_table.get(j).get("s_name")+"will reach the bus stop in 5 mins", null, null);
-                    smsManager.sendTextMessage("9899881387", null, "Your child "+the_table.get(j).get("s_name")+"will reach the bus stop in 5 mins", null, null);
+                    //smsManager.sendTextMessage("9910908279", null, "Your child "+the_table.get(j).get("s_name")+"will reach the bus stop in 5 mins", null, null);
+                    //smsManager.sendTextMessage("9899881387", null, "Your child "+the_table.get(j).get("s_name")+"will reach the bus stop in 5 mins", null, null);
                     p_check_map.get(j).setSmsSent(true);
                     Toast.makeText(getApplicationContext(), "Message Sent",
                             Toast.LENGTH_LONG).show();
@@ -772,11 +772,11 @@ public class Google_Map_Upload extends FragmentActivity {
 
 
         //SCHOOL POINTER//
-        for (int j = 0; j < size; j++) {
-            LatLng pos = markersarray.get(j);
-            mMap.addMarker(new MarkerOptions().position(new LatLng(pos.latitude, pos.longitude)));
+        //for (int j = 0; j < size; j++) {
+        //    LatLng pos = markersarray.get(j);
+        //    mMap.addMarker(new MarkerOptions().position(new LatLng(pos.latitude, pos.longitude)));
 
-        }
+        //}
 
     }
     public void updateUI(Location location) {
