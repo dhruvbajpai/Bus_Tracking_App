@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.parse.GetCallback;
+import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -58,27 +59,27 @@ public class editteacher extends Activity implements View.OnClickListener {
         phn.setText(Route_info.teachphn);
         user.setText(Route_info.teachuser);
         pass.setText(Route_info.teachpass);
-        route.setText(Route_info.route);
+        route.setText(Route_info.route_no.toString());
         imagechange = (ImageButton)findViewById(R.id.change);
         imagechange.setOnClickListener(this);
         Log.d("asd","ttt");
     }
-        @Override
+    @Override
     public void onClick(View v) {
-    if(v.getId()==R.id.change)
-    {Log.d("asd","tttbeforeclick");
-        dialog = new Diag(this);
-        dialog.getWindow().getAttributes().windowAnimations = R.style.PauseDialogAnimation;
+        if(v.getId()==R.id.change)
+        {Log.d("asd","tttbeforeclick");
+            dialog = new Diag(this);
+            dialog.getWindow().getAttributes().windowAnimations = R.style.PauseDialogAnimation;
 
-        dialog.getWindow();
-        dialog.show();
-        Log.d("asd","tttclick");
-    }
-    if(v.getId()==R.id.btsave)
-    {
+            dialog.getWindow();
+            dialog.show();
+            Log.d("asd","tttclick");
+        }
+        if(v.getId()==R.id.btsave)
+        {
 
 
-        Log.d("asd",filename);
+            Log.d("asd",filename);
         /*if(filename=="") {
             Toast.makeText(getApplicationContext(), "a", Toast.LENGTH_SHORT).show();
             bm = BitmapFactory.decodeResource(getResources(),
@@ -88,58 +89,63 @@ public class editteacher extends Activity implements View.OnClickListener {
             // Convert it to byte
         }*/
 
-        if(filename!="") {
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bmsize = sizeOf(bm);
-            Log.d("asd",String.valueOf(bmsize));
+            if(filename!="") {
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bmsize = sizeOf(bm);
+                Log.d("asd",String.valueOf(bmsize));
 
-            Toast.makeText(getApplicationContext(),String.valueOf(bmsize),Toast.LENGTH_SHORT).show();
-            if (extension == "png") {
-                // Compress image to lower quality scale 1 - 100
-                bm.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            } else {
-                bm.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                Toast.makeText(getApplicationContext(),String.valueOf(bmsize),Toast.LENGTH_SHORT).show();
+                if (extension == "png") {
+                    // Compress image to lower quality scale 1 - 100
+                    bm.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                } else {
+                    bm.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                }
+                byte[] image = stream.toByteArray();
+                file = new ParseFile(filename, image);
+                // Upload the image into Parse Cloud
+                //file.saveInBackground();
+                try {
+                    file.save();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
             }
-            byte[] image = stream.toByteArray();
-            file = new ParseFile(filename, image);
-            // Upload the image into Parse Cloud
-            file.saveInBackground();
+            // Create the ParseFile
+
+
+
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("route_teacher");
+            String a =Route_info.teachid;
+            query.getInBackground(a, new GetCallback<ParseObject>() {
+                @Override
+                public void done(ParseObject imgupload, com.parse.ParseException e) {
+                    if (e == null) {
+                        if(filename!="") {
+                            imgupload.put("photo", file);
+
+                        }else{
+                            imgupload.remove("photo");
+
+                        }
+
+                        imgupload.put("username", user.getText().toString());
+                        imgupload.put("password", pass.getText().toString());
+                        imgupload.put("teacher_name", name.getText().toString());
+                        imgupload.put("phone", phn.getText().toString());
+                        imgupload.put("route_no", route.getText().toString());
+                        imgupload.saveInBackground();
+                        Toast.makeText(getApplicationContext(),"uploaded",Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {Toast.makeText(getApplicationContext(),"failed",Toast.LENGTH_SHORT).show();}
+                }
+            });
 
         }
-        // Create the ParseFile
-
-
-
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("route_teacher");
-        String a =Route_info.teachid;
-        query.getInBackground(a, new GetCallback<ParseObject>() {
-            @Override
-            public void done(ParseObject imgupload, com.parse.ParseException e) {
-                if (e == null) {
-                    if(filename!="") {
-                        imgupload.put("photo", file);
-
-                    }else{
-                        imgupload.remove("photo");
-
-                    }
-
-                    imgupload.put("username", user.getText().toString());
-                    imgupload.put("password", pass.getText().toString());
-                    imgupload.put("teacher_name", name.getText().toString());
-                    imgupload.put("phone", phn.getText().toString());
-                    imgupload.put("route_no", route.getText().toString());
-                    imgupload.saveInBackground();
-                    Toast.makeText(getApplicationContext(),"uploaded",Toast.LENGTH_SHORT).show();
-                }
-                else
-                {Toast.makeText(getApplicationContext(),"failed",Toast.LENGTH_SHORT).show();}
-            }
-        });
 
     }
-
-  }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

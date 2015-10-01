@@ -85,6 +85,7 @@ public class MapsActivity extends FragmentActivity {
     ParseObject ob;
     GoogleMap googleMap;
     ArrayList<LatLng> markersarray;
+    List<String> markersarrayNames;
     ArrayList<Marker> markers;
     Marker pos_marker, prev_marker;
     boolean route_gen_flag=false,marker_gen_flag=false;
@@ -326,6 +327,7 @@ public class MapsActivity extends FragmentActivity {
 
         save = (Button) findViewById(R.id.btn_save);
         markersarray = new ArrayList<LatLng>();
+        markersarrayNames = new ArrayList<String>();
         markers = new ArrayList<Marker>();
         locationview = (AutoCompleteTextView) findViewById(R.id.location);
         set = (Button) findViewById(R.id.set_pointer);
@@ -376,10 +378,10 @@ public class MapsActivity extends FragmentActivity {
                 pos_marker = marker;
                 info.setText("Selected Marker shown in Green");
                 marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                marker.setTitle("This Marker Selected");
+                marker.setTitle("Current Marker Click");
                 marker.showInfoWindow();
 
-                return false;
+                return true;
             }
         });
 
@@ -416,6 +418,7 @@ public class MapsActivity extends FragmentActivity {
                                     markers.add(school);
 
                                     markersarray.add(new LatLng(28.670252,77.084699));
+                                    markersarrayNames.add("Apeejay School\n-1");
                                     //markersarray.add(new LatLng(28.689224, 77.121460)); //actual marker apeejay
 
                                     for (int j = 0; j < size; j++) {
@@ -428,6 +431,7 @@ public class MapsActivity extends FragmentActivity {
 
 
                                         markersarray.add(new LatLng(lt, lg));// array of the lat lng points to be taken in consideration for generating the POLYLINES.
+                                        markersarrayNames.add(scoreList.get(j).getString("s_name")+"\n"+scoreList.get(j).getInt("Priority"));
                                        /* if(j==position)
                                             continue;       ///SO THAT THE CURRENT SAVED LOCATION POINTER IS NOT CREATED AGAIN.*/
                                         ///////////////////////////////////////////////////////////////////////////////**************************************************************************
@@ -843,7 +847,7 @@ public class MapsActivity extends FragmentActivity {
             br.close();
 
         } catch (Exception e) {
-            Log.d("Exception while downloading url", e.toString());
+            Log.d("Excep while dl url", e.toString());
         } finally {
             iStream.close();
             urlConnection.disconnect();

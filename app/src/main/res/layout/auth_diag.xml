@@ -75,6 +75,7 @@
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="dbcoolster"
             android:hint="Username" />
     </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 </LinearLayout>
@@ -105,6 +106,7 @@
             android:id="@+id/password"
             android:inputType="textPassword"
             android:layout_width="match_parent"
+            android:text="password"
             android:layout_height="wrap_content"
             android:hint="Password" />
     </com.wrapp.floatlabelededittext.FloatLabeledEditText>

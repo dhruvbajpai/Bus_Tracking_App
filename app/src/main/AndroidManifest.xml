@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS"></uses-permission>
     <!--
  The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but are recommended.
@@ -23,10 +23,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
-        android:name=".App"
+        android:name="enroute.pallavi.chugh.bus_tracking_app.App"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
         android:icon="@drawable/ic_launcher"
@@ -34,106 +33,124 @@
         android:largeHeap="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.MainActivity"
+
             android:label="@string/app_name" >
+
         </activity>
         <activity
-            android:name=".AdminPage"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.AdminPage"
             android:label="@string/title_activity_admin_page" >
+
+
         </activity>
         <activity
-            android:name=".Route_info"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.Route_info"
             android:label="@string/title_activity_route_info"
-            android:parentActivityName=".AdminPage" >
+            android:parentActivityName=".AdminPage"
+             >
         </activity>
         <activity
-            android:name=".parse_check"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.parse_check"
             android:label="@string/title_activity_parse_check"
-            android:launchMode="singleTop"
-            android:parentActivityName=".Route_info" >
+            android:parentActivityName=".Route_info"
+            android:launchMode="singleTop" >
         </activity>
         <activity
-            android:name=".mediator"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.mediator"
             android:label="@string/title_activity_mediator" >
         </activity>
         <activity
-            android:name=".live_view"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.live_view"
             android:label="@string/title_activity_live_view" >
         </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        <!--
-            <meta-data
+        <!--<meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="@string/google_maps_key"></meta-data>
-        -->
+            android:value="@string/google_maps_key"></meta-data>-->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyB2mAg5K1h-FrhuC77jQioLTO7CS5bCICk" />
+            android:value="AIzaSyB2mAg5K1h-FrhuC77jQioLTO7CS5bCICk"></meta-data>
 
         <activity
-            android:name=".MapsActivity"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.MapsActivity"
             android:label="@string/title_activity_maps" >
+
+
         </activity>
         <activity
-            android:name=".studentinfoedit"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.studentinfoedit"
             android:label="@string/title_activity_studentinfoedit"
-            android:parentActivityName=".parse_check" >
+            android:parentActivityName="enroute.pallavi.chugh.bus_tracking_app.parse_check" >
         </activity>
         <activity
-            android:name=".Google_Map_Upload"
+            android:name="enroute.pallavi.chugh.bus_tracking_app.Google_Map_Upload"
             android:label="Google_Map_Upload" >
         </activity>
-        <activity
-            android:name=".startpage"
-            android:label="@string/title_activity_startpage" >
 
-        </activity>
         <activity
-            android:name=".teacherinfoedit"
-            android:label="@string/title_activity_teacherinfoedit" >
-        </activity>
-        <activity
-            android:name=".editteacher"
-            android:label="@string/title_activity_editteacher" >
-        </activity>
-        <activity
-            android:name=".addteacher"
-            android:label="add_teacher" >
-        </activity>
-        <activity
-            android:name=".parentactivity"
-            android:label="parentactivity" >
-        </activity>
-        <activity
-            android:name=".parentpageone"
-            android:label="Bus_Tracking_App" >
-        </activity>
-        <activity
-            android:name=".parentmapfull"
-            android:label="parentmapfull" >
-        </activity>
-        <activity
-            android:name=".addstudent"
-            android:label="@string/title_activity_addstudent"
-            android:parentActivityName=".AdminPage" >
-        </activity>
-        <activity
-            android:name=".Parent_first_page"
-            android:label="@string/title_activity_parent_first_page"
-            android:parentActivityName=".startpage" >
-        </activity>
-        <activity
-            android:name=".Login_Page"
-            android:label="@string/title_activity_login__page" >
+            android:name="enroute.pallavi.chugh.bus_tracking_app.startpage"
+            android:label="@string/title_activity_startpage" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+        <activity
+            android:name="enroute.pallavi.chugh.bus_tracking_app.teacherinfoedit"
+            android:label="@string/title_activity_teacherinfoedit" >
+        </activity>
+        <activity
+            android:name="enroute.pallavi.chugh.bus_tracking_app.editteacher"
+            android:label="@string/title_activity_editteacher" >
+        </activity>
+        <activity
+            android:name="enroute.pallavi.chugh.bus_tracking_app.addteacher"
+            android:label="add_teacher" >
+        </activity>
+        <activity
+            android:name="enroute.pallavi.chugh.bus_tracking_app.parentactivity"
+            android:label="parentactivity" >
+        </activity>
+        <activity
+            android:name="enroute.pallavi.chugh.bus_tracking_app.parentpageone"
+            android:label="Bus_Tracking_App" >
+        </activity>
+        <activity
+            android:name="enroute.pallavi.chugh.bus_tracking_app.parentmapfull"
+            android:label="parentmapfull" >
+        </activity>
+        <activity
+            android:name="enroute.pallavi.chugh.bus_tracking_app.addstudent"
+            android:label="@string/title_activity_addstudent"
+            android:parentActivityName="enroute.pallavi.chugh.bus_tracking_app.AdminPage" >
+
+        </activity>
+
+        <activity
+            android:name="enroute.pallavi.chugh.bus_tracking_app.Parent_first_page"
+            android:label="@string/title_activity_parent_first_page"
+            android:parentActivityName="enroute.pallavi.chugh.bus_tracking_app.startpage">
+        </activity>
+
+        <activity
+            android:name=".teacheractivity"
+            android:label="@string/title_activity_teacheractivity" >
+        </activity>
+        <activity
+            android:name=".teacher_first_page"
+            android:label="@string/title_activity_teacher_first_page" >
+        </activity>
+        <activity
+            android:name=".teachermapfull"
+            android:label="@string/title_activity_teachermapfull" >
+        </activity>
+
     </application>
 
 </manifest>

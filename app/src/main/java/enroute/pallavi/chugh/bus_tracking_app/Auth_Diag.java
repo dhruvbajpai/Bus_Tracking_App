@@ -18,17 +18,19 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+//import enroute.pallavi.chugh.bus_tracking_app.tabs.teacheractivity;
+
 /**
  * Created by Dhruv on 14-Jul-15.
  */
 public class Auth_Diag extends Dialog {
 
-    static int noofroute=0;
+    static int noofroute=5;
     public Activity c;
     public Dialog d;
     public Button ok;
     ProgressDialog mProgressDialog;
-    static String studentid;
+    public static String studentid,teacherid;
     EditText u, p;
 
     public Auth_Diag(Activity a) {
@@ -69,7 +71,7 @@ public class Auth_Diag extends Dialog {
                                 mProgressDialog.show();
                                 ParseQuery<ParseObject> query = ParseQuery.getQuery("liveloc");
                                 try {
-                                    
+
                                     noofroute=query.count();//to count the number of routes using the liveloc table
                                     mProgressDialog.dismiss();//
                                 } catch (ParseException e1) {
@@ -86,13 +88,13 @@ public class Auth_Diag extends Dialog {
                                 i.putExtra("route",user.get("route").toString());
                                 c.startActivity(i);
                             }
-                            if(k.equals(s) && k.equals("teacher")) {// if the account is a parent account then it has a student id associated with it in the USER TABLE.
-                                studentid=user.get("studentid").toString();// if its not a parent account then it the studentId field in the user table holds NULL value.
-                                Intent i = new Intent(c.getApplicationContext(), parentactivity.class);
 
-                                i.putExtra("route",user.get("route").toString());
+                            if(k.equals(s) && k.equals("teacher")) {// if the account is a parent account then it has a student id associated with it in the USER TABLE.
+                                teacherid=user.get("teacherid").toString();// if its not a parent account then it the studentId field in the user table holds NULL value.
+                                Intent i = new Intent(c.getApplicationContext(), teacheractivity.class);
                                 c.startActivity(i);
                             }
+
                             if(k.equals(s) && k.equals("driver")) {// if the account is a parent account then it has a student id associated with it in the USER TABLE.
                                 //String route=user.get("route").toString();// if its not a parent account then it the studentId field in the user table holds NULL value.
                                 Intent i = new Intent(c.getApplicationContext(),Google_Map_Upload.class);

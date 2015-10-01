@@ -119,6 +119,7 @@ public class mediator extends Activity {
                 } else {
                     Log.d("score", "Error: " + e.getMessage());
                 }
+                finish();
             }
         });
 
