@@ -1,0 +1,103 @@
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:weightSum="2"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:text="PRIORITY"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:id="@+id/priority"
+
+        android:layout_gravity="center_vertical|center_horizontal"
+
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:background="#000000"
+        ></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3">
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/checklist_view"></ListView>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <com.rey.material.widget.Button
+
+                android:id="@+id/upload_selection"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:textSize="12sp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btnshape"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="UPLOAD SELECTION"
+                android:textColor="#ffffff"
+                app:rd_rippleType = "wave"
+                app:rd_cornerRadius = "11dp"
+                app:rd_enable="true"/>
+            <com.rey.material.widget.Button
+
+                android:id="@+id/add_student"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:textSize="12sp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btnshape"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="UPLOAD SELECTION"
+                android:textColor="#ffffff"
+                app:rd_rippleType = "wave"
+                app:rd_cornerRadius = "11dp"
+                app:rd_enable="true"/>
+            <com.rey.material.widget.Button
+
+                android:id="@+id/undo"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:textSize="12sp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btnshape"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="UNDO LAST"
+                android:textColor="#ffffff"
+                app:rd_rippleType = "wave"
+                app:rd_cornerRadius = "11dp"
+                app:rd_enable="true"/>
+
+        </LinearLayout>
+       <!-- <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></ListView>-->
+
+
+    </LinearLayout>
+</LinearLayout>

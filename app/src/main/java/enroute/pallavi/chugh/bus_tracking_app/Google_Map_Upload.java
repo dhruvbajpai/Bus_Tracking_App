@@ -82,7 +82,7 @@ public class Google_Map_Upload extends FragmentActivity {
     int stop_done_on_priority_day=0;
     Location current_location = null;
     TextView t_distance, t_time;
-    String route = "r4";
+    String route = "r4";                // FIX THE VALUE OF THE ROUTE AS PER THE LOGIN ID OF THE DRIVER
     List<Polyline> plist;
     //GetRouteTask getRoute;
     int cam_f = 0;
@@ -177,7 +177,7 @@ public class Google_Map_Upload extends FragmentActivity {
 
 
                     dialog.dismiss();
-                    drawmarkers();
+                    drawmarkers(); //  only school marker adding here
                     LatLngBounds.Builder builder = new LatLngBounds.Builder();
                     for (Marker marker : markers) {
                         builder.include(marker.getPosition());
@@ -194,7 +194,7 @@ public class Google_Map_Upload extends FragmentActivity {
             }
         });
 
-
+        // markersarray has all the markers except the School marker and drawmarkers is useless...
         //---------------------------------------------------------------------------FOR UPDATING REAL TIME DRIVER LOCATION ON INFO ON PARSE-------------------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         final LocationListener locationListener = new LocationListener() {
@@ -246,7 +246,7 @@ public class Google_Map_Upload extends FragmentActivity {
 
             }
         };
-        locationManager.requestLocationUpdates(provider, 2000, 5, locationListener);
+        locationManager.requestLocationUpdates(provider, 2000, 5, locationListener);  // OPTIMIZE THIS NEEDED...
         //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -291,6 +291,8 @@ public class Google_Map_Upload extends FragmentActivity {
                     return true;
                 }
             }
+            //Remove route from the p_check table once P_day ends...set a update_index which is updated as to how many stops updated..if it reached query.count at the end..
+            //remove route from the p_check table
 
         }catch (Exception e)
         {
@@ -334,6 +336,8 @@ public class Google_Map_Upload extends FragmentActivity {
                             TimenDistance current = new TimenDistance(MyJSONParse.TimeInMins(res), MyJSONParse.DistanceInKm(res), MyJSONParse.TimeVal(res), MyJSONParse.Dist_val(res));
                             p_check_map.put(i, current);
                             p_check_map_previous.put(i,current);
+                            Log.d("TAG", "Distance of " + String.valueOf(i) + " is " + p_check_map.get(i).getD_values());
+                            loop_count++;// CHECK IF REQUIRED
                         } else if (loop_count > 1)// The previous HashMap has values .ie. Its not null
                         {
                             if (p_check_map.get(i).isPriority_set() == false) {
@@ -351,6 +355,7 @@ public class Google_Map_Upload extends FragmentActivity {
                                 p_check_map_previous.put(i,current);
                                 Log.d("TILL HERE", "4");
                                 Log.d("TAG", "Distance of " + String.valueOf(i) + " is " + p_check_map.get(i).getD_values());
+                                loop_count++;
                             }
 
                         }
@@ -391,6 +396,8 @@ public class Google_Map_Upload extends FragmentActivity {
                 Log.d("TAG","Send message to "+ j);
                 try {
                     SmsManager smsManager = SmsManager.getDefault();
+                    Toast.makeText(getApplicationContext(),"Index "+ String.valueOf(j)+ " "+the_table.get(j).getString("s_name"),Toast.LENGTH_SHORT);
+                    Log.d("REACHED","Index "+ String.valueOf(j)+ " "+the_table.get(j).getString("s_name"));
                     //smsManager.sendTextMessage("9910908279", null, "Your child "+the_table.get(j).get("s_name")+"will reach the bus stop in 5 mins", null, null);
                     //smsManager.sendTextMessage("9899881387", null, "Your child "+the_table.get(j).get("s_name")+"will reach the bus stop in 5 mins", null, null);
                     p_check_map.get(j).setSmsSent(true);
@@ -745,7 +752,7 @@ public class Google_Map_Upload extends FragmentActivity {
     }*/
 
 
-    public void drawmarkers() {
+    public void drawmarkers() {  // should be drawring every marker...CHECK FOR IT
 
         //Toast.makeText(getApplicationContext(),latitudes.get(0).toString(),Toast.LENGTH_SHORT).show();
         //SCHOOL POINTER//

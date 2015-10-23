@@ -1,14 +1,16 @@
 package enroute.pallavi.chugh.bus_tracking_app;
 
 import android.app.Application;
+//import android.support.multidex.MultiDexApplication;
+
 
 import com.parse.Parse;
 
 /**
  * Created by Dhruv on 16-Jul-15.
  */
-public class App extends Application {
-    @Override
+public class App extends Application{// MultiDexApplication {
+
     public void onCreate() {
         super.onCreate();
         Parse.enableLocalDatastore(this);

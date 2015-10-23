@@ -59,6 +59,7 @@
             android:id="@+id/p_day"
             android:text="Register for Priority day"/>
 
+
     </LinearLayout>
 
     </LinearLayout>

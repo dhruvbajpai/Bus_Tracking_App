@@ -10,8 +10,9 @@ android {
         applicationId "enroute.pallavi.chugh.bus_tracking_app"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 14
+        versionCode 15
         versionName "2.3"
+        //multiDexEnabled true
     }
     buildTypes {
         release {
@@ -28,13 +29,16 @@ dependencies {
     compile fileTree(include: 'Parse-*.jar', dir: 'libs')
     // compile files('libs/Parse-1.9.3.jar')
 
+    // compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
+    compile 'com.wrapp.floatlabelededittext:library:0.0.6'
+
+
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.parse.bolts:bolts-android:1.+'
-    compile 'com.google.android.gms:play-services:7.5.0'
+   //compile 'com.google.android.gms:play-services:8.1.0'
+    compile 'com.google.android.gms:play-services-maps:8.1.0'
     compile 'com.getbase:floatingactionbutton:1.10.0'
     compile 'com.wrapp.floatlabelededittext:library:0.0.6'
-    compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
-    compile 'com.wrapp.floatlabelededittext:library:0.0.6'
-    //compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
-
+    compile 'com.blunderer:materialdesignlibrary:2.0.4'
+    compile 'com.github.rey5137:material:1.2.1'
 }

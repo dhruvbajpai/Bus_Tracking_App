@@ -1,0 +1,61 @@
+<LinearLayout
+    android:layout_height="40dp"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="12"
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <TextView
+        android:layout_height="40dp"
+        android:layout_width="0dp"
+        android:layout_weight="8"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/nameindex"
+        android:layout_marginTop="7dp"
+        android:textSize="20sp"
+        android:textColor="#000000"
+
+        xmlns:android="http://schemas.android.com/apk/res/android"></TextView>
+    <com.rey.material.widget.Button
+        android:layout_height="25dp"
+        android:layout_width="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="2"
+        android:layout_marginRight="2dp"
+        android:layout_toRightOf="@id/nameindex"
+        android:gravity="center_vertical|center_horizontal"
+        android:textSize="12sp"
+        android:id="@+id/infoadd"
+        android:background="@drawable/info_add_background"
+        android:text="INFO"
+        android:textColor="#ffffff"
+        app:rd_rippleType = "wave"
+        app:rd_cornerRadius = "11dp"
+        app:rd_enable="true"/>
+    <com.rey.material.widget.Button
+        android:layout_height="25dp"
+        android:layout_width="0dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="2"
+        android:layout_gravity="center_vertical"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="3dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:textSize="12sp"
+        android:id="@+id/delete_student"
+
+        android:background="@drawable/red_delete"
+        android:text="DELETE"
+        android:textColor="#ffffff"
+        app:rd_rippleType = "wave"
+        app:rd_cornerRadius = "11dp"
+        app:rd_enable="true"/>
+
+
+
+</LinearLayout>

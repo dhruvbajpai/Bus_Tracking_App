@@ -1,0 +1,90 @@
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include
+        android:id="@+id/app_stud"
+        layout="@layout/app_bar"
+
+        ></include>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:weightSum="6">
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:id="@+id/name"
+            android:hint="Enter Name"
+            android:layout_weight="4"/>
+        <com.rey.material.widget.Button
+
+            android:id="@+id/add_student"
+
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btnshape"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Add Student"
+            android:textColor="#ffffff"
+            app:rd_rippleType = "wave"
+            app:rd_cornerRadius = "11dp"
+            app:rd_enable="true"/>
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="Names Below"
+        android:gravity="center_horizontal|center_vertical"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9"
+            android:id="@+id/stu_list">
+
+        </ListView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <com.rey.material.widget.Button
+
+                android:id="@+id/savecont"
+
+                android:layout_width="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="100dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btnshape"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Save and Continue"
+                android:textColor="#ffffff"
+                app:rd_rippleType = "wave"
+                app:rd_cornerRadius = "11dp"
+                app:rd_enable="true"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

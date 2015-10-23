@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <include
+        android:id="@+id/app_loader"
+        layout="@layout/app_bar"
+
+        ></include>
+
+    <Spinner
+
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        android:id="@+id/route_spinner"
+
+
+        ></Spinner>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
+        <com.rey.material.widget.Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/route_next"
+            android:layout_marginLeft="80dp"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btnshape"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Select the above Route"
+            android:textColor="#ffffff"
+            app:rd_rippleType = "wave"
+            app:rd_cornerRadius = "11dp"
+            app:rd_enable="true"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

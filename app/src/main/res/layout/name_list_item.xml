@@ -1,0 +1,58 @@
+<RelativeLayout
+    android:layout_height="40dp"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <TextView
+        android:layout_height="40dp"
+        android:layout_width="220dp"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/nameindex"
+        android:layout_marginTop="7dp"
+        android:textSize="20sp"
+        android:textColor="#000000"
+
+        xmlns:android="http://schemas.android.com/apk/res/android"></TextView>
+    <com.rey.material.widget.Button
+        android:layout_height="25dp"
+        android:layout_width="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_vertical"
+
+        android:layout_marginRight="1dp"
+        android:layout_toRightOf="@id/nameindex"
+        android:gravity="center_vertical|center_horizontal"
+        android:textSize="12sp"
+
+        android:id="@+id/delete_student"
+        android:background="@drawable/red_delete"
+        android:text="DELETE"
+        android:textColor="#ffffff"
+        app:rd_rippleType = "wave"
+        app:rd_cornerRadius = "11dp"
+        app:rd_enable="true"/>
+    <com.rey.material.widget.Button
+        android:layout_height="25dp"
+        android:layout_width="40dp"
+        android:layout_marginTop="10dp"
+
+        android:layout_gravity="center_vertical"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:textSize="12sp"
+        android:id="@+id/infoadd"
+        android:background="@drawable/red_delete"
+        android:text="DELETE"
+        android:textColor="#ffffff"
+        app:rd_rippleType = "wave"
+        app:rd_cornerRadius = "11dp"
+        app:rd_enable="true"/>
+
+
+
+</RelativeLayout>
